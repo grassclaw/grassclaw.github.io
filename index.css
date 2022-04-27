@@ -10,8 +10,8 @@
     
     --hover-width: 50%;
     --other-width: 25%;
-    --hover-speed: 750ms;
-    --other-speed: 200ms;
+    --hover-speed: 550ms;
+    --other-speed: 2000ms;
   }
   
   html, body {
