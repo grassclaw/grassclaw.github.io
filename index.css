@@ -1,11 +1,12 @@
 :root {
-    --container-bg-color: #333;
+    --container-bg-color: rgba(206, 106, 106, 0.473);
     --left-bg-color:rgba(191, 100, 228, .3); 
     --left-button-hover-color: rgba(191, 100, 228, .8);
     --right-bg-color: rgba(46, 145, 182, .3);
     --right-button-hover-color: rgba(46, 145, 182, .8);
     --middle-bg-color: rgba(239, 174, 6, .3);
     --middle-button-hover-color: rgba(239, 174, 6, .8);
+    --general-background: rgb(43, 39, 39, .2);
     
     --hover-width: 50%;
     --other-width: 25%;
@@ -42,7 +43,9 @@
     width: 15rem;
     text-align: center;
     color: #fff;
+    background-color:var(--general-background);
     border: #fff solid 0.2rem;
+    border-radius: 2px 0px 7px 1px;
     font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
