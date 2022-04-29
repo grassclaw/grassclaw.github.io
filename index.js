@@ -9,11 +9,13 @@ const navBar = document.querySelector(".nav-bar")
 
 //Mouseover/hover class toggling for nav
 headNav.addEventListener("mouseenter", () => {
-    navBar.classList.remove("nav-up");
-  });
-  
-  navBar.addEventListener("mouseleave", () => {
-    navBar.classList.add("nav-up");
+  navBar.classList.remove("slide-up");
+  navBar.classList.add("slide-down");
+
+});
+navBar.addEventListener("mouseleave", () => {
+  navBar.classList.remove("slide-down");
+  navBar.classList.add("slide-up");
 });
 
 //Mouseover/hover class toggling for tri-split area
@@ -31,7 +33,8 @@ right.addEventListener("mouseenter", () => {
   container.classList.add("hover-right");
 });
 
-right.addEventListener("mouseleave", () => { container.classList.remove("hover-right");
+right.addEventListener("mouseleave", () => {
+  container.classList.remove("hover-right");
 });
 
 //MIDDLE
