@@ -55,7 +55,7 @@
   
   .built-with{
     background-color: var(--middle-bg-color);
-    height: 1.8em;
+    height: auto;
     transition: all 1.5s cubic-bezier(0.17, 0.04, 0.03, 0.94);
   }
 
