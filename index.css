@@ -59,25 +59,6 @@
     transition: all 1.5s cubic-bezier(0.17, 0.04, 0.03, 0.94);
   }
 
-  /* NavBar Hover CSS */
-  .nav-bar{
-    overflow: hidden;
-    height: 0px;
-    background-color: rgb(91, 91, 190);
-    color:white;
-    transition: all .5s;
-    transition-timing-function: ease-out;
-  }
-
-  .slide-up{
-    padding:0 !important;
-    height: 0;
-  }
-
-  .slide-down{
-    height: 30px;
-  }
-
   /* TRISPLIT HOVER CSS */
   .split.left .button:hover {
     background-color: var(--left-button-hover-color);
