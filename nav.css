@@ -30,7 +30,7 @@
     background: #262626;
     position: absolute;
     z-index: 1;
-    border-radius: 6px;
+    border-radius: 40%;
     cursor: pointer;
     -moz-transition: all 0.35s ease-in;
     -o-transition: all 0.35s ease-in;
@@ -38,13 +38,15 @@
     transition: all 0.35s ease-in;
   }
   .navigation .postBtn:after {
-    content: '+';
+    /* font-family: "Font Awesome 5 Brands";  */
+    font-weight: 400;
+    content: "Menu";
     width: 100%;
     position: absolute;
     text-align: center;
     line-height: 40px;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, sans-serif;
-    color: #575757;
+    color: white;
     font-weight: 100;
     font-size: 1.8em;
     -moz-transform: translate3d(0, 0, 0);

@@ -7,7 +7,7 @@
     --middle-bg-color: rgba(239, 174, 6, .3);
     --middle-button-hover-color: rgba(239, 174, 6, .8);
     --general-background: rgb(43, 39, 39, .2);
-    
+    --banner:rgb(211,211,230,1);
     --hover-width: 50%;
     --other-width: 25%;
     --hover-speed: 550ms;
@@ -54,7 +54,7 @@
   }
   
   .built-with{
-    background-color: var(--middle-bg-color);
+    background-color: var(--banner);
     height: auto;
     transition: all 1.5s cubic-bezier(0.17, 0.04, 0.03, 0.94);
   }
