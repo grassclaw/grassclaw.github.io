@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useRef } from "react"
 import { HeroSection } from "@/components/portfolio/hero-section"
 import { SearchBar } from "@/components/portfolio/search-bar"
@@ -9,7 +11,7 @@ import { AcademicResearch } from "@/components/portfolio/academic-research"
 import { Extracurriculars } from "@/components/portfolio/extracurriculars"
 import { TechnicalProficiencies } from "@/components/portfolio/technical-proficiencies"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card } from "@/components/ui/card"
+import { GraphCard } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
@@ -164,7 +166,7 @@ export default function Portfolio() {
         <svg className="absolute bottom-16 right-12 w-36 h-36 opacity-22" viewBox="0 0 100 100">
           <circle cx="25" cy="40" r="3" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "1.3s" }} />
           <circle cx="75" cy="30" r="2.5" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "0.6s" }} />
-          <circle cx="60" cy="75" r="2" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "2.1s" }} />
+          <circle cx="60" cy="75" r="2" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "2.1s" }} />
           <line x1="25" y1="40" x2="75" y2="30" stroke="#8b5cf6" strokeWidth="1" opacity="0.5" />
           <line x1="75" y1="30" x2="60" y2="75" stroke="#3b82f6" strokeWidth="1" opacity="0.5" />
           <line x1="60" y1="75" x2="25" y2="40" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.4" />
@@ -177,13 +179,88 @@ export default function Portfolio() {
         <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} onSearchEnter={handleSearchEnter} />
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-white">Graph Search</h3>
+          <div className="flex items-center justify-between relative">
+            <h3 className="text-xl font-semibold relative">
+              <span className="relative inline-block">
+                {"Graph Search".split("").map((letter, index) => (
+                  <span
+                    key={index}
+                    className="inline-block animate-wave text-transparent bg-gradient-to-r from-purple-400 via-blue-500 to-purple-600 bg-clip-text animate-color-wave"
+                    style={
+                      {
+                        animationDelay: `${index * 0.1}s`,
+                        "--wave-delay": `${index * 0.15}s`,
+                      } as React.CSSProperties
+                    }
+                  >
+                    {letter === " " ? "\u00A0" : letter}
+                  </span>
+                ))}
+              </span>
+            </h3>
+
+            <div className="absolute left-28 top-1/2 right-20 h-px overflow-visible pointer-events-none">
+              <svg className="w-full h-8 -mt-4" viewBox="0 0 100 32" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="connectionGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#8b5cf6" />
+                    <stop offset="50%" stopColor="#3b82f6" />
+                    <stop offset="100%" stopColor="#8b5cf6" />
+                  </linearGradient>
+                </defs>
+
+                <line
+                  x1="0"
+                  y1="16"
+                  x2="100"
+                  y2="16"
+                  stroke="url(#connectionGrad)"
+                  strokeWidth="2"
+                  opacity="0.6"
+                  className="animate-pulse"
+                />
+
+                <circle r="3" fill="#8b5cf6" opacity="0.8">
+                  <animateMotion dur="5s" repeatCount="indefinite">
+                    <mpath href="#connectionPath" />
+                  </animateMotion>
+                </circle>
+                <circle r="2.5" fill="#3b82f6" opacity="0.7">
+                  <animateMotion dur="5s" repeatCount="indefinite" begin="2.5s">
+                    <mpath href="#connectionPath" />
+                  </animateMotion>
+                </circle>
+
+                <path id="connectionPath" d="M 0 16 L 100 16" fill="none" opacity="0" />
+
+                <circle
+                  cx="35"
+                  cy="16"
+                  r="2"
+                  fill="#8b5cf6"
+                  className="animate-ping"
+                  style={{ animationDelay: "0.5s" }}
+                />
+                <circle
+                  cx="65"
+                  cy="16"
+                  r="1.5"
+                  fill="#3b82f6"
+                  className="animate-ping"
+                  style={{ animationDelay: "1.2s" }}
+                />
+
+                <line x1="0" y1="16" x2="35" y2="16" stroke="#8b5cf6" strokeWidth="1" opacity="0.4" />
+                <line x1="35" y1="16" x2="65" y2="16" stroke="#3b82f6" strokeWidth="1" opacity="0.4" />
+                <line x1="65" y1="16" x2="100" y2="16" stroke="#8b5cf6" strokeWidth="1" opacity="0.4" />
+              </svg>
+            </div>
+
             <Button
               variant="outline"
               size="sm"
               onClick={() => setIsGraphExpanded(!isGraphExpanded)}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 relative z-10 bg-slate-800 border-2 border-purple-500 text-purple-400 font-bold hover:bg-slate-700 hover:border-purple-400 hover:text-purple-300 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
             >
               {isGraphExpanded ? (
                 <>
@@ -200,12 +277,12 @@ export default function Portfolio() {
           </div>
 
           {isGraphExpanded && (
-            <Card className="p-6 h-[500px]">
-              <div className="text-sm text-muted-foreground mb-4 text-center">
+            <GraphCard className="p-6 h-[500px]">
+              <div className="text-sm mb-4 text-center text-black">
                 Click and drag to pan • Scroll to zoom • Click nodes to highlight connections
               </div>
               <SkillsGraph onSkillSelect={setSelectedSkill} selectedSkill={selectedSkill} />
-            </Card>
+            </GraphCard>
           )}
         </div>
 

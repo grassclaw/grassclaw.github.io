@@ -15,15 +15,26 @@ interface SkillNode {
   y: number
   connections: string[]
 }
-
 interface SkillsGraphProps {
   onSkillSelect: (skill: string | null) => void
   selectedSkill: string | null
 }
 
+const ZOOM_MIN = 0.3
+const ZOOM_MAX = 1.0
+const ZOOM_STEP = 0.1
+
+// Slider is 0..100; map to zoom 0.3..1.0
+const zoomToSlider = (z: number) =>
+  Math.round(((Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, z)) - ZOOM_MIN) / (ZOOM_MAX - ZOOM_MIN)) * 100)
+
+const sliderToZoom = (s: number) =>
+  +(ZOOM_MIN + (Math.min(100, Math.max(0, s)) / 100) * (ZOOM_MAX - ZOOM_MIN)).toFixed(3)
+
 export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+
   const [zoom, setZoom] = useState(0.5)
   const [panX, setPanX] = useState(0)
   const [panY, setPanY] = useState(0)
@@ -32,7 +43,6 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
   const [canvasSize, setCanvasSize] = useState({ width: 800, height: 600 })
 
   const skills: SkillNode[] = [
-    // AI/ML Core - centered around 350,200
     { id: "llms", label: "LLMs", category: "AI", x: 350, y: 200, connections: ["langchain", "transformers", "rag"] },
     { id: "langchain", label: "LangChain", category: "AI", x: 250, y: 150, connections: ["llms", "rag", "python"] },
     { id: "transformers", label: "Transformers", category: "AI", x: 450, y: 150, connections: ["llms", "huggingface"] },
@@ -44,8 +54,6 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
       y: 250,
       connections: ["llms", "langchain", "vectordb"],
     },
-
-    // Infrastructure - right side
     {
       id: "aws",
       label: "AWS",
@@ -64,8 +72,6 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
       connections: ["aws", "docker"],
     },
     { id: "s3", label: "S3", category: "Infrastructure", x: 650, y: 200, connections: ["aws"] },
-
-    // Security - left side
     { id: "mitre", label: "MITRE ATT&CK", category: "Security", x: 100, y: 350, connections: ["stix", "threat-intel"] },
     { id: "stix", label: "STIX/TAXII", category: "Security", x: 200, y: 400, connections: ["mitre", "threat-intel"] },
     {
@@ -76,8 +82,6 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
       y: 300,
       connections: ["mitre", "stix"],
     },
-
-    // Programming - center bottom
     {
       id: "python",
       label: "Python",
@@ -88,8 +92,6 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
     },
     { id: "golang", label: "Golang", category: "Programming", x: 450, y: 350, connections: ["python", "sql"] },
     { id: "sql", label: "SQL", category: "Programming", x: 400, y: 400, connections: ["python", "golang", "postgres"] },
-
-    // Data - bottom right
     { id: "postgres", label: "PostgreSQL", category: "Data", x: 500, y: 450, connections: ["sql", "vectordb"] },
     { id: "vectordb", label: "Vector Stores", category: "Data", x: 400, y: 450, connections: ["rag", "postgres"] },
     { id: "huggingface", label: "HuggingFace", category: "AI", x: 550, y: 150, connections: ["transformers"] },
@@ -103,136 +105,132 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
     Data: "#f97316",
   }
 
+  // Resize observer
   useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const resizeObserver = new ResizeObserver((entries) => {
-      const entry = entries[0]
-      if (entry) {
-        const { width, height } = entry.contentRect
-        setCanvasSize({
-          width: Math.max(600, width),
-          height: Math.max(400, height - 20), // Account for padding
-        })
-      }
+    const el = containerRef.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect
+      setCanvasSize({ width: Math.max(600, width), height: Math.max(400, height - 20) })
     })
-
-    resizeObserver.observe(container)
-    return () => resizeObserver.disconnect()
+    ro.observe(el)
+    return () => ro.disconnect()
   }, [])
 
+  // Draw
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    const dpr = window.devicePixelRatio || 1
+    const dpr = Math.max(1, window.devicePixelRatio || 1)
     canvas.width = canvasSize.width * dpr
     canvas.height = canvasSize.height * dpr
-    ctx.scale(dpr, dpr)
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0) // reset & scale for DPR
 
-    const draw = () => {
-      ctx.clearRect(0, 0, canvasSize.width, canvasSize.height)
+    ctx.clearRect(0, 0, canvasSize.width, canvasSize.height)
+    ctx.save()
 
-      ctx.save()
-      ctx.scale(zoom, zoom)
-      ctx.translate(panX, panY)
+    // translate first, then scale — pan is in world units
+    ctx.translate(panX, panY)
+    ctx.scale(zoom, zoom)
 
-      ctx.strokeStyle = "#e5e7eb"
-      ctx.lineWidth = 1
+    ctx.strokeStyle = "#000000"
+    ctx.lineWidth = 1 / zoom
 
-      skills.forEach((skill) => {
-        skill.connections.forEach((connectionId) => {
-          const connectedSkill = skills.find((s) => s.id === connectionId)
-          if (connectedSkill) {
-            ctx.beginPath()
-            ctx.moveTo(skill.x, skill.y)
-            ctx.lineTo(connectedSkill.x, connectedSkill.y)
-            ctx.stroke()
-          }
-        })
-      })
-
-      skills.forEach((skill) => {
-        const isSelected = selectedSkill === skill.id
-        const radius = isSelected ? 25 : 20
-
-        ctx.fillStyle = categories[skill.category as keyof typeof categories]
+    // edges
+    skills.forEach((s) => {
+      s.connections.forEach((cid) => {
+        const t = skills.find((x) => x.id === cid)
+        if (!t) return
         ctx.beginPath()
-        ctx.arc(skill.x, skill.y, radius, 0, 2 * Math.PI)
-        ctx.fill()
-
-        if (isSelected) {
-          ctx.strokeStyle = "#1f2937"
-          ctx.lineWidth = 3
-          ctx.stroke()
-        }
-
-        ctx.fillStyle = "#1f2937"
-        ctx.font = "14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        ctx.textAlign = "center"
-        ctx.textBaseline = "top"
-        ctx.fillText(skill.label, skill.x, skill.y + radius + 8)
+        ctx.moveTo(s.x, s.y)
+        ctx.lineTo(t.x, t.y)
+        ctx.stroke()
       })
-
-      ctx.restore()
-    }
-
-    draw()
-  }, [selectedSkill, zoom, panX, panY, canvasSize])
-
-  const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
-    if (isDragging) return
-
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const rect = canvas.getBoundingClientRect()
-    const x = ((event.clientX - rect.left) * (canvasSize.width / rect.width)) / zoom - panX
-    const y = ((event.clientY - rect.top) * (canvasSize.height / rect.height)) / zoom - panY
-
-    const clickedSkill = skills.find((skill) => {
-      const distance = Math.sqrt((x - skill.x) ** 2 + (y - skill.y) ** 2)
-      return distance <= 25
     })
 
-    if (clickedSkill) {
-      onSkillSelect(selectedSkill === clickedSkill.id ? null : clickedSkill.id)
-    }
+    // nodes
+    skills.forEach((s) => {
+      const isSel = selectedSkill === s.id
+      const r = isSel ? 25 : 20
+
+      ctx.fillStyle = categories[s.category as keyof typeof categories]
+      ctx.beginPath()
+      ctx.arc(s.x, s.y, r, 0, Math.PI * 2)
+      ctx.fill()
+
+      if (isSel) {
+        ctx.strokeStyle = "#1f2937"
+        ctx.lineWidth = 3 / zoom
+        ctx.stroke()
+      }
+
+      ctx.fillStyle = "#ffffff"
+      ctx.font = `${14 / zoom}px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`
+      ctx.textAlign = "center"
+      ctx.textBaseline = "top"
+      ctx.fillText(s.label, s.x, s.y + r + 8 / zoom)
+    })
+
+    ctx.restore()
+  }, [selectedSkill, zoom, panX, panY, canvasSize])
+
+  // Helpers
+  const worldFromClient = (clientX: number, clientY: number) => {
+    const canvas = canvasRef.current!
+    const rect = canvas.getBoundingClientRect()
+    const xCanvas = (clientX - rect.left) * (canvasSize.width / rect.width)
+    const yCanvas = (clientY - rect.top) * (canvasSize.height / rect.height)
+    // convert canvas coords to world coords (invert current pan/zoom)
+    const wx = xCanvas / zoom - panX / 1
+    const wy = yCanvas / zoom - panY / 1
+    return { wx, wy, xCanvas, yCanvas }
   }
 
-  const handleMouseDown = (event: React.MouseEvent<HTMLCanvasElement>) => {
+  const setZoomAroundPoint = (clientX: number, clientY: number, nextZoom: number) => {
+    nextZoom = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, nextZoom))
+    const { wx, xCanvas, wy, yCanvas } = worldFromClient(clientX, clientY)
+    // keep world point under cursor anchored after zoom:
+    setPanX(wx - xCanvas / nextZoom)
+    setPanY(wy - yCanvas / nextZoom)
+    setZoom(nextZoom)
+  }
+
+  // Interaction
+  const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
+    if (isDragging) return
+    const { wx, wy } = worldFromClient(event.clientX, event.clientY)
+    const clicked = skills.find((s) => Math.hypot(wx - s.x, wy - s.y) <= 25)
+    if (clicked) onSkillSelect(selectedSkill === clicked.id ? null : clicked.id)
+  }
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     setIsDragging(true)
-    setLastMousePos({ x: event.clientX, y: event.clientY })
+    setLastMousePos({ x: e.clientX, y: e.clientY })
   }
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!isDragging) return
-
-    const deltaX = event.clientX - lastMousePos.x
-    const deltaY = event.clientY - lastMousePos.y
-
-    setPanX((prev) => prev + deltaX / zoom)
-    setPanY((prev) => prev + deltaY / zoom)
-    setLastMousePos({ x: event.clientX, y: event.clientY })
+    const dx = e.clientX - lastMousePos.x
+    const dy = e.clientY - lastMousePos.y
+    // pan in world units so pan speed feels consistent across zoom levels
+    setPanX((p) => p + dx / zoom)
+    setPanY((p) => p + dy / zoom)
+    setLastMousePos({ x: e.clientX, y: e.clientY })
   }
 
-  const handleMouseUp = () => {
-    setIsDragging(false)
+  const handleMouseUp = () => setIsDragging(false)
+
+  const handleWheel = (e: React.WheelEvent<HTMLCanvasElement>) => {
+    e.preventDefault()
+    const factor = e.deltaY > 0 ? 1 / (1 + ZOOM_STEP) : 1 + ZOOM_STEP
+    setZoomAroundPoint(e.clientX, e.clientY, zoom * factor)
   }
 
-  const handleWheel = (event: React.WheelEvent<HTMLCanvasElement>) => {
-    event.preventDefault()
-    const zoomFactor = event.deltaY > 0 ? 0.9 : 1.1
-    const newZoom = Math.max(0.3, Math.min(1.0, zoom * zoomFactor))
-    setZoom(newZoom)
-  }
-
-  const handleZoomIn = () => setZoom((prev) => Math.min(1.0, prev * 1.2))
-  const handleZoomOut = () => setZoom((prev) => Math.max(0.3, prev / 1.2))
+  const handleZoomIn = () => setZoom((z) => Math.min(ZOOM_MAX, +(z + ZOOM_STEP).toFixed(3)))
+  const handleZoomOut = () => setZoom((z) => Math.max(ZOOM_MIN, +(z - ZOOM_STEP).toFixed(3)))
   const handleReset = () => {
     setZoom(0.5)
     setPanX(0)
@@ -241,53 +239,77 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
 
   return (
     <div className="space-y-4 h-full flex flex-col relative overflow-hidden">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-center">
         <div className="flex gap-2 flex-wrap">
           {Object.entries(categories).map(([category, color]) => (
             <div key={category} className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
-              <span className="text-sm text-muted-foreground">{category}</span>
+              <span className="text-sm text-black">{category}</span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="flex items-center gap-4 p-2 bg-muted/50 rounded-lg">
-        <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline" onClick={handleZoomOut}>
-            <ZoomOut className="h-4 w-4" />
-          </Button>
-          <Button size="sm" variant="outline" onClick={handleZoomIn}>
-            <ZoomIn className="h-4 w-4" />
-          </Button>
-          <Button size="sm" variant="outline" onClick={handleReset}>
-            <RotateCcw className="h-4 w-4" />
-          </Button>
+      <div ref={containerRef} className="flex-1 transition-all duration-300 min-h-[500px] overflow-hidden relative">
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 bg-black/50 text-white px-3 py-1 rounded-md text-sm backdrop-blur-sm">
+          Click and drag to pan • Scroll to zoom • Click nodes to highlight connections
         </div>
-        <div className="flex items-center gap-2 flex-1">
-          <span className="text-sm text-muted-foreground">Zoom:</span>
-          <Slider
-            value={[zoom]}
-            onValueChange={(value) => setZoom(value[0])}
-            min={0.3}
-            max={1.0}
-            step={0.1}
-            className="flex-1 max-w-32"
-          />
-          <span className="text-sm text-muted-foreground min-w-12">{Math.round(zoom * 100)}%</span>
-        </div>
-      </div>
 
-      <div ref={containerRef} className="flex-1 transition-all duration-300 min-h-96 overflow-hidden relative">
+        {/* Zoom bar */}
+        <div className="absolute right-4 top-4 z-10 flex flex-col items-center backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 p-3 gap-3 bg-transparent border-dashed">
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={handleZoomIn}
+            className="w-10 h-5 p-0 hover:bg-purple-50 bg-transparent border-0"
+            aria-label="Zoom in"
+          >
+            <ZoomIn className="h-5 w-5 text-white" />
+          </Button>
+
+          {/* Track strictly between buttons */}
+          <div className="h-32 w-8 flex items-center justify-center">
+            <Slider
+              value={[zoomToSlider(zoom)]} // 0..100
+              onValueChange={(vals) => setZoom(sliderToZoom(vals[0]))}
+              min={0}
+              max={100}
+              step={1}
+              orientation="vertical"
+              aria-label="Zoom level"
+              className="h-32 w-8"
+            />
+          </div>
+
+          <div className="text-xs font-semibold text-violet-700 select-none mt-2">{Math.round(zoom * 100)}%</div>
+
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={handleZoomOut}
+            className="w-10 h-10 p-0 hover:bg-purple-50 bg-transparent border-0"
+            aria-label="Zoom out"
+          >
+            <ZoomOut className="h-5 w-5 text-white" />
+          </Button>
+
+          <div className="w-full h-px bg-gray-200" />
+
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={handleReset}
+            className="w-10 h-10 p-0 hover:bg-gray-50 bg-transparent border-0"
+            aria-label="Reset zoom"
+          >
+            <RotateCcw className="h-4 w-4 text-white" />
+          </Button>
+        </div>
+
         <canvas
           ref={canvasRef}
-          style={{
-            width: `${canvasSize.width}px`,
-            height: `${canvasSize.height}px`,
-            maxWidth: "100%",
-            maxHeight: "100%",
-          }}
-          className={`border rounded-lg ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+          style={{ width: "100%", height: "100%", maxWidth: "100%", maxHeight: "100%", display: "block" }}
+          className={`rounded-lg border border-gray-200 bg-slate-600 ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
           onClick={handleCanvasClick}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
