@@ -2,7 +2,7 @@ name: Deploy Next.js site to Pages
 
 on:
   push:
-    branches: ["master"]     # change to ["main"] if needed
+    branches: ["master"]   # or ["main"] if that’s your default
   workflow_dispatch:
 
 permissions:
@@ -24,12 +24,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: 20
           cache: "pnpm"
 
-      # 👇 This makes pnpm available
-      - name: Enable pnpm
-        run: corepack enable
+      # 👇 This line ensures pnpm is actually installed
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
