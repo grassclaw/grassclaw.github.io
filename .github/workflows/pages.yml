@@ -25,10 +25,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      # Install pnpm into PATH (match your packageManager version)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.3
+          run_install: false
+
+      # Sanity check: prove pnpm exists (helps catch PATH issues)
+      - name: Check pnpm
+        run: pnpm -v
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install --frozen-lockfile
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -36,10 +48,10 @@ jobs:
           static_site_generator: next
 
       - name: Build
-        run: npx --no-install next build
+        run: pnpm run build
 
       - name: Export static site
-        run: npx --no-install next export
+        run: pnpm run export
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
