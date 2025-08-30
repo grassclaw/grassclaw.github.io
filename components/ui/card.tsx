@@ -54,4 +54,17 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   return <div data-slot="card-footer" className={cn("flex items-center px-6 [.border-t]:pt-6", className)} {...props} />
 }
 
-export { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent }
+function GraphCard({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="graph-card"
+      className={cn(
+        "text-card-foreground flex flex-col gap-4 rounded-xl border-2 border-purple-200/50 py-4 shadow-lg bg-gradient-to-br from-white/90 to-purple-50/80 backdrop-blur-md",
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent, GraphCard }

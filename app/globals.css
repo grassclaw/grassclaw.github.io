@@ -152,8 +152,81 @@
   }
 }
 
+/* Adding gentle wave animation for Graph Search text */
+@keyframes wave {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Adding color wave animation that moves blue tone across text */
+@keyframes colorWave {
+  0% {
+    background-position: -200% center;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 0% center;
+    filter: hue-rotate(30deg);
+  }
+  100% {
+    background-position: 200% center;
+    filter: hue-rotate(0deg);
+  }
+}
+
+/* Adding ripple animation for Graph Search text */
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes textShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
 @layer utilities {
   .animate-wiggle {
     animation: wiggle 2s ease-in-out infinite;
+  }
+
+  /* Adding wave animation utility class with slower timing */
+  .animate-wave {
+    animation: wave 4s ease-in-out infinite;
+  }
+
+  /* Adding color wave animation utility class */
+  .animate-color-wave {
+    background-size: 300% auto;
+    animation: colorWave 8s ease-in-out infinite;
+    animation-delay: var(--wave-delay, 0s);
+  }
+
+  .animate-ripple {
+    animation: ripple 2s ease-in-out infinite;
+  }
+
+  .animate-text-shimmer {
+    background-size: 200% auto;
+    animation: textShimmer 3s linear infinite;
   }
 }
