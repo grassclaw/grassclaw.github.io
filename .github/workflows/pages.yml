@@ -1,7 +1,8 @@
 name: Deploy Next.js site to Pages
+
 on:
   push:
-    branches: ["master"]
+    branches: ["master"]   # change to ["main"] if needed
   workflow_dispatch:
 
 permissions:
@@ -19,31 +20,34 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-      
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "pnpm"
-      
+
+      # Install the exact pnpm version from package.json
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.3
+          run_install: false
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
           static_site_generator: next
-      
+
       - name: Build
         run: pnpm run build
-      
+
       - name: Export static site
         run: pnpm run export
-      
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
