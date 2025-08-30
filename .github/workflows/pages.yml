@@ -21,14 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
-
-      # Correct: Use pnpm/action-setup@v2, not @v4
+        # Correct: Use pnpm/action-setup@v2, not @v4
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -41,6 +34,13 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
