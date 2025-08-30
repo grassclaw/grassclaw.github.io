@@ -27,7 +27,8 @@ jobs:
           node-version: "20"
           cache: "pnpm"
 
-      - name: Enable Corepack (pnpm)
+      # 👇 This makes pnpm available
+      - name: Enable pnpm
         run: corepack enable
 
       - name: Install dependencies
@@ -42,7 +43,7 @@ jobs:
         run: pnpm run build
 
       - name: Export static site
-        run: pnpm run export   # writes ./out because output:'export' in next.config.mjs
+        run: pnpm run export
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
