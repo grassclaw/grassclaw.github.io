@@ -2,7 +2,7 @@ name: Deploy Next.js site to Pages
 
 on:
   push:
-    branches: ["master"]   # change to ["main"] if needed
+    branches: ["master"]   # change to ["main"] if that's your default
   workflow_dispatch:
 
 permissions:
@@ -25,13 +25,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "pnpm"
+          cache: 'pnpm'
 
-      # Install the exact pnpm version from package.json
+      # ✅ install pnpm CLI into the runner
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9.12.3
+          version: 9 # match your local pnpm version if different
           run_install: false
 
       - name: Install dependencies
