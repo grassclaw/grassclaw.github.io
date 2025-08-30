@@ -136,10 +136,8 @@ export function AcademicResearch({ searchQuery, selectedSkill }: AcademicResearc
     <div className="space-y-6">
       {showNoResultsMessage && (
         <Card className="p-8 text-center border-2 border-dashed border-muted">
-          <p className="text-muted-foreground text-lg mb-2">Sorry, nothing was found for "{searchQuery}"</p>
-          <p className="text-sm text-muted-foreground">
-            However, it doesn't mean I haven't done it! Feel free to reach out.
-          </p>
+          <p className="text-slate-700 text-lg mb-2">Sorry, nothing was found for "{searchQuery}"</p>
+          <p className="text-sm text-slate-600">However, it doesn't mean I haven't done it! Feel free to reach out.</p>
         </Card>
       )}
 
@@ -159,12 +157,12 @@ export function AcademicResearch({ searchQuery, selectedSkill }: AcademicResearc
                   <CardTitle className="text-xl text-balance">{item.title}</CardTitle>
                   <div className="flex items-center gap-4 text-muted-foreground mt-2">
                     <div className="flex items-center gap-1">
-                      <GraduationCap className="w-4 h-4" />
-                      <span>{item.institution}</span>
+                      <GraduationCap className="w-4 h-4 text-slate-600" />
+                      <span className="text-slate-700">{item.institution}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      <span>{item.period}</span>
+                      <Calendar className="w-4 h-4 text-slate-600" />
+                      <span className="text-slate-700">{item.period}</span>
                     </div>
                   </div>
                 </div>
@@ -172,14 +170,14 @@ export function AcademicResearch({ searchQuery, selectedSkill }: AcademicResearc
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-pretty">{item.description}</p>
+              <p className="text-pretty text-slate-800">{item.description}</p>
 
               {item.areas && (
                 <div>
-                  <h4 className="font-semibold mb-2">Research Areas:</h4>
+                  <h4 className="font-semibold mb-2 text-slate-800">Research Areas:</h4>
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     {item.areas.map((area, index) => (
-                      <li key={index} className="text-pretty">
+                      <li key={index} className="text-pretty text-slate-700">
                         {area}
                       </li>
                     ))}

@@ -125,10 +125,8 @@ export function Extracurriculars({ searchQuery, selectedSkill }: Extracurricular
     <div className="space-y-6">
       {showNoResultsMessage && (
         <Card className="p-8 text-center border-2 border-dashed border-muted">
-          <p className="text-muted-foreground text-lg mb-2">Sorry, nothing was found for "{searchQuery}"</p>
-          <p className="text-sm text-muted-foreground">
-            However, it doesn't mean I haven't done it! Feel free to reach out.
-          </p>
+          <p className="text-slate-700 text-lg mb-2">Sorry, nothing was found for "{searchQuery}"</p>
+          <p className="text-sm text-slate-600">However, it doesn't mean I haven't done it! Feel free to reach out.</p>
         </Card>
       )}
 
@@ -147,15 +145,15 @@ export function Extracurriculars({ searchQuery, selectedSkill }: Extracurricular
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div className="flex items-start gap-3">
                   <div className="p-2 bg-accent/10 rounded-lg">
-                    <IconComponent className="w-5 h-5 text-accent" />
+                    <IconComponent className="w-5 h-5 text-slate-600" />
                   </div>
                   <div>
-                    <CardTitle className="text-xl text-balance">{activity.title}</CardTitle>
+                    <CardTitle className="text-xl text-balance text-slate-800">{activity.title}</CardTitle>
                     <div className="flex items-center gap-4 text-muted-foreground mt-2">
-                      <span>{activity.organization}</span>
+                      <span className="text-slate-700">{activity.organization}</span>
                       <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>{activity.period}</span>
+                        <Calendar className="w-4 h-4 text-slate-600" />
+                        <span className="text-slate-700">{activity.period}</span>
                       </div>
                     </div>
                   </div>
@@ -164,13 +162,13 @@ export function Extracurriculars({ searchQuery, selectedSkill }: Extracurricular
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-pretty">{activity.description}</p>
+              <p className="text-pretty text-slate-800">{activity.description}</p>
 
               <div>
-                <h4 className="font-semibold mb-2">Key Responsibilities:</h4>
+                <h4 className="font-semibold mb-2 text-slate-800">Key Responsibilities:</h4>
                 <ul className="list-disc list-inside space-y-1 text-sm">
                   {activity.responsibilities.map((responsibility, index) => (
-                    <li key={index} className="text-pretty">
+                    <li key={index} className="text-pretty text-slate-700">
                       {responsibility}
                     </li>
                   ))}
