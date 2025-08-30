@@ -112,6 +112,24 @@ export function AcademicResearch({ searchQuery, selectedSkill }: AcademicResearc
 
   const allItems = [...research, ...education]
 
+  const highlightText = (text: string, query: string) => {
+    if (!query.trim()) return text
+
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi")
+    const parts = text.split(regex)
+
+    return parts.map((part, index) => {
+      if (regex.test(part)) {
+        return (
+          <span key={index} className="bg-purple-200 text-purple-900 px-1 rounded">
+            {part}
+          </span>
+        )
+      }
+      return part
+    })
+  }
+
   const itemsWithHighlight = allItems.map((item) => {
     const matchesSearch =
       searchQuery === "" ||
@@ -154,11 +172,11 @@ export function AcademicResearch({ searchQuery, selectedSkill }: AcademicResearc
             <CardHeader>
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div>
-                  <CardTitle className="text-xl text-balance">{item.title}</CardTitle>
+                  <CardTitle className="text-xl text-balance">{highlightText(item.title, searchQuery)}</CardTitle>
                   <div className="flex items-center gap-4 text-muted-foreground mt-2">
                     <div className="flex items-center gap-1">
                       <GraduationCap className="w-4 h-4 text-slate-600" />
-                      <span className="text-slate-700">{item.institution}</span>
+                      <span className="text-slate-700">{highlightText(item.institution, searchQuery)}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Calendar className="w-4 h-4 text-slate-600" />
@@ -170,7 +188,7 @@ export function AcademicResearch({ searchQuery, selectedSkill }: AcademicResearc
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-pretty text-slate-800">{item.description}</p>
+              <p className="text-pretty text-slate-800">{highlightText(item.description, searchQuery)}</p>
 
               {item.areas && (
                 <div>
@@ -178,7 +196,7 @@ export function AcademicResearch({ searchQuery, selectedSkill }: AcademicResearc
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     {item.areas.map((area, index) => (
                       <li key={index} className="text-pretty text-slate-700">
-                        {area}
+                        {highlightText(area, searchQuery)}
                       </li>
                     ))}
                   </ul>

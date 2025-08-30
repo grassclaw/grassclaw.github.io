@@ -121,6 +121,24 @@ export function Extracurriculars({ searchQuery, selectedSkill }: Extracurricular
   const hasMatches = activitiesWithHighlight.some((activity) => activity.isHighlighted)
   const showNoResultsMessage = searchQuery !== "" && !hasMatches
 
+  const highlightText = (text: string, query: string) => {
+    if (!query.trim()) return text
+
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi")
+    const parts = text.split(regex)
+
+    return parts.map((part, index) => {
+      if (regex.test(part)) {
+        return (
+          <span key={index} className="bg-purple-200 text-purple-900 px-1 rounded">
+            {part}
+          </span>
+        )
+      }
+      return part
+    })
+  }
+
   return (
     <div className="space-y-6">
       {showNoResultsMessage && (
@@ -148,9 +166,11 @@ export function Extracurriculars({ searchQuery, selectedSkill }: Extracurricular
                     <IconComponent className="w-5 h-5 text-slate-600" />
                   </div>
                   <div>
-                    <CardTitle className="text-xl text-balance text-slate-800">{activity.title}</CardTitle>
+                    <CardTitle className="text-xl text-balance text-slate-800">
+                      {highlightText(activity.title, searchQuery)}
+                    </CardTitle>
                     <div className="flex items-center gap-4 text-muted-foreground mt-2">
-                      <span className="text-slate-700">{activity.organization}</span>
+                      <span className="text-slate-700">{highlightText(activity.organization, searchQuery)}</span>
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4 text-slate-600" />
                         <span className="text-slate-700">{activity.period}</span>
@@ -162,14 +182,14 @@ export function Extracurriculars({ searchQuery, selectedSkill }: Extracurricular
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-pretty text-slate-800">{activity.description}</p>
+              <p className="text-pretty text-slate-800">{highlightText(activity.description, searchQuery)}</p>
 
               <div>
                 <h4 className="font-semibold mb-2 text-slate-800">Key Responsibilities:</h4>
                 <ul className="list-disc list-inside space-y-1 text-sm">
                   {activity.responsibilities.map((responsibility, index) => (
                     <li key={index} className="text-pretty text-slate-700">
-                      {responsibility}
+                      {highlightText(responsibility, searchQuery)}
                     </li>
                   ))}
                 </ul>

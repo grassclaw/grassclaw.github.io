@@ -261,7 +261,7 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
             size="sm"
             variant="ghost"
             onClick={handleZoomIn}
-            className="w-10 h-5 p-0 hover:bg-purple-50 bg-transparent border-0"
+            className="w-10 h-5 p-0 hover:bg-slate-50 bg-transparent border-0"
             aria-label="Zoom in"
           >
             <ZoomIn className="h-5 w-5 text-white" />
@@ -281,13 +281,13 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
             />
           </div>
 
-          <div className="text-xs font-semibold text-violet-700 select-none mt-2">{Math.round(zoom * 100)}%</div>
+          <div className="text-xs font-semibold text-slate-700 select-none mt-2">{Math.round(zoom * 100)}%</div>
 
           <Button
             size="sm"
             variant="ghost"
             onClick={handleZoomOut}
-            className="w-10 h-10 p-0 hover:bg-purple-50 bg-transparent border-0"
+            className="w-10 h-10 p-0 hover:bg-slate-50 bg-transparent border-0"
             aria-label="Zoom out"
           >
             <ZoomOut className="h-5 w-5 text-white" />
