@@ -59,7 +59,7 @@ function GraphCard({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="graph-card"
       className={cn(
-        "text-card-foreground flex flex-col gap-4 rounded-xl border-2 border-purple-200/50 py-4 shadow-lg bg-gradient-to-br from-white/90 to-purple-50/80 backdrop-blur-md",
+        "text-card-foreground flex flex-col gap-4 rounded-xl border-2 border-slate-200/50 py-4 shadow-lg bg-gradient-to-br from-white/90 to-slate-50/80 backdrop-blur-md",
         className,
       )}
       {...props}

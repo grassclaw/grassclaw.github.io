@@ -9,7 +9,7 @@ export function HeroSection() {
         <svg className="w-full h-full" viewBox="0 0 1200 600" fill="none">
           <defs>
             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#8b5cf6" />
+              <stop offset="0%" stopColor="#60a5fa" />
               <stop offset="100%" stopColor="#3b82f6" />
             </linearGradient>
           </defs>
@@ -32,9 +32,9 @@ export function HeroSection() {
           </g>
           {/* Data flow particles */}
           <g>
-            <circle cx="200" cy="125" r="1" fill="#8b5cf6" className="animate-ping" />
+            <circle cx="200" cy="125" r="1" fill="#60a5fa" className="animate-ping" />
             <circle cx="400" cy="115" r="1" fill="#3b82f6" className="animate-ping" style={{ animationDelay: "1s" }} />
-            <circle cx="600" cy="140" r="1" fill="#8b5cf6" className="animate-ping" style={{ animationDelay: "2s" }} />
+            <circle cx="600" cy="140" r="1" fill="#60a5fa" className="animate-ping" style={{ animationDelay: "2s" }} />
             <circle
               cx="800"
               cy="160"
@@ -54,18 +54,18 @@ export function HeroSection() {
               <img
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/188-HfYogLPVvZA-Tuwb2JauwSpe2uO55FRqGrieIv5sTI.jpeg"
                 alt="Aaron Escamilla"
-                className="w-48 h-48 rounded-full object-cover border-4 border-purple-500/30 shadow-2xl shadow-purple-500/20"
+                className="w-48 h-48 rounded-full object-cover border-4 border-slate-500/30 shadow-2xl shadow-slate-500/20"
               />
               {/* Animated graph elements around profile */}
               <div
-                className="absolute -top-4 -right-4 w-8 h-8 bg-purple-500/20 rounded-full animate-bounce"
+                className="absolute -top-4 -right-4 w-8 h-8 bg-slate-500/20 rounded-full animate-bounce"
                 style={{ animationDelay: "0s" }}
               ></div>
               <div
                 className="absolute -bottom-2 -left-2 w-6 h-6 bg-blue-500/20 rounded-full animate-bounce"
                 style={{ animationDelay: "1s" }}
               ></div>
-              <div className="absolute top-1/2 -right-6 w-4 h-4 bg-purple-400/30 rounded-full animate-pulse"></div>
+              <div className="absolute top-1/2 -right-6 w-4 h-4 bg-slate-400/30 rounded-full animate-pulse"></div>
               <div
                 className="absolute bottom-1/4 -left-6 w-5 h-5 bg-blue-400/30 rounded-full animate-pulse"
                 style={{ animationDelay: "0.5s" }}
@@ -88,7 +88,7 @@ export function HeroSection() {
             <div className="flex flex-wrap gap-2 mb-6 justify-center lg:justify-start">
               <Badge
                 variant="secondary"
-                className="bg-purple-600/20 text-purple-200 border-purple-500/30 hover:animate-wiggle"
+                className="bg-slate-600/20 text-slate-200 border-slate-500/30 hover:animate-wiggle"
               >
                 LLMs
               </Badge>
@@ -101,7 +101,7 @@ export function HeroSection() {
               </Badge>
               <Badge
                 variant="secondary"
-                className="bg-purple-600/20 text-purple-200 border-purple-500/30 hover:animate-wiggle"
+                className="bg-slate-600/20 text-slate-200 border-slate-500/30 hover:animate-wiggle"
                 style={{ animationDelay: "0.2s" }}
               >
                 LangChain
@@ -115,7 +115,7 @@ export function HeroSection() {
               </Badge>
               <Badge
                 variant="secondary"
-                className="bg-purple-600/20 text-purple-200 border-purple-500/30 hover:animate-wiggle"
+                className="bg-slate-600/20 text-slate-200 border-slate-500/30 hover:animate-wiggle"
                 style={{ animationDelay: "0.4s" }}
               >
                 Golang
@@ -130,7 +130,7 @@ export function HeroSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start">
-              <Button className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white">
+              <Button className="flex items-center gap-2 bg-slate-600 hover:bg-slate-700 text-white">
                 <Mail className="w-4 h-4" />
                 aaronenv@proton.me
               </Button>

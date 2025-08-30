@@ -185,7 +185,7 @@ export default function Portfolio() {
                 {"Graph Search".split("").map((letter, index) => (
                   <span
                     key={index}
-                    className="inline-block animate-wave text-transparent bg-gradient-to-r from-purple-400 via-blue-500 to-purple-600 bg-clip-text animate-color-wave"
+                    className="inline-block animate-wave text-transparent bg-gradient-to-r from-slate-400 via-blue-500 to-slate-600 bg-clip-text animate-color-wave"
                     style={
                       {
                         animationDelay: `${index * 0.1}s`,
@@ -260,7 +260,7 @@ export default function Portfolio() {
               variant="outline"
               size="sm"
               onClick={() => setIsGraphExpanded(!isGraphExpanded)}
-              className="flex items-center gap-2 relative z-10 bg-slate-800 border-2 border-purple-500 text-purple-400 font-bold hover:bg-slate-700 hover:border-purple-400 hover:text-purple-300 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+              className="flex items-center gap-2 relative z-10 bg-slate-800 border-2 border-slate-500 text-slate-400 font-bold hover:bg-slate-700 hover:border-slate-400 hover:text-slate-300 transition-all duration-300 shadow-lg hover:shadow-slate-500/25"
             >
               {isGraphExpanded ? (
                 <>
