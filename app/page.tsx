@@ -66,15 +66,119 @@ export default function Portfolio() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative bg-gradient-to-b from-slate-900 via-slate-800 via-slate-600 via-slate-400 to-slate-100">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <svg className="absolute top-32 left-16 w-48 h-48 opacity-20" viewBox="0 0 100 100">
+          <defs>
+            <linearGradient id="nodeGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#8b5cf6" />
+              <stop offset="100%" stopColor="#3b82f6" />
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <circle cx="20" cy="30" r="3" fill="url(#nodeGrad1)" className="animate-pulse" filter="url(#glow)" />
+          <circle
+            cx="60"
+            cy="20"
+            r="2.5"
+            fill="url(#nodeGrad1)"
+            className="animate-pulse"
+            style={{ animationDelay: "0.5s" }}
+            filter="url(#glow)"
+          />
+          <circle
+            cx="80"
+            cy="60"
+            r="4"
+            fill="url(#nodeGrad1)"
+            className="animate-pulse"
+            style={{ animationDelay: "1s" }}
+            filter="url(#glow)"
+          />
+          <circle
+            cx="40"
+            cy="70"
+            r="2"
+            fill="url(#nodeGrad1)"
+            className="animate-pulse"
+            style={{ animationDelay: "1.5s" }}
+            filter="url(#glow)"
+          />
+          <line x1="20" y1="30" x2="60" y2="20" stroke="url(#nodeGrad1)" strokeWidth="1" opacity="0.6" />
+          <line x1="60" y1="20" x2="80" y2="60" stroke="url(#nodeGrad1)" strokeWidth="1" opacity="0.6" />
+          <line x1="80" y1="60" x2="40" y2="70" stroke="url(#nodeGrad1)" strokeWidth="1" opacity="0.6" />
+          <line x1="40" y1="70" x2="20" y2="30" stroke="url(#nodeGrad1)" strokeWidth="0.8" opacity="0.4" />
+        </svg>
+
+        <svg className="absolute top-48 right-24 w-40 h-40 opacity-25" viewBox="0 0 100 100">
+          <circle cx="30" cy="40" r="2.5" fill="#8b5cf6" className="animate-ping" />
+          <circle cx="70" cy="30" r="3" fill="#3b82f6" className="animate-ping" style={{ animationDelay: "1.5s" }} />
+          <circle cx="50" cy="70" r="2" fill="#8b5cf6" className="animate-ping" style={{ animationDelay: "0.8s" }} />
+          <line x1="30" y1="40" x2="70" y2="30" stroke="#8b5cf6" strokeWidth="1" opacity="0.5" />
+          <line x1="70" y1="30" x2="50" y2="70" stroke="#3b82f6" strokeWidth="1" opacity="0.5" />
+        </svg>
+
+        <svg className="absolute top-1/2 left-8 w-56 h-56 opacity-15" viewBox="0 0 100 100">
+          <circle cx="25" cy="25" r="2" fill="#8b5cf6" className="animate-pulse" />
+          <circle cx="75" cy="35" r="3" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "0.8s" }} />
+          <circle cx="50" cy="70" r="3.5" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "1.2s" }} />
+          <circle cx="20" cy="60" r="2.5" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "2s" }} />
+          <circle cx="80" cy="75" r="2" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "0.3s" }} />
+          <line x1="25" y1="25" x2="75" y2="35" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.4" />
+          <line x1="75" y1="35" x2="50" y2="70" stroke="#3b82f6" strokeWidth="0.8" opacity="0.4" />
+          <line x1="50" y1="70" x2="20" y2="60" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.4" />
+          <line x1="20" y1="60" x2="80" y2="75" stroke="#3b82f6" strokeWidth="0.8" opacity="0.4" />
+          <line x1="80" y1="75" x2="75" y2="35" stroke="#8b5cf6" strokeWidth="0.6" opacity="0.3" />
+        </svg>
+
+        <svg className="absolute top-2/3 right-16 w-44 h-44 opacity-20" viewBox="0 0 100 100">
+          <circle cx="40" cy="20" r="2.5" fill="#3b82f6" className="animate-ping" style={{ animationDelay: "2s" }} />
+          <circle cx="20" cy="60" r="2" fill="#8b5cf6" className="animate-ping" style={{ animationDelay: "0.3s" }} />
+          <circle cx="80" cy="80" r="3" fill="#3b82f6" className="animate-ping" style={{ animationDelay: "1.8s" }} />
+          <circle cx="70" cy="40" r="2.5" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "1s" }} />
+          <line x1="40" y1="20" x2="20" y2="60" stroke="#8b5cf6" strokeWidth="1" opacity="0.5" />
+          <line x1="20" y1="60" x2="80" y2="80" stroke="#3b82f6" strokeWidth="1" opacity="0.5" />
+          <line x1="80" y1="80" x2="70" y2="40" stroke="#8b5cf6" strokeWidth="1" opacity="0.5" />
+          <line x1="70" y1="40" x2="40" y2="20" stroke="#3b82f6" strokeWidth="1" opacity="0.5" />
+        </svg>
+
+        <svg className="absolute bottom-32 left-1/4 w-52 h-52 opacity-18" viewBox="0 0 100 100">
+          <circle cx="30" cy="30" r="2.5" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "0.7s" }} />
+          <circle cx="70" cy="50" r="2" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "1.4s" }} />
+          <circle cx="50" cy="80" r="3" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "0.2s" }} />
+          <circle cx="15" cy="65" r="2" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "1.8s" }} />
+          <circle cx="85" cy="25" r="2.5" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "0.9s" }} />
+          <line x1="30" y1="30" x2="70" y2="50" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.6" />
+          <line x1="70" y1="50" x2="50" y2="80" stroke="#3b82f6" strokeWidth="0.8" opacity="0.6" />
+          <line x1="50" y1="80" x2="15" y2="65" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.6" />
+          <line x1="15" y1="65" x2="30" y2="30" stroke="#3b82f6" strokeWidth="0.8" opacity="0.6" />
+          <line x1="85" y1="25" x2="70" y2="50" stroke="#8b5cf6" strokeWidth="0.6" opacity="0.4" />
+        </svg>
+
+        <svg className="absolute bottom-16 right-12 w-36 h-36 opacity-22" viewBox="0 0 100 100">
+          <circle cx="25" cy="40" r="3" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "1.3s" }} />
+          <circle cx="75" cy="30" r="2.5" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "0.6s" }} />
+          <circle cx="60" cy="75" r="2" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "2.1s" }} />
+          <line x1="25" y1="40" x2="75" y2="30" stroke="#8b5cf6" strokeWidth="1" opacity="0.5" />
+          <line x1="75" y1="30" x2="60" y2="75" stroke="#3b82f6" strokeWidth="1" opacity="0.5" />
+          <line x1="60" y1="75" x2="25" y2="40" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.4" />
+        </svg>
+      </div>
+
       <HeroSection />
 
-      <main className="container mx-auto px-4 py-8 space-y-8">
+      <main className="container mx-auto px-4 py-8 space-y-8 relative z-10">
         <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} onSearchEnter={handleSearchEnter} />
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold">Graph Search</h3>
+            <h3 className="text-lg font-semibold text-white">Graph Search</h3>
             <Button
               variant="outline"
               size="sm"

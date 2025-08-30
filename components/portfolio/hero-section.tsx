@@ -4,7 +4,7 @@ import { Mail, MapPin, Linkedin } from "lucide-react"
 
 export function HeroSection() {
   return (
-    <section className="relative bg-slate-900 py-16 overflow-hidden">
+    <section className="relative bg-transparent py-16 overflow-hidden">
       <div className="absolute inset-0 opacity-10">
         <svg className="w-full h-full" viewBox="0 0 1200 600" fill="none">
           <defs>
@@ -141,9 +141,9 @@ export function HeroSection() {
                 <Linkedin className="w-4 h-4" />
                 LinkedIn Profile
               </Button>
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2 text-slate-300">
                 <MapPin className="w-4 h-4" />
-                Tucson, AZ
+                Working remotely from USA
               </div>
             </div>
           </div>
