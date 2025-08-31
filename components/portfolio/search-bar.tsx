@@ -25,11 +25,6 @@ const suggestedKeywords = [
 export function SearchBar({ searchQuery, onSearchChange }: SearchBarProps) {
   return (
     <div className="space-y-4">
-      <div className="text-center">
-        <h2 className="text-2xl font-bold mb-2 text-balance text-white">Search Portfolio</h2>
-        <p className="text-muted-foreground mb-4">Find specific skills, technologies, and experience</p>
-      </div>
-
       <div className="flex flex-wrap gap-2 justify-center">
         <span className="text-sm text-muted-foreground mr-2">Quick search:</span>
         {suggestedKeywords.map((keyword) => (

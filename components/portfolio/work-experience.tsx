@@ -9,6 +9,7 @@ import { useState } from "react"
 interface WorkExperienceProps {
   searchQuery: string
   selectedSkill: string | null
+  hasAnyMatches?: boolean
 }
 
 const highlightText = (text: string, searchQuery: string) => {
@@ -28,7 +29,7 @@ const highlightText = (text: string, searchQuery: string) => {
   )
 }
 
-export function WorkExperience({ searchQuery, selectedSkill }: WorkExperienceProps) {
+export function WorkExperience({ searchQuery, selectedSkill, hasAnyMatches = false }: WorkExperienceProps) {
   const [isSkillsExpanded, setIsSkillsExpanded] = useState(true)
 
   const skillCategories = [
@@ -229,7 +230,7 @@ export function WorkExperience({ searchQuery, selectedSkill }: WorkExperiencePro
   })
 
   const hasMatches = experiencesWithHighlight.some((exp) => exp.isHighlighted)
-  const showNoResultsMessage = searchQuery !== "" && !hasMatches
+  const showNoResultsMessage = searchQuery !== "" && !hasMatches && !hasAnyMatches
 
   return (
     <div className="space-y-6">
