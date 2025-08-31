@@ -1,13 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { GraduationCap, Award, Users } from "lucide-react"
+import { GraduationCap, Award, Users, ExternalLink } from "lucide-react"
 
 interface EducationProps {
   searchQuery: string
   selectedSkill: string | null
+  hasAnyMatches: boolean
 }
 
-export function Education({ searchQuery, selectedSkill }: EducationProps) {
+export function Education({ searchQuery, selectedSkill, hasAnyMatches }: EducationProps) {
   const education = [
     {
       id: "ms-cyber-ops",
@@ -58,11 +59,28 @@ export function Education({ searchQuery, selectedSkill }: EducationProps) {
 
   const campusInvolvement = [
     {
-      id: "planning-committee",
-      title: "Commissioner",
-      organization: "Town of Sahuarita, Planning & Zones Committee",
+      id: "perplexity-partner",
+      title: "Sponsored Perplexity AI Campus Partner",
+      organization: "Perplexity AI",
+      year: "2025-Present",
+      description:
+        "Advocate for AI-driven research and learning, host AI-related events, work with clubs and professors as partnership liaison",
+      url: "https://www.perplexity.ai/hub/legal/campus-partners-program-terms",
+    },
+    {
+      id: "creative-lab",
+      title: "AI and Coding Workshop Instructor",
+      organization: "University of Arizona Creative Lab",
       year: "2025",
-      description: "Public service role in municipal planning and zoning decisions",
+      description: "Teaching AI applications and coding fundamentals to students",
+    },
+    {
+      id: "social-media-coordinator",
+      title: "Social Media Coordinator",
+      organization: "Cyber Saguaro Club",
+      year: "2024-2025",
+      description: "Managing social media presence and digital outreach for cybersecurity club",
+      url: "https://cybersaguaros.com/",
     },
     {
       id: "research-assistant",
@@ -70,13 +88,6 @@ export function Education({ searchQuery, selectedSkill }: EducationProps) {
       organization: "University of Arizona",
       year: "2024-Present",
       description: "Contributing to cybersecurity and AI research initiatives",
-    },
-    {
-      id: "creative-lab",
-      title: "AI and Coding Workshop Instructor",
-      organization: "University of Arizona Creative Lab",
-      year: "2024",
-      description: "Teaching AI applications and coding fundamentals to students",
     },
   ]
 
@@ -102,7 +113,8 @@ export function Education({ searchQuery, selectedSkill }: EducationProps) {
     if (searchQuery === "") return true
 
     const searchLower = searchQuery.toLowerCase()
-    return (
+
+    const matches =
       item.degree?.toLowerCase().includes(searchLower) ||
       item.institution?.toLowerCase().includes(searchLower) ||
       item.name?.toLowerCase().includes(searchLower) ||
@@ -110,12 +122,13 @@ export function Education({ searchQuery, selectedSkill }: EducationProps) {
       item.title?.toLowerCase().includes(searchLower) ||
       item.organization?.toLowerCase().includes(searchLower) ||
       item.description?.toLowerCase().includes(searchLower)
-    )
+
+    return matches
   }
 
   const hasMatches =
     education.some(matchesSearch) || certificates.some(matchesSearch) || campusInvolvement.some(matchesSearch)
-  const showNoResultsMessage = searchQuery !== "" && !hasMatches
+  const showNoResultsMessage = searchQuery !== "" && !hasMatches && !hasAnyMatches
 
   return (
     <div className="space-y-8">
@@ -229,7 +242,21 @@ export function Education({ searchQuery, selectedSkill }: EducationProps) {
                     : "border-slate-200"
                 } hover:shadow-md transition-shadow`}
               >
-                <h4 className="font-semibold text-slate-800 mb-1">{highlightText(involvement.title, searchQuery)}</h4>
+                <h4 className="font-semibold text-slate-800 mb-1">
+                  {involvement.url ? (
+                    <a
+                      href={involvement.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-1"
+                    >
+                      {highlightText(involvement.title, searchQuery)}
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  ) : (
+                    highlightText(involvement.title, searchQuery)
+                  )}
+                </h4>
                 <p className="text-sm text-slate-600 mb-2">{highlightText(involvement.organization, searchQuery)}</p>
                 <p className="text-xs text-slate-500 mb-2">{involvement.year}</p>
                 <p className="text-sm text-slate-700">{highlightText(involvement.description, searchQuery)}</p>
