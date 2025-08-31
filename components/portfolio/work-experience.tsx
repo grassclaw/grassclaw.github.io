@@ -1,6 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+"use client"
+
+import { Card, CardContent, CardHeader, CardTitle, TechnicalSkillsCard } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, MapPin, Building } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Calendar, MapPin, Building, Code, ChevronDown, ChevronUp } from "lucide-react"
+import { useState } from "react"
 
 interface WorkExperienceProps {
   searchQuery: string
@@ -25,12 +29,96 @@ const highlightText = (text: string, searchQuery: string) => {
 }
 
 export function WorkExperience({ searchQuery, selectedSkill }: WorkExperienceProps) {
+  const [isSkillsExpanded, setIsSkillsExpanded] = useState(true)
+
+  const skillCategories = [
+    {
+      category: "LLM & ML Frameworks/Tools",
+      skills: [
+        { name: "LangChain", id: "langchain", jobs: ["nagra-2025", "netstar-2024"] },
+        { name: "Unsloth", id: "unsloth", jobs: ["netstar-2024"] },
+        { name: "Transformers (HuggingFace)", id: "transformers", jobs: ["netstar-2024"] },
+        { name: "LoRA fine-tuning", id: "lora", jobs: ["netstar-2024"] },
+        { name: "ggml", id: "ggml", jobs: ["netstar-2024"] },
+        { name: "GPTQ", id: "gptq", jobs: ["netstar-2024"] },
+        { name: "sentence-transformers", id: "sentence-transformers", jobs: ["netstar-2024"] },
+        { name: "RAG pipelines", id: "rag", jobs: ["nagra-2025", "netstar-2024"] },
+        { name: "MCP servers", id: "mcp", jobs: ["nagra-2025", "netstar-2024"] },
+      ],
+    },
+    {
+      category: "ML Infrastructure & MLOps",
+      skills: [
+        { name: "AWS (S3, EC2, Lambda, CloudTrail, SageMaker)", id: "aws", jobs: ["nagra-2025", "netstar-2024"] },
+        { name: "Azure AI Services", id: "azure", jobs: ["netstar-2024"] },
+        { name: "Docker", id: "docker", jobs: ["netstar-2024"] },
+        { name: "Kubernetes", id: "kubernetes", jobs: ["netstar-2024"] },
+        { name: "Terraform", id: "terraform", jobs: ["netstar-2024"] },
+        { name: "Ansible", id: "ansible", jobs: ["netstar-2024"] },
+        { name: "Makefiles", id: "makefiles", jobs: ["netstar-2024"] },
+      ],
+    },
+    {
+      category: "Security & Threat Intelligence Tools",
+      skills: [
+        { name: "STIX/TAXII", id: "stix", jobs: ["netstar-2024", "netstar-2020"] },
+        { name: "MITRE ATT&CK", id: "mitre", jobs: ["netstar-2024", "netstar-2020"] },
+        { name: "KQL (Sentinel emulation)", id: "kql", jobs: ["nagra-2025"] },
+      ],
+    },
+    {
+      category: "Programming & Scripting Languages",
+      skills: [
+        {
+          name: "Python",
+          id: "python",
+          jobs: ["nagra-2025", "netstar-2024", "self-2022", "2u-2021", "netstar-2020", "barrick-2018"],
+        },
+        { name: "Golang", id: "golang", jobs: ["netstar-2024"] },
+        { name: "SQL", id: "sql", jobs: ["nagra-2025", "netstar-2024", "self-2022"] },
+      ],
+    },
+    {
+      category: "Data & Database Tools",
+      skills: [
+        { name: "MongoDB", id: "mongodb", jobs: ["self-2022"] },
+        { name: "PostgreSQL", id: "postgres", jobs: ["netstar-2024"] },
+        { name: "TimescaleDB", id: "timescaledb", jobs: ["netstar-2024"] },
+        { name: "Neo4j", id: "neo4j", jobs: ["netstar-2024"] },
+        { name: "Custom vector store generation", id: "vectordb", jobs: ["netstar-2024"] },
+        { name: "Graph enrichment tools", id: "graph-tools", jobs: ["netstar-2024"] },
+        { name: "REST API interface design", id: "rest-api", jobs: ["netstar-2024", "self-2022"] },
+      ],
+    },
+    {
+      category: "Collaboration & Dev Tools",
+      skills: [
+        { name: "GitHub Projects", id: "github", jobs: ["netstar-2024", "self-2022"] },
+        { name: "GitLab CI", id: "gitlab", jobs: ["netstar-2024"] },
+        { name: "Jira", id: "jira", jobs: ["netstar-2024", "2u-2021"] },
+        { name: "Confluence", id: "confluence", jobs: ["netstar-2024", "2u-2021"] },
+        { name: "VS Code", id: "vscode", jobs: ["netstar-2024"] },
+        { name: "Cursor", id: "cursor", jobs: ["netstar-2024"] },
+        { name: "ServiceNow", id: "servicenow", jobs: ["netstar-2024", "2u-2021"] },
+      ],
+    },
+  ]
+
+  const jobTitles = {
+    "nagra-2025": "Nagra Kudelski Group",
+    "netstar-2024": "Netstar DTA",
+    "self-2022": "Self-Proprietor",
+    "2u-2021": "2U Education",
+    "netstar-2020": "Netstar",
+    "barrick-2018": "Barrick Gold",
+  }
+
   const experiences = [
     {
       id: "nagra-2025",
       title: "Consulting Senior Cyber ML Architect",
       company: "Nagra Kudelski Group",
-      location: "Remote, AZ",
+      location: "Working remotely from USA",
       period: "2025 — Present",
       type: "Contract/Research Partner",
       description:
@@ -46,7 +134,7 @@ export function WorkExperience({ searchQuery, selectedSkill }: WorkExperiencePro
       id: "netstar-2024",
       title: "Senior Machine Learning Engineer - Threat Intelligence",
       company: "Netstar DTA Global Reach, Inc.",
-      location: "Remote, AZ",
+      location: "Working remotely from USA",
       period: "2024 — Present",
       type: "Full-time",
       description:
@@ -63,7 +151,7 @@ export function WorkExperience({ searchQuery, selectedSkill }: WorkExperiencePro
       id: "self-2022",
       title: "Web Security Auditor & AI Web Consultant",
       company: "Self-Proprietor",
-      location: "Remote, AZ",
+      location: "Working remotely from USA",
       period: "2022 — 2024",
       type: "Consulting",
       description:
@@ -79,7 +167,7 @@ export function WorkExperience({ searchQuery, selectedSkill }: WorkExperiencePro
       id: "2u-2021",
       title: "Staffing Operations Technical Lead",
       company: "2U Education",
-      location: "Remote, AZ",
+      location: "Working remotely from USA",
       period: "2021 — 2022",
       type: "Full-time",
       description:
@@ -94,7 +182,7 @@ export function WorkExperience({ searchQuery, selectedSkill }: WorkExperiencePro
       id: "netstar-2020",
       title: "Threat Intelligence Research Engineer",
       company: "Netstar",
-      location: "Remote, AZ",
+      location: "Working remotely from USA",
       period: "2020 — 2021",
       type: "Full-time",
       description:
@@ -145,6 +233,55 @@ export function WorkExperience({ searchQuery, selectedSkill }: WorkExperiencePro
 
   return (
     <div className="space-y-6">
+      <TechnicalSkillsCard>
+        <CardHeader className="pb-2">
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Code className="w-5 h-5" />
+              Technical Skills & Proficiencies
+            </CardTitle>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsSkillsExpanded(!isSkillsExpanded)}
+              className="flex items-center gap-1"
+            >
+              {isSkillsExpanded ? (
+                <>
+                  <ChevronUp className="w-4 h-4" />
+                  Collapse
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="w-4 h-4" />
+                  Expand
+                </>
+              )}
+            </Button>
+          </div>
+        </CardHeader>
+        {isSkillsExpanded && (
+          <CardContent className="pt-0 pb-4 space-y-3">
+            {skillCategories.map((category) => (
+              <div key={category.category}>
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="text-sm font-semibold text-slate-800 whitespace-nowrap">{category.category}:</h3>
+                  {category.skills.map((skill) => (
+                    <Badge
+                      key={skill.id}
+                      variant="outline"
+                      className="bg-blue-600 text-white border-blue-600 font-medium text-xs"
+                    >
+                      {skill.name}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        )}
+      </TechnicalSkillsCard>
+
       {showNoResultsMessage && (
         <Card className="p-8 text-center border-2 border-dashed border-muted">
           <p className="text-slate-700 text-lg mb-2">Sorry, nothing was found for "{searchQuery}"</p>

@@ -1,8 +1,77 @@
+"use client"
+
+import type React from "react"
+
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Mail, MapPin, Linkedin } from "lucide-react"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { MapPin, Linkedin } from "lucide-react"
+import { useState, useRef } from "react"
+
+const roles = [
+  {
+    id: "ai-ml",
+    title: "Senior AI/ML Engineer",
+    subtitle: "Senior AI & ML Engineer • Cybersecurity Researcher • Academic",
+    description:
+      "Innovative professional with progressive experience in artificial intelligence, cybersecurity, and advanced threat detection. Skilled in designing and deploying AI/ML-driven models to identify, analyze, and predict cyber threats.",
+    badges: ["LLMs", "AWS", "LangChain", "MLOps", "Python", "Golang"],
+  },
+  {
+    id: "threat-intel",
+    title: "Senior Threat Intelligence Researcher",
+    subtitle: "Threat Intelligence Researcher • OSINT Investigator • Database Architect",
+    description:
+      "Cybersecurity expert specializing in threat intelligence analysis, OSINT investigations, and security research. Experienced in building threat detection systems and analyzing advanced persistent threats across diverse threat landscapes.",
+    badges: ["Threat Intelligence", "OSINT", "STIX/TAXII", "KQL", "MITRE ATT&CK", "Python"],
+  },
+  {
+    id: "web-ux",
+    title: "Web Development and UXUI",
+    subtitle: "Full-Stack Developer • UXUI Research • Product Development",
+    description:
+      "Full-stack developer and UX researcher focused on creating intuitive, user-centered digital experiences. Skilled in modern web technologies, user research methodologies, and product development from concept to deployment.",
+    badges: ["React", "Next.js", "UX Research", "Figma", "TypeScript", "Node.js"],
+  },
+]
 
 export function HeroSection() {
+  const [selectedRole, setSelectedRole] = useState("ai-ml")
+  const [isDragging, setIsDragging] = useState(false)
+  const tabsRef = useRef<HTMLDivElement>(null)
+  const currentRole = roles.find((role) => role.id === selectedRole) || roles[0]
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true)
+    handleDragMove(e.clientX)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return
+    handleDragMove(e.clientX)
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const handleDragMove = (clientX: number) => {
+    if (!tabsRef.current) return
+
+    const rect = tabsRef.current.getBoundingClientRect()
+    const relativeX = clientX - rect.left
+    const percentage = Math.max(0, Math.min(1, relativeX / rect.width))
+
+    // Determine which role based on drag position
+    if (percentage < 0.33) {
+      setSelectedRole("ai-ml")
+    } else if (percentage < 0.67) {
+      setSelectedRole("threat-intel")
+    } else {
+      setSelectedRole("web-ux")
+    }
+  }
+
   return (
     <section className="relative bg-transparent py-16 overflow-hidden">
       <div className="absolute inset-0 opacity-10">
@@ -74,69 +143,68 @@ export function HeroSection() {
           </div>
 
           <div className="flex-1 text-center lg:text-left">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-balance text-white">Aaron Escamilla</h1>
-            <h2 className="text-xl lg:text-2xl text-gray-300 mb-6 text-pretty">
-              Senior AI & ML Engineer • Cybersecurity Researcher • Academic
-            </h2>
+            <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-balance text-white">Aaron E</h1>
 
-            <p className="text-lg mb-6 max-w-2xl text-pretty text-gray-200">
-              Innovative professional with progressive experience in artificial intelligence, cybersecurity, and
-              advanced threat detection. Skilled in designing and deploying AI/ML-driven models to identify, analyze,
-              and predict cyber threats.
+            <div className="mb-6">
+              <h2 className="text-xl lg:text-2xl text-gray-300 mb-4 text-pretty transition-all duration-300">
+                {currentRole.subtitle}
+              </h2>
+
+              <div className="flex justify-center lg:justify-start mb-4">
+                <Tabs value={selectedRole} onValueChange={setSelectedRole} className="w-full max-w-2xl">
+                  <TabsList
+                    ref={tabsRef}
+                    className={`grid w-full grid-cols-3 bg-slate-800/50 border border-slate-600/30 ${isDragging ? "cursor-grabbing" : "cursor-grab"} select-none`}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                  >
+                    <TabsTrigger
+                      value="ai-ml"
+                      className="text-white font-semibold data-[state=active]:text-foreground data-[state=active]:bg-white/90 transition-all duration-300 pointer-events-none"
+                    >
+                      AI/ML Engineer
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="threat-intel"
+                      className="text-white font-semibold data-[state=active]:text-foreground data-[state=active]:bg-white/90 transition-all duration-300 pointer-events-none"
+                    >
+                      Threat Intel
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="web-ux"
+                      className="text-white font-semibold data-[state=active]:text-foreground data-[state=active]:bg-white/90 transition-all duration-300 pointer-events-none"
+                    >
+                      Web/UX
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </div>
+            </div>
+
+            <p className="text-lg mb-6 max-w-2xl text-pretty text-gray-200 transition-all duration-300">
+              {currentRole.description}
             </p>
 
             <div className="flex flex-wrap gap-2 mb-6 justify-center lg:justify-start">
-              <Badge
-                variant="secondary"
-                className="bg-slate-600/20 text-slate-200 border-slate-500/30 hover:animate-wiggle"
-              >
-                LLMs
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-blue-600/20 text-blue-200 border-blue-500/30 hover:animate-wiggle"
-                style={{ animationDelay: "0.1s" }}
-              >
-                AWS
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-slate-600/20 text-slate-200 border-slate-500/30 hover:animate-wiggle"
-                style={{ animationDelay: "0.2s" }}
-              >
-                LangChain
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-blue-600/20 text-blue-200 border-blue-500/30 hover:animate-wiggle"
-                style={{ animationDelay: "0.3s" }}
-              >
-                Threat Intelligence
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-slate-600/20 text-slate-200 border-slate-500/30 hover:animate-wiggle"
-                style={{ animationDelay: "0.4s" }}
-              >
-                Golang
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-blue-600/20 text-blue-200 border-blue-500/30 hover:animate-wiggle"
-                style={{ animationDelay: "0.5s" }}
-              >
-                Python
-              </Badge>
+              {currentRole.badges.map((badge, index) => (
+                <Badge
+                  key={badge}
+                  variant="secondary"
+                  className="bg-slate-600/20 text-slate-200 border-slate-500/30 hover:animate-wiggle transition-all duration-300"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {badge}
+                </Badge>
+              ))}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start">
-              <Button className="flex items-center gap-2 bg-slate-600 hover:bg-slate-700 text-white">
-                <Mail className="w-4 h-4" />
-                aaronenv@proton.me
-              </Button>
               <Button
                 variant="outline"
                 className="flex items-center gap-2 bg-transparent border-gray-600 text-gray-300 hover:bg-gray-800"
+                onClick={() => window.open("https://www.linkedin.com/in/cyberaaron/", "_blank")}
               >
                 <Linkedin className="w-4 h-4" />
                 LinkedIn Profile

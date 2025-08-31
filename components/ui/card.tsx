@@ -7,7 +7,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card"
       className={cn(
-        "text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-white/80 backdrop-blur-sm",
+        "text-card-foreground flex flex-col gap-6 rounded-xl border py-4 shadow-sm bg-white/80 backdrop-blur-sm",
         className,
       )}
       {...props}
@@ -67,4 +67,27 @@ function GraphCard({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-export { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent, GraphCard }
+function TechnicalSkillsCard({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="technical-skills-card"
+      className={cn(
+        "text-card-foreground flex flex-col gap-4 rounded-xl border py-3 shadow-sm bg-gradient-to-br from-blue-50/90 to-slate-100/80 backdrop-blur-sm border-blue-200/50 bg-lime-500",
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardAction,
+  CardDescription,
+  CardContent,
+  GraphCard,
+  TechnicalSkillsCard,
+}
