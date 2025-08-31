@@ -83,6 +83,21 @@ export default function Portfolio() {
           "stack",
           "web",
           "development",
+          "perplexity",
+          "ai", // Added "ai" keyword to match AI-related content in education section
+          "campus",
+          "partner",
+          "cyber",
+          "saguaro",
+          "creative",
+          "lab",
+          "instructor",
+          "research",
+          "assistant",
+          "comptia",
+          "security",
+          "eagle",
+          "scout",
         ],
       },
       {
@@ -100,6 +115,14 @@ export default function Portfolio() {
           "ai",
           "machine",
           "learning",
+          "semantic",
+          "technologies",
+          "cybersecurity",
+          "iscap",
+          "json",
+          "ld",
+          "distributed",
+          "analytics",
         ],
       },
       {
@@ -141,6 +164,11 @@ export default function Portfolio() {
           "cub",
           "data",
           "collection",
+          "eastmark",
+          "mesa",
+          "sahuarita",
+          "planning",
+          "zoning",
         ],
       },
     ]
@@ -169,125 +197,152 @@ export default function Portfolio() {
     const query = searchQuery.toLowerCase()
     const matchingTabs = new Set<string>()
 
-    // Check each tab for matches by simulating the search logic
-    const tabChecks = [
-      {
-        tab: "experience",
-        keywords: [
-          "experience",
-          "work",
-          "job",
-          "career",
-          "engineer",
-          "developer",
-          "ml",
-          "ai",
-          "threat",
-          "intelligence",
-          "technical",
-          "skills",
-          "tools",
-          "technology",
-          "programming",
-          "framework",
-          "nagra",
-          "netstar",
-          "consulting",
-          "architect",
-          "python",
-          "aws",
-          "langchain",
-          "kql",
-          "docker",
-          "kubernetes",
-        ],
-      },
-      {
-        tab: "education",
-        keywords: [
-          "education",
-          "degree",
-          "university",
-          "college",
-          "certificate",
-          "school",
-          "bellevue",
-          "arizona",
-          "state",
-          "masters",
-          "associates",
-          "full",
-          "stack",
-          "web",
-          "development",
-        ],
-      },
-      {
-        tab: "research",
-        keywords: [
-          "research",
-          "academic",
-          "academia",
-          "paper",
-          "publication",
-          "conference",
-          "pending",
-          "threat",
-          "detection",
-          "ai",
-          "machine",
-          "learning",
-        ],
-      },
-      {
-        tab: "extracurriculars",
-        keywords: [
-          "extracurricular",
-          "volunteer",
-          "leadership",
-          "community",
-          "creative",
-          "tutoring",
-          "mentoring",
-          "webaphors",
-          "youtube",
-          "discord",
-          "math",
-          "calculus",
-          "statistics",
-          "cybersecurity",
-          "bootcamp",
-        ],
-      },
-      {
-        tab: "public-service",
-        keywords: [
-          "public",
-          "service",
-          "commissioner",
-          "government",
-          "civic",
-          "census",
-          "bureau",
-          "enumerator",
-          "youth",
-          "group",
-          "community",
-          "leader",
-          "scout",
-          "cub",
-          "data",
-          "collection",
-        ],
-      },
+    // Check Work Experience
+    const workKeywords = [
+      "experience",
+      "work",
+      "job",
+      "career",
+      "engineer",
+      "developer",
+      "ml",
+      "ai",
+      "threat",
+      "intelligence",
+      "technical",
+      "skills",
+      "tools",
+      "technology",
+      "programming",
+      "framework",
+      "nagra",
+      "netstar",
+      "consulting",
+      "architect",
+      "python",
+      "aws",
+      "langchain",
+      "kql",
+      "docker",
+      "kubernetes",
     ]
+    if (workKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
+      matchingTabs.add("experience")
+    }
 
-    tabChecks.forEach(({ tab, keywords }) => {
-      const hasMatch = keywords.some((keyword) => keyword.includes(query) || query.includes(keyword))
-      if (hasMatch) {
-        matchingTabs.add(tab)
-      }
-    })
+    // Check Education - include actual content terms
+    const educationKeywords = [
+      "education",
+      "degree",
+      "university",
+      "college",
+      "certificate",
+      "school",
+      "bellevue",
+      "arizona",
+      "state",
+      "masters",
+      "associates",
+      "full",
+      "stack",
+      "web",
+      "development",
+      "perplexity",
+      "ai", // Added "ai" keyword to match AI-related content in education section
+      "campus",
+      "partner",
+      "cyber",
+      "saguaro",
+      "creative",
+      "lab",
+      "instructor",
+      "research",
+      "assistant",
+      "comptia",
+      "security",
+      "eagle",
+      "scout",
+    ]
+    if (educationKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
+      matchingTabs.add("education")
+    }
+
+    // Check Academia
+    const academiaKeywords = [
+      "research",
+      "academic",
+      "academia",
+      "paper",
+      "publication",
+      "conference",
+      "pending",
+      "threat",
+      "detection",
+      "ai",
+      "machine",
+      "learning",
+      "semantic",
+      "technologies",
+      "cybersecurity",
+      "iscap",
+      "json",
+      "ld",
+      "distributed",
+      "analytics",
+    ]
+    if (academiaKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
+      matchingTabs.add("research")
+    }
+
+    // Check Extracurriculars
+    const extracurricularKeywords = [
+      "extracurricular",
+      "volunteer",
+      "leadership",
+      "community",
+      "creative",
+      "tutoring",
+      "mentoring",
+      "webaphors",
+      "youtube",
+      "discord",
+      "math",
+      "calculus",
+      "statistics",
+      "cybersecurity",
+      "bootcamp",
+    ]
+    if (extracurricularKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
+      matchingTabs.add("extracurriculars")
+    }
+
+    // Check Public Service
+    const publicServiceKeywords = [
+      "public",
+      "service",
+      "commissioner",
+      "government",
+      "civic",
+      "census",
+      "bureau",
+      "enumerator",
+      "youth",
+      "group",
+      "community",
+      "leader",
+      "scout",
+      "cub",
+      "data",
+      "collection",
+      "eastmark",
+      "mesa",
+      "sahuarita",
+      "planning",
+      "zoning",
+    ]
+    if (publicServiceKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
+      matchingTabs.add("public-service")
+    }
 
     setTabsWithMatches(matchingTabs)
     setHasAnyMatches(matchingTabs.size > 0)
@@ -493,9 +548,6 @@ export default function Portfolio() {
 
             {isGraphExpanded && (
               <GraphCard className="p-6 h-[500px]">
-                <div className="text-sm mb-4 text-center text-black">
-                  Click and drag to pan • Scroll to zoom • Click nodes to highlight connections
-                </div>
                 <SkillsGraph onSkillSelect={setSelectedSkill} selectedSkill={selectedSkill} />
               </GraphCard>
             )}

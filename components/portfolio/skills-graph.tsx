@@ -239,7 +239,7 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
 
   return (
     <div className="space-y-4 h-full flex flex-col relative overflow-hidden">
-      <div className="flex justify-center">
+      <div className="flex justify-center rounded-lg">
         <div className="flex gap-2 flex-wrap">
           {Object.entries(categories).map(([category, color]) => (
             <div key={category} className="flex items-center gap-2">
@@ -250,11 +250,7 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
         </div>
       </div>
 
-      <div ref={containerRef} className="flex-1 transition-all duration-300 min-h-[500px] overflow-hidden relative">
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 bg-black/50 text-white px-3 py-1 rounded-md text-sm backdrop-blur-sm">
-          Click and drag to pan • Scroll to zoom • Click nodes to highlight connections
-        </div>
-
+      <div ref={containerRef} className="flex-1 transition-all duration-300 h-[400px] overflow-hidden relative">
         {/* Zoom bar */}
         <div className="absolute right-4 top-4 z-10 flex flex-col items-center backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 p-3 gap-3 bg-transparent border-dashed">
           <Button
@@ -309,7 +305,7 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
         <canvas
           ref={canvasRef}
           style={{ width: "100%", height: "100%", maxWidth: "100%", maxHeight: "100%", display: "block" }}
-          className={`rounded-lg border border-gray-200 bg-slate-600 ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+          className={`rounded-lg border border-gray-200 bg-slate-600 border-none ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
           onClick={handleCanvasClick}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
@@ -317,12 +313,11 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
           onMouseLeave={handleMouseUp}
           onWheel={handleWheel}
         />
+        {/* Instructions moved back to bottom and fixed container height */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 bg-black/50 text-white px-3 py-1 rounded-md text-sm backdrop-blur-sm">
+          Click and drag to pan • Scroll to zoom • Click nodes to highlight connections
+        </div>
       </div>
-
-      <p className="text-sm text-muted-foreground text-center">
-        Click on nodes to highlight related experience •{" "}
-        {selectedSkill ? `Selected: ${skills.find((s) => s.id === selectedSkill)?.label}` : "No selection"}
-      </p>
     </div>
   )
 }

@@ -5,9 +5,10 @@ import { Calendar, Users, Mic } from "lucide-react"
 interface ExtracurricularsProps {
   searchQuery: string
   selectedSkill: string | null
+  hasAnyMatches: boolean
 }
 
-export function Extracurriculars({ searchQuery, selectedSkill }: ExtracurricularsProps) {
+export function Extracurriculars({ searchQuery, selectedSkill, hasAnyMatches }: ExtracurricularsProps) {
   const creativeInitiatives = [
     {
       id: "webaphors-initiative",
@@ -102,7 +103,7 @@ export function Extracurriculars({ searchQuery, selectedSkill }: Extracurricular
   })
 
   const hasMatches = activitiesWithHighlight.some((activity) => activity.isHighlighted)
-  const showNoResultsMessage = searchQuery !== "" && !hasMatches
+  const showNoResultsMessage = searchQuery !== "" && !hasMatches && !hasAnyMatches
 
   const highlightText = (text: string, query: string) => {
     if (!query.trim()) return text

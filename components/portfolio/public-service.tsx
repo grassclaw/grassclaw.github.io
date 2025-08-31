@@ -1,13 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, Users, Award } from "lucide-react"
+import { Calendar, Users, Award, ExternalLink } from "lucide-react"
 
 interface PublicServiceProps {
   searchQuery: string
   selectedSkill: string | null
+  hasAnyMatches: boolean
 }
 
-export function PublicService({ searchQuery, selectedSkill }: PublicServiceProps) {
+export function PublicService({ searchQuery, selectedSkill, hasAnyMatches }: PublicServiceProps) {
   const activities = [
     {
       id: "commissioner-2025",
@@ -15,7 +16,8 @@ export function PublicService({ searchQuery, selectedSkill }: PublicServiceProps
       organization: "Town of Sahuarita",
       location: "Sahuarita, AZ",
       period: "2025 — Present",
-      type: "Government Service", // Updated from "Government" to "Government Service"
+      type: "Government Service",
+      url: "https://sahuaritaaz.gov/262/Planning-Zoning-Commission",
       description:
         "Appointed to serve on the Planning & Zones Committee, responsible for reviewing development proposals, zoning changes, and land use planning decisions that impact community growth and development.",
       responsibilities: [
@@ -29,11 +31,11 @@ export function PublicService({ searchQuery, selectedSkill }: PublicServiceProps
     },
     {
       id: "youth-group-leader",
-      title: "Youth Group Community Leader",
-      organization: "Community Youth Programs",
+      title: "Community Youth Group Leader",
+      organization: "EastMark Mesa Arizona",
       location: "Arizona",
       period: "2021 — 2023",
-      type: "Public Service", // Updated from "Public" to "Public Service"
+      type: "Public Service",
       description:
         "Guided youth in organizing skills training, community service projects, and outdoor recreational activities. Focused on character development, leadership skills, and community engagement through hands-on learning experiences.",
       responsibilities: [
@@ -51,7 +53,7 @@ export function PublicService({ searchQuery, selectedSkill }: PublicServiceProps
       organization: "U.S. Bureau of Census",
       location: "Arizona",
       period: "2020",
-      type: "Government Service", // Updated from "Government" to "Government Service"
+      type: "Government Service",
       description:
         "Conducted door-to-door interviews and data collection for the 2020 U.S. Census, ensuring accurate population counts and demographic data collection for federal representation and funding allocation.",
       responsibilities: [
@@ -69,7 +71,7 @@ export function PublicService({ searchQuery, selectedSkill }: PublicServiceProps
       organization: "Boy Scouts of America",
       location: "Arizona",
       period: "2016 — 2017",
-      type: "Public Service", // Updated from "Public" to "Public Service"
+      type: "Public Service",
       description:
         "Lead and mentor young scouts in character development, outdoor skills, and leadership training. Focus on youth development through hands-on activities and community service projects.",
       responsibilities: [
@@ -101,7 +103,7 @@ export function PublicService({ searchQuery, selectedSkill }: PublicServiceProps
   })
 
   const hasMatches = activitiesWithHighlight.some((activity) => activity.isHighlighted)
-  const showNoResultsMessage = searchQuery !== "" && !hasMatches
+  const showNoResultsMessage = searchQuery !== "" && !hasMatches && !hasAnyMatches
 
   const highlightText = (text: string, query: string) => {
     if (!query.trim()) return text
@@ -149,7 +151,19 @@ export function PublicService({ searchQuery, selectedSkill }: PublicServiceProps
                   </div>
                   <div>
                     <CardTitle className="text-xl text-balance text-slate-800">
-                      {highlightText(activity.title, searchQuery)}
+                      {activity.url ? (
+                        <a
+                          href={activity.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-blue-600 transition-colors inline-flex items-center gap-2"
+                        >
+                          {highlightText(activity.title, searchQuery)}
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      ) : (
+                        highlightText(activity.title, searchQuery)
+                      )}
                     </CardTitle>
                     <div className="flex items-center gap-4 text-muted-foreground mt-2">
                       <span className="text-slate-700">{highlightText(activity.organization, searchQuery)}</span>

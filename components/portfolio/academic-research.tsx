@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { BookOpen, ExternalLink, Calendar, Users } from "lucide-react"
+import { BookOpen, Calendar, Users } from "lucide-react"
 
 interface AcademiaProps {
   searchQuery: string
@@ -10,40 +10,41 @@ interface AcademiaProps {
 export function Academia({ searchQuery, selectedSkill }: AcademiaProps) {
   const researchPapers = [
     {
+      id: "iscap-semantic-tech",
+      title:
+        "Semantic Technologies for Cybersecurity Education Competencies: JSON-LD Implementation of Distributed Learning Analytics",
+      status: "Final Review",
+      conference: "Information Systems & Computing Academic Professionals (ISCAP)",
+      researchGroup: "University of Arizona cybersecurity research lab",
+      year: "2025",
+      description:
+        "Implementation of semantic technologies using JSON-LD for distributed learning analytics in cybersecurity education competency frameworks.",
+      link: null,
+      skills: ["JSON-LD", "Semantic Web", "Learning Analytics", "Cybersecurity Education"],
+    },
+    {
       id: "ai-threat-2025",
-      title: "AI Threat Detection Methodologies: Graph Neural Networks for Large-Scale Domain Classification",
+      title: "AI Threat Detection Methodologies: Graph Neural Networks for Large-Scale Threat Categorization",
       status: "Pending",
-      conference: "International Cybersecurity Conference 2025",
-      researchGroup: "University of Arizona Cybersecurity Research Lab",
+      conference: "pending",
+      researchGroup: "University of Arizona cybersecurity research lab",
       year: "2025",
       description:
         "Pioneering research on cost-effective ML pipeline optimization reducing processing costs by 89% through advanced Graph Neural Network implementations for automated threat categorization.",
-      link: "#", // Will be updated with actual link
+      link: null,
       skills: ["Graph Neural Networks", "LLMs", "Threat Intelligence", "Python", "AWS"],
     },
     {
       id: "nl2kql-research",
       title: "Natural Language to KQL Translation for Cybersecurity Analysis",
       status: "Pending",
-      conference: "University of Arizona Research Symposium",
-      researchGroup: "AI Security Research Initiative",
-      year: "2024",
+      conference: "pending",
+      researchGroup: "University of Arizona cybersecurity research lab",
+      year: "2025",
       description:
         "Development of advanced NL2KQL pipeline with schema validation, prompt normalization, and modular evaluation layers for enhanced security query generation.",
-      link: "#",
+      link: null,
       skills: ["LangChain", "KQL", "Security Automation", "Prompt Engineering"],
-    },
-    {
-      id: "ml-security-framework",
-      title: "Machine Learning Framework for Advanced Persistent Threat Detection",
-      status: "Pending",
-      conference: "To be submitted",
-      researchGroup: "Cybersecurity ML Research Group",
-      year: "2024",
-      description:
-        "Comprehensive framework for behavioral analysis and APT detection using machine learning techniques integrated with MITRE ATT&CK framework.",
-      link: "#",
-      skills: ["Machine Learning", "MITRE ATT&CK", "STIX/TAXII", "Behavioral Analysis"],
     },
   ]
 
@@ -141,16 +142,6 @@ export function Academia({ searchQuery, selectedSkill }: AcademiaProps) {
                   <div className="text-2xl font-bold text-slate-800">{paper.year}</div>
                   <div className="text-xs text-slate-500">Year</div>
                 </div>
-                {paper.link && (
-                  <a
-                    href={paper.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4 text-slate-600" />
-                  </a>
-                )}
               </div>
             </div>
           </CardContent>
