@@ -7,9 +7,10 @@ import { HeroSection } from "@/components/portfolio/hero-section"
 import { SearchBar } from "@/components/portfolio/search-bar"
 import { SkillsGraph } from "@/components/portfolio/skills-graph"
 import { WorkExperience } from "@/components/portfolio/work-experience"
-import { AcademicResearch } from "@/components/portfolio/academic-research"
+import { Education } from "@/components/portfolio/education"
+import { Academia } from "@/components/portfolio/academic-research"
 import { Extracurriculars } from "@/components/portfolio/extracurriculars"
-import { TechnicalProficiencies } from "@/components/portfolio/technical-proficiencies"
+import { PublicService } from "@/components/portfolio/public-service"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { GraphCard } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -20,8 +21,10 @@ export default function Portfolio() {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
   const [isGraphExpanded, setIsGraphExpanded] = useState(false)
   const experienceRef = useRef<HTMLDivElement>(null)
+  const educationRef = useRef<HTMLDivElement>(null)
   const researchRef = useRef<HTMLDivElement>(null)
   const extracurricularsRef = useRef<HTMLDivElement>(null)
+  const publicServiceRef = useRef<HTMLDivElement>(null)
   const technicalRef = useRef<HTMLDivElement>(null)
 
   const handleSearchEnter = () => {
@@ -43,14 +46,36 @@ export default function Portfolio() {
           "ai",
           "threat",
           "intelligence",
+          "technical",
+          "skills",
+          "tools",
+          "technology",
+          "programming",
+          "framework",
         ],
       },
-      { ref: researchRef, keywords: ["research", "academic", "university", "study", "paper", "publication"] },
+      { ref: educationRef, keywords: ["education", "degree", "university", "college", "certificate", "school"] },
+      { ref: researchRef, keywords: ["research", "academic", "academia", "paper", "publication", "conference"] },
       {
         ref: extracurricularsRef,
-        keywords: ["extracurricular", "volunteer", "leadership", "community", "commissioner", "eagle", "scout"],
+        keywords: ["extracurricular", "volunteer", "leadership", "community", "creative", "tutoring", "mentoring"],
       },
-      { ref: technicalRef, keywords: ["technical", "skills", "tools", "technology", "programming", "framework"] },
+      {
+        ref: publicServiceRef,
+        keywords: [
+          "public",
+          "service",
+          "commissioner",
+          "eagle",
+          "scout",
+          "government",
+          "civic",
+          "census",
+          "bureau",
+          "enumerator",
+          "data-collection",
+        ],
+      },
     ]
 
     let bestMatch = sections[0]
@@ -287,12 +312,18 @@ export default function Portfolio() {
         </div>
 
         <Tabs defaultValue="experience" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="experience" className="text-white font-semibold data-[state=active]:text-foreground">
               Work Experience
             </TabsTrigger>
             <TabsTrigger value="research" className="text-white font-semibold data-[state=active]:text-foreground">
-              Academic Research
+              Academia
+            </TabsTrigger>
+            <TabsTrigger
+              value="public-service"
+              className="text-white font-semibold data-[state=active]:text-foreground"
+            >
+              Public Service
             </TabsTrigger>
             <TabsTrigger
               value="extracurriculars"
@@ -300,8 +331,8 @@ export default function Portfolio() {
             >
               Extracurriculars
             </TabsTrigger>
-            <TabsTrigger value="technical" className="text-white font-semibold data-[state=active]:text-foreground">
-              Technical Skills
+            <TabsTrigger value="education" className="text-white font-semibold data-[state=active]:text-foreground">
+              Education
             </TabsTrigger>
           </TabsList>
 
@@ -310,19 +341,19 @@ export default function Portfolio() {
           </TabsContent>
 
           <TabsContent value="research" className="mt-6" ref={researchRef}>
-            <AcademicResearch searchQuery={searchQuery} selectedSkill={selectedSkill} />
+            <Academia searchQuery={searchQuery} selectedSkill={selectedSkill} />
+          </TabsContent>
+
+          <TabsContent value="public-service" className="mt-6" ref={publicServiceRef}>
+            <PublicService searchQuery={searchQuery} selectedSkill={selectedSkill} />
           </TabsContent>
 
           <TabsContent value="extracurriculars" className="mt-6" ref={extracurricularsRef}>
             <Extracurriculars searchQuery={searchQuery} selectedSkill={selectedSkill} />
           </TabsContent>
 
-          <TabsContent value="technical" className="mt-6" ref={technicalRef}>
-            <TechnicalProficiencies
-              searchQuery={searchQuery}
-              onSkillClick={setSelectedSkill}
-              selectedSkill={selectedSkill}
-            />
+          <TabsContent value="education" className="mt-6" ref={educationRef}>
+            <Education searchQuery={searchQuery} selectedSkill={selectedSkill} />
           </TabsContent>
         </Tabs>
       </main>

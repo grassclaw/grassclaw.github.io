@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, Users, Award, Mic } from "lucide-react"
+import { Calendar, Users, Mic } from "lucide-react"
 
 interface ExtracurricularsProps {
   searchQuery: string
@@ -8,100 +8,83 @@ interface ExtracurricularsProps {
 }
 
 export function Extracurriculars({ searchQuery, selectedSkill }: ExtracurricularsProps) {
-  const activities = [
+  const creativeInitiatives = [
     {
-      id: "commissioner-2025",
-      title: "Commissioner - Planning & Zones Committee",
-      organization: "Town of Sahuarita",
-      location: "Sahuarita, AZ",
-      period: "2025 — Present",
-      type: "Public Service",
+      id: "webaphors-initiative",
+      title: "Webaphors Channel Initiative",
+      organization: "Creative Content Platform",
+      location: "Online Platform",
+      period: "2023 — Present",
       description:
-        "Appointed to serve on the Planning & Zones Committee, responsible for reviewing development proposals, zoning changes, and land use planning decisions that impact community growth and development.",
+        "Founded and developed the Webaphors channel initiative, creating educational content that bridges complex technical concepts with accessible metaphors and visual storytelling.",
       responsibilities: [
-        "Review and evaluate development proposals and zoning applications",
-        "Participate in public hearings and community engagement sessions",
-        "Collaborate with city planners and community stakeholders",
-        "Ensure compliance with municipal planning codes and regulations",
+        "Develop creative content strategy for technical education",
+        "Create visual metaphors for complex programming concepts",
+        "Build audience engagement through innovative storytelling",
+        "Collaborate with educators and content creators",
       ],
-      skills: ["leadership", "public-speaking", "policy-analysis", "community-engagement"],
-      icon: Users,
-    },
-    {
-      id: "conference-speaker-2025",
-      title: "Conference Speaker - AI Threat Detection",
-      organization: "International Cybersecurity Conference",
-      location: "Global Conference",
-      period: "2025",
-      type: "Speaking Engagement",
-      description:
-        "Selected to present peer-reviewed research on AI-based threat detection methodologies at a globally recognized cybersecurity conference. Presentation covers innovative approaches to automated threat intelligence.",
-      responsibilities: [
-        "Present original research to international audience of cybersecurity professionals",
-        "Demonstrate practical applications of AI in threat detection",
-        "Engage in Q&A sessions with industry experts",
-        "Network with leading researchers and practitioners",
-      ],
-      skills: ["public-speaking", "research-presentation", "llms", "threat-intel", "networking"],
+      skills: ["content-creation", "creative-writing", "technical-communication", "visual-design"],
       icon: Mic,
     },
     {
-      id: "youtube-creator",
-      title: "Content Creator",
-      organization: "Newine – YouTube Shorts",
+      id: "youtube-discord-community",
+      title: "YouTube Shorts & Discord Learning Community",
+      organization: "Newine – YouTube Platform",
       location: "Online Platform",
       period: "2022 — Present",
-      type: "Creative Content",
       description:
-        "Create educational and entertaining content focused on technology, AI, and cybersecurity topics. Build audience engagement through short-form video content that makes complex technical concepts accessible.",
+        "Create educational YouTube Shorts and manage Discord learning community focused on technology, AI, and cybersecurity topics. Build audience engagement through short-form video content and interactive discussions.",
       responsibilities: [
         "Research and script educational content on emerging technologies",
         "Produce and edit short-form video content",
-        "Engage with online community and respond to technical questions",
+        "Moderate Discord community and facilitate learning discussions",
         "Stay current with trends in AI, cybersecurity, and technology",
       ],
-      skills: ["content-creation", "video-editing", "technical-communication", "social-media"],
+      skills: ["content-creation", "video-editing", "community-management", "social-media"],
       icon: Mic,
     },
+  ]
+
+  const tutoringMentoring = [
     {
-      id: "eagle-scout",
-      title: "Eagle Scout",
-      organization: "Boy Scouts of America",
-      location: "Arizona",
-      period: "Achievement",
-      type: "Leadership Award",
+      id: "math-tutor-byu",
+      title: "Math Tutor (Calculus/Statistics)",
+      organization: "Brigham Young University",
+      location: "Provo, UT",
+      period: "2020 — 2022",
       description:
-        "Achieved the highest rank in Boy Scouts of America, demonstrating leadership, community service, and personal development. Completed extensive community service project and leadership training.",
+        "Provided one-on-one and group tutoring for undergraduate students in advanced mathematics courses, specializing in calculus and statistics with focus on practical applications.",
       responsibilities: [
-        "Led community service project benefiting local organization",
-        "Mentored younger scouts in outdoor skills and leadership",
-        "Demonstrated proficiency in outdoor survival and first aid",
-        "Completed extensive leadership and character development training",
+        "Tutor students in calculus, statistics, and related mathematics courses",
+        "Develop personalized learning strategies for diverse learning styles",
+        "Create practice problems and study materials",
+        "Track student progress and adjust teaching methods accordingly",
       ],
-      skills: ["leadership", "project-management", "mentoring", "community-service"],
-      icon: Award,
+      skills: ["education", "mathematics", "mentoring", "curriculum-development"],
+      icon: Users,
     },
     {
-      id: "workshop-instructor",
-      title: "AI and Coding Workshop Instructor",
-      organization: "University of Arizona Creative Lab",
-      location: "Tucson, AZ",
-      period: "2024",
-      type: "Educational Outreach",
+      id: "cybersecurity-bootcamp-mentor",
+      title: "Cybersecurity Bootcamp Mentor",
+      organization: "Various Bootcamp Programs",
+      location: "Remote",
+      period: "2023 — Present",
       description:
-        "Designed and delivered workshops making AI and programming concepts accessible to diverse audiences. Focused on practical applications and ethical considerations in AI development.",
+        "Mentor students and assist faculty in cybersecurity bootcamps, helping build knowledge assessments and providing guidance on practical cybersecurity skills and career development.",
       responsibilities: [
-        "Develop curriculum for AI literacy and programming fundamentals",
-        "Deliver interactive workshops to students and community members",
-        "Create hands-on exercises and practical demonstrations",
-        "Foster inclusive learning environment for diverse skill levels",
+        "Mentor students in cybersecurity fundamentals and advanced topics",
+        "Assist faculty in developing knowledge assessments and curriculum",
+        "Provide career guidance and industry insights",
+        "Review and improve educational materials and exercises",
       ],
-      skills: ["education", "curriculum-development", "public-speaking", "ai-ethics", "python"],
+      skills: ["mentoring", "cybersecurity", "curriculum-development", "career-guidance"],
       icon: Users,
     },
   ]
 
-  const activitiesWithHighlight = activities.map((activity) => {
+  const allActivities = [...creativeInitiatives, ...tutoringMentoring]
+
+  const activitiesWithHighlight = allActivities.map((activity) => {
     const matchesSearch =
       searchQuery === "" ||
       activity.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -139,6 +122,64 @@ export function Extracurriculars({ searchQuery, selectedSkill }: Extracurricular
     })
   }
 
+  const renderActivityCard = (activity: any) => {
+    const IconComponent = activity.icon
+    return (
+      <Card
+        key={activity.id}
+        className={`hover:shadow-lg transition-all duration-300 ${
+          activity.isHighlighted && (searchQuery !== "" || selectedSkill !== null)
+            ? "border-4 border-purple-500 shadow-2xl shadow-purple-200 ring-2 ring-purple-300 ring-opacity-50"
+            : ""
+        }`}
+      >
+        <CardHeader>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-accent/10 rounded-lg">
+                <IconComponent className="w-5 h-5 text-slate-600" />
+              </div>
+              <div className="flex-1">
+                <CardTitle className="text-lg text-balance text-slate-800">
+                  {highlightText(activity.title, searchQuery)}
+                </CardTitle>
+                <div className="flex items-center gap-4 text-muted-foreground mt-2">
+                  <span className="text-slate-700">{highlightText(activity.organization, searchQuery)}</span>
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4 text-slate-600" />
+                    <span className="text-slate-700">{activity.period}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="text-pretty text-slate-800">{highlightText(activity.description, searchQuery)}</p>
+
+          <div>
+            <h4 className="font-semibold mb-2 text-slate-800">Key Responsibilities:</h4>
+            <ul className="list-disc list-inside space-y-1 text-sm">
+              {activity.responsibilities.map((responsibility, index) => (
+                <li key={index} className="text-pretty text-slate-700">
+                  {highlightText(responsibility, searchQuery)}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {activity.skills.map((skill) => (
+              <Badge key={skill} variant={selectedSkill === skill ? "default" : "secondary"} className="text-xs">
+                {skill.replace("-", " ").toUpperCase()}
+              </Badge>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
     <div className="space-y-6">
       {showNoResultsMessage && (
@@ -148,64 +189,33 @@ export function Extracurriculars({ searchQuery, selectedSkill }: Extracurricular
         </Card>
       )}
 
-      {activitiesWithHighlight.map((activity) => {
-        const IconComponent = activity.icon
-        return (
-          <Card
-            key={activity.id}
-            className={`hover:shadow-lg transition-all duration-300 ${
-              activity.isHighlighted && (searchQuery !== "" || selectedSkill !== null)
-                ? "border-4 border-purple-500 shadow-2xl shadow-purple-200 ring-2 ring-purple-300 ring-opacity-50"
-                : ""
-            }`}
-          >
-            <CardHeader>
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-accent/10 rounded-lg">
-                    <IconComponent className="w-5 h-5 text-slate-600" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-xl text-balance text-slate-800">
-                      {highlightText(activity.title, searchQuery)}
-                    </CardTitle>
-                    <div className="flex items-center gap-4 text-muted-foreground mt-2">
-                      <span className="text-slate-700">{highlightText(activity.organization, searchQuery)}</span>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4 text-slate-600" />
-                        <span className="text-slate-700">{activity.period}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <Badge variant="outline">{activity.type}</Badge>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-pretty text-slate-800">{highlightText(activity.description, searchQuery)}</p>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Left Column - Creative Initiatives */}
+        <div className="space-y-6">
+          <div className="border-l-4 border-slate-400 pl-4">
+            <h3 className="text-xl font-bold mb-4 text-white">Creative Initiatives</h3>
+          </div>
+          <div className="space-y-4">
+            {creativeInitiatives
+              .map((activity) => activitiesWithHighlight.find((a) => a.id === activity.id))
+              .filter(Boolean)
+              .map((activity) => renderActivityCard(activity))}
+          </div>
+        </div>
 
-              <div>
-                <h4 className="font-semibold mb-2 text-slate-800">Key Responsibilities:</h4>
-                <ul className="list-disc list-inside space-y-1 text-sm">
-                  {activity.responsibilities.map((responsibility, index) => (
-                    <li key={index} className="text-pretty text-slate-700">
-                      {highlightText(responsibility, searchQuery)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {activity.skills.map((skill) => (
-                  <Badge key={skill} variant={selectedSkill === skill ? "default" : "secondary"} className="text-xs">
-                    {skill.replace("-", " ").toUpperCase()}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )
-      })}
+        {/* Right Column - Tutoring & Mentoring */}
+        <div className="space-y-6">
+          <div className="border-l-4 border-slate-400 pl-4">
+            <h3 className="text-xl font-bold mb-4 text-white">Tutoring & Mentoring</h3>
+          </div>
+          <div className="space-y-4">
+            {tutoringMentoring
+              .map((activity) => activitiesWithHighlight.find((a) => a.id === activity.id))
+              .filter(Boolean)
+              .map((activity) => renderActivityCard(activity))}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,116 +1,51 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, GraduationCap } from "lucide-react"
+import { BookOpen, ExternalLink, Calendar, Users } from "lucide-react"
 
-interface AcademicResearchProps {
+interface AcademiaProps {
   searchQuery: string
   selectedSkill: string | null
 }
 
-export function AcademicResearch({ searchQuery, selectedSkill }: AcademicResearchProps) {
-  const research = [
+export function Academia({ searchQuery, selectedSkill }: AcademiaProps) {
+  const researchPapers = [
     {
-      id: "ms-cyber-ops",
-      title: "Master of Science in Cyber & Information Operations",
-      institution: "University of Arizona",
-      location: "Tucson, AZ",
-      period: "Expected 2026",
-      type: "Graduate Degree",
+      id: "ai-threat-2025",
+      title: "AI Threat Detection Methodologies: Graph Neural Networks for Large-Scale Domain Classification",
+      status: "Pending",
+      conference: "International Cybersecurity Conference 2025",
+      researchGroup: "University of Arizona Cybersecurity Research Lab",
+      year: "2025",
       description:
-        "Advanced study in cybersecurity operations, information warfare, and AI applications in security. Focus on threat intelligence, machine learning for security, and cyber defense strategies.",
-      areas: [
-        "AI-driven threat detection and analysis",
-        "Advanced persistent threat (APT) research",
-        "Machine learning applications in cybersecurity",
-        "Information operations and cyber warfare",
-      ],
-      skills: ["llms", "threat-intel", "mitre", "stix", "python", "ml-security"],
+        "Pioneering research on cost-effective ML pipeline optimization reducing processing costs by 89% through advanced Graph Neural Network implementations for automated threat categorization.",
+      link: "#", // Will be updated with actual link
+      skills: ["Graph Neural Networks", "LLMs", "Threat Intelligence", "Python", "AWS"],
     },
     {
-      id: "conference-2025",
-      title: "AI Threat Detection Methodologies",
-      institution: "International Cybersecurity Conference 2025",
-      location: "Global Conference",
-      period: "2025",
-      type: "Peer-Reviewed Research",
+      id: "nl2kql-research",
+      title: "Natural Language to KQL Translation for Cybersecurity Analysis",
+      status: "Pending",
+      conference: "University of Arizona Research Symposium",
+      researchGroup: "AI Security Research Initiative",
+      year: "2024",
       description:
-        "Selected to present pioneering research on AI-based threat detection methodologies. Research focuses on Graph Neural Networks for threat categorization and automated enrichment workflows.",
-      areas: [
-        "Graph Neural Network applications in cybersecurity",
-        "Automated threat intelligence enrichment",
-        "Large-scale domain classification using AI",
-        "Cost-effective ML pipeline optimization",
-      ],
-      skills: ["llms", "gnn", "threat-intel", "aws", "python", "vectordb"],
+        "Development of advanced NL2KQL pipeline with schema validation, prompt normalization, and modular evaluation layers for enhanced security query generation.",
+      link: "#",
+      skills: ["LangChain", "KQL", "Security Automation", "Prompt Engineering"],
     },
     {
-      id: "ua-research",
-      title: "Student Research - AI Security Applications",
-      institution: "University of Arizona",
-      location: "Remote, AZ",
-      period: "2024 — Present",
-      type: "Research Project",
+      id: "ml-security-framework",
+      title: "Machine Learning Framework for Advanced Persistent Threat Detection",
+      status: "Pending",
+      conference: "To be submitted",
+      researchGroup: "Cybersecurity ML Research Group",
+      year: "2024",
       description:
-        "Ongoing research into applications of large language models and machine learning in cybersecurity contexts. Focus on natural language to query language translation and automated security analysis.",
-      areas: [
-        "Natural Language to KQL translation",
-        "LLM applications in security operations",
-        "Automated security query generation",
-        "AI-assisted threat hunting",
-      ],
-      skills: ["llms", "langchain", "kql", "security-automation", "python"],
-    },
-    {
-      id: "creative-lab",
-      title: "AI and Coding Workshop Instructor",
-      institution: "University of Arizona Creative Lab",
-      location: "Tucson, AZ",
-      period: "2024",
-      type: "Teaching & Outreach",
-      description:
-        "Designed and delivered workshops on AI applications and coding fundamentals. Focused on making AI and programming concepts accessible to diverse audiences.",
-      areas: [
-        "AI literacy and practical applications",
-        "Programming fundamentals",
-        "Machine learning concepts for beginners",
-        "Ethical AI development",
-      ],
-      skills: ["python", "llms", "education", "ai-ethics"],
+        "Comprehensive framework for behavioral analysis and APT detection using machine learning techniques integrated with MITRE ATT&CK framework.",
+      link: "#",
+      skills: ["Machine Learning", "MITRE ATT&CK", "STIX/TAXII", "Behavioral Analysis"],
     },
   ]
-
-  const education = [
-    {
-      id: "bs-asu",
-      title: "Bachelor of Science",
-      institution: "Arizona State University",
-      location: "Tempe, AZ",
-      period: "2017",
-      type: "Undergraduate Degree",
-      description:
-        "Foundation in engineering principles and analytical thinking that provided the groundwork for transition into cybersecurity and AI fields.",
-    },
-    {
-      id: "fullstack-cert",
-      title: "Certificate: Full Stack Web Development",
-      institution: "University of Arizona",
-      location: "Tucson, AZ",
-      period: "2019",
-      type: "Professional Certificate",
-      description: "Comprehensive training in modern web development technologies and practices.",
-    },
-    {
-      id: "security-plus",
-      title: "Certificate: CompTIA Security+",
-      institution: "CompTIA",
-      location: "Expected 2025",
-      type: "Professional Certification",
-      description:
-        "Industry-standard cybersecurity certification covering security concepts, threats, and best practices.",
-    },
-  ]
-
-  const allItems = [...research, ...education]
 
   const highlightText = (text: string, query: string) => {
     if (!query.trim()) return text
@@ -130,24 +65,20 @@ export function AcademicResearch({ searchQuery, selectedSkill }: AcademicResearc
     })
   }
 
-  const itemsWithHighlight = allItems.map((item) => {
-    const matchesSearch =
-      searchQuery === "" ||
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.institution.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (item.areas && item.areas.some((area) => area.toLowerCase().includes(searchQuery.toLowerCase()))) ||
-      (item.skills && item.skills.some((skill) => skill.toLowerCase().includes(searchQuery.toLowerCase())))
+  const matchesSearch = (item: any) => {
+    if (searchQuery === "") return true
 
-    const matchesSkill = selectedSkill === null || (item.skills && item.skills.includes(selectedSkill))
+    const searchLower = searchQuery.toLowerCase()
+    return (
+      item.title?.toLowerCase().includes(searchLower) ||
+      item.conference?.toLowerCase().includes(searchLower) ||
+      item.researchGroup?.toLowerCase().includes(searchLower) ||
+      item.description?.toLowerCase().includes(searchLower) ||
+      (item.skills && item.skills.some((skill: string) => skill.toLowerCase().includes(searchLower)))
+    )
+  }
 
-    return {
-      ...item,
-      isHighlighted: matchesSearch && matchesSkill,
-    }
-  })
-
-  const hasMatches = itemsWithHighlight.some((item) => item.isHighlighted)
+  const hasMatches = researchPapers.some(matchesSearch)
   const showNoResultsMessage = searchQuery !== "" && !hasMatches
 
   return (
@@ -159,63 +90,72 @@ export function AcademicResearch({ searchQuery, selectedSkill }: AcademicResearc
         </Card>
       )}
 
-      <div className="grid gap-6">
-        {itemsWithHighlight.map((item) => (
-          <Card
-            key={item.id}
-            className={`hover:shadow-lg transition-all duration-300 ${
-              item.isHighlighted && (searchQuery !== "" || selectedSkill !== null)
-                ? "border-4 border-purple-500 shadow-2xl shadow-purple-200 ring-2 ring-purple-300 ring-opacity-50"
-                : ""
-            }`}
-          >
-            <CardHeader>
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                <div>
-                  <CardTitle className="text-xl text-balance">{highlightText(item.title, searchQuery)}</CardTitle>
-                  <div className="flex items-center gap-4 text-muted-foreground mt-2">
-                    <div className="flex items-center gap-1">
-                      <GraduationCap className="w-4 h-4 text-slate-600" />
-                      <span className="text-slate-700">{highlightText(item.institution, searchQuery)}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4 text-slate-600" />
-                      <span className="text-slate-700">{item.period}</span>
-                    </div>
+      {researchPapers.map((paper) => (
+        <Card
+          key={paper.id}
+          className={`p-6 ${
+            matchesSearch(paper) && searchQuery !== ""
+              ? "border-4 border-purple-500 shadow-lg shadow-purple-200 ring-2 ring-purple-300"
+              : ""
+          } hover:shadow-md transition-all duration-300`}
+        >
+          <CardContent className="p-0">
+            <div className="flex items-start justify-between gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <BookOpen className="w-5 h-5 text-slate-600" />
+                  <h3 className="text-xl font-bold text-slate-800">{highlightText(paper.title, searchQuery)}</h3>
+                  <Badge variant={paper.status === "Published" ? "default" : "outline"} className="ml-auto">
+                    {paper.status}
+                  </Badge>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-slate-500" />
+                    <span className="text-sm text-slate-600">
+                      <strong>Conference:</strong> {highlightText(paper.conference, searchQuery)}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4 text-slate-500" />
+                    <span className="text-sm text-slate-600">
+                      <strong>Research Group:</strong> {highlightText(paper.researchGroup, searchQuery)}
+                    </span>
                   </div>
                 </div>
-                <Badge variant="outline">{item.type}</Badge>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-pretty text-slate-800">{highlightText(item.description, searchQuery)}</p>
 
-              {item.areas && (
-                <div>
-                  <h4 className="font-semibold mb-2 text-slate-800">Research Areas:</h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    {item.areas.map((area, index) => (
-                      <li key={index} className="text-pretty text-slate-700">
-                        {highlightText(area, searchQuery)}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+                <p className="text-slate-700 mb-4 leading-relaxed">{highlightText(paper.description, searchQuery)}</p>
 
-              {item.skills && (
                 <div className="flex flex-wrap gap-2">
-                  {item.skills.map((skill) => (
-                    <Badge key={skill} variant={selectedSkill === skill ? "default" : "secondary"} className="text-xs">
-                      {skill.replace("-", " ").toUpperCase()}
+                  {paper.skills.map((skill) => (
+                    <Badge key={skill} variant="secondary" className="text-xs">
+                      {skill}
                     </Badge>
                   ))}
                 </div>
-              )}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              </div>
+
+              <div className="flex flex-col items-center gap-3">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-slate-800">{paper.year}</div>
+                  <div className="text-xs text-slate-500">Year</div>
+                </div>
+                {paper.link && (
+                  <a
+                    href={paper.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4 text-slate-600" />
+                  </a>
+                )}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   )
 }
