@@ -73,7 +73,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative bg-transparent py-16 overflow-hidden">
+    <section className="relative bg-transparent pt-8 pb-4 overflow-hidden">
       <div className="absolute inset-0 opacity-10">
         <svg className="w-full h-full" viewBox="0 0 1200 600" fill="none">
           <defs>
@@ -127,7 +127,7 @@ export function HeroSection() {
               />
               {/* Animated graph elements around profile */}
               <div
-                className="absolute -top-4 -right-4 w-8 h-8 bg-slate-500/20 rounded-full animate-bounce"
+                className="absolute -top-4 -right-4 w-8 h-8 bg-slate-800/50 border border-slate-600/30 rounded-full animate-bounce"
                 style={{ animationDelay: "0s" }}
               ></div>
               <div

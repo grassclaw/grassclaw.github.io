@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { HeroSection } from "@/components/portfolio/hero-section"
 import { SearchBar } from "@/components/portfolio/search-bar"
 import { SkillsGraph } from "@/components/portfolio/skills-graph"
@@ -13,8 +13,6 @@ import { Extracurriculars } from "@/components/portfolio/extracurriculars"
 import { PublicService } from "@/components/portfolio/public-service"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { GraphCard } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { ChevronDown, ChevronUp } from "lucide-react"
 
 export default function Portfolio() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -26,6 +24,9 @@ export default function Portfolio() {
   const extracurricularsRef = useRef<HTMLDivElement>(null)
   const publicServiceRef = useRef<HTMLDivElement>(null)
   const technicalRef = useRef<HTMLDivElement>(null)
+
+  const [tabsWithMatches, setTabsWithMatches] = useState<Set<string>>(new Set())
+  const [hasAnyMatches, setHasAnyMatches] = useState(false)
 
   const handleSearchEnter = () => {
     if (!searchQuery.trim()) return
@@ -52,13 +53,74 @@ export default function Portfolio() {
           "technology",
           "programming",
           "framework",
+          "nagra",
+          "netstar",
+          "consulting",
+          "architect",
+          "python",
+          "aws",
+          "langchain",
+          "kql",
+          "docker",
+          "kubernetes",
         ],
       },
-      { ref: educationRef, keywords: ["education", "degree", "university", "college", "certificate", "school"] },
-      { ref: researchRef, keywords: ["research", "academic", "academia", "paper", "publication", "conference"] },
+      {
+        ref: educationRef,
+        keywords: [
+          "education",
+          "degree",
+          "university",
+          "college",
+          "certificate",
+          "school",
+          "bellevue",
+          "arizona",
+          "state",
+          "masters",
+          "associates",
+          "full",
+          "stack",
+          "web",
+          "development",
+        ],
+      },
+      {
+        ref: researchRef,
+        keywords: [
+          "research",
+          "academic",
+          "academia",
+          "paper",
+          "publication",
+          "conference",
+          "pending",
+          "threat",
+          "detection",
+          "ai",
+          "machine",
+          "learning",
+        ],
+      },
       {
         ref: extracurricularsRef,
-        keywords: ["extracurricular", "volunteer", "leadership", "community", "creative", "tutoring", "mentoring"],
+        keywords: [
+          "extracurricular",
+          "volunteer",
+          "leadership",
+          "community",
+          "creative",
+          "tutoring",
+          "mentoring",
+          "webaphors",
+          "youtube",
+          "discord",
+          "math",
+          "calculus",
+          "statistics",
+          "cybersecurity",
+          "bootcamp",
+        ],
       },
       {
         ref: publicServiceRef,
@@ -66,14 +128,19 @@ export default function Portfolio() {
           "public",
           "service",
           "commissioner",
-          "eagle",
-          "scout",
           "government",
           "civic",
           "census",
           "bureau",
           "enumerator",
-          "data-collection",
+          "youth",
+          "group",
+          "community",
+          "leader",
+          "scout",
+          "cub",
+          "data",
+          "collection",
         ],
       },
     ]
@@ -91,6 +158,140 @@ export default function Portfolio() {
 
     bestMatch.ref.current?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
+
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setTabsWithMatches(new Set())
+      setHasAnyMatches(false)
+      return
+    }
+
+    const query = searchQuery.toLowerCase()
+    const matchingTabs = new Set<string>()
+
+    // Check each tab for matches by simulating the search logic
+    const tabChecks = [
+      {
+        tab: "experience",
+        keywords: [
+          "experience",
+          "work",
+          "job",
+          "career",
+          "engineer",
+          "developer",
+          "ml",
+          "ai",
+          "threat",
+          "intelligence",
+          "technical",
+          "skills",
+          "tools",
+          "technology",
+          "programming",
+          "framework",
+          "nagra",
+          "netstar",
+          "consulting",
+          "architect",
+          "python",
+          "aws",
+          "langchain",
+          "kql",
+          "docker",
+          "kubernetes",
+        ],
+      },
+      {
+        tab: "education",
+        keywords: [
+          "education",
+          "degree",
+          "university",
+          "college",
+          "certificate",
+          "school",
+          "bellevue",
+          "arizona",
+          "state",
+          "masters",
+          "associates",
+          "full",
+          "stack",
+          "web",
+          "development",
+        ],
+      },
+      {
+        tab: "research",
+        keywords: [
+          "research",
+          "academic",
+          "academia",
+          "paper",
+          "publication",
+          "conference",
+          "pending",
+          "threat",
+          "detection",
+          "ai",
+          "machine",
+          "learning",
+        ],
+      },
+      {
+        tab: "extracurriculars",
+        keywords: [
+          "extracurricular",
+          "volunteer",
+          "leadership",
+          "community",
+          "creative",
+          "tutoring",
+          "mentoring",
+          "webaphors",
+          "youtube",
+          "discord",
+          "math",
+          "calculus",
+          "statistics",
+          "cybersecurity",
+          "bootcamp",
+        ],
+      },
+      {
+        tab: "public-service",
+        keywords: [
+          "public",
+          "service",
+          "commissioner",
+          "government",
+          "civic",
+          "census",
+          "bureau",
+          "enumerator",
+          "youth",
+          "group",
+          "community",
+          "leader",
+          "scout",
+          "cub",
+          "data",
+          "collection",
+        ],
+      },
+    ]
+
+    tabChecks.forEach(({ tab, keywords }) => {
+      const hasMatch = keywords.some((keyword) => keyword.includes(query) || query.includes(keyword))
+      if (hasMatch) {
+        matchingTabs.add(tab)
+      }
+    })
+
+    setTabsWithMatches(matchingTabs)
+    setHasAnyMatches(matchingTabs.size > 0)
+  }, [searchQuery])
 
   return (
     <div className="min-h-screen relative bg-gradient-to-b from-slate-900 via-slate-800 via-slate-600 via-slate-400 to-slate-100">
@@ -140,7 +341,7 @@ export default function Portfolio() {
           <line x1="20" y1="30" x2="60" y2="20" stroke="url(#nodeGrad1)" strokeWidth="1" opacity="0.6" />
           <line x1="60" y1="20" x2="80" y2="60" stroke="url(#nodeGrad1)" strokeWidth="1" opacity="0.6" />
           <line x1="80" y1="60" x2="40" y2="70" stroke="url(#nodeGrad1)" strokeWidth="1" opacity="0.6" />
-          <line x1="40" y1="70" x2="20" y2="30" stroke="url(#nodeGrad1)" strokeWidth="0.8" opacity="0.4" />
+          <line x1="40" y1="70" x2="20" y2="30" stroke="#334155" strokeWidth="0.8" opacity="0.4" />
         </svg>
 
         <svg className="absolute top-48 right-24 w-40 h-40 opacity-25" viewBox="0 0 100 100">
@@ -200,162 +401,185 @@ export default function Portfolio() {
 
       <HeroSection />
 
-      <main className="container mx-auto px-4 py-8 space-y-8 relative z-10">
-        <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} onSearchEnter={handleSearchEnter} />
-
+      <main className="container mx-auto px-4 pt-4 pb-8 space-y-8 relative z-10">
         <div className="space-y-4">
-          <div className="flex items-center justify-between relative">
-            <h3 className="text-xl font-semibold relative">
-              <span className="relative inline-block">
-                {"Graph Search".split("").map((letter, index) => (
-                  <span
-                    key={index}
-                    className="inline-block animate-wave text-transparent bg-gradient-to-r from-slate-400 via-blue-500 to-slate-600 bg-clip-text animate-color-wave"
-                    style={
-                      {
-                        animationDelay: `${index * 0.1}s`,
-                        "--wave-delay": `${index * 0.15}s`,
-                      } as React.CSSProperties
-                    }
-                  >
-                    {letter === " " ? "\u00A0" : letter}
-                  </span>
-                ))}
-              </span>
-            </h3>
+          <div className="flex flex-col items-center relative">
+            <div
+              onClick={() => setIsGraphExpanded(!isGraphExpanded)}
+              className="cursor-pointer hover:opacity-80 transition-all duration-300 flex flex-col items-center"
+            >
+              <h3 className="text-xl font-semibold relative">
+                <span className="relative inline-block">
+                  {"Graph Visualization".split("").map((letter, index) => (
+                    <span
+                      key={index}
+                      className="inline-block animate-wave text-transparent bg-gradient-to-r from-slate-400 via-blue-500 to-slate-600 bg-clip-text animate-color-wave"
+                      style={
+                        {
+                          animationDelay: `${index * 0.1}s`,
+                          "--wave-delay": `${index * 0.15}s`,
+                        } as React.CSSProperties
+                      }
+                    >
+                      {letter === " " ? "\u00A0" : letter}
+                    </span>
+                  ))}
+                </span>
+              </h3>
 
-            <div className="absolute left-28 top-1/2 right-20 h-px overflow-visible pointer-events-none">
-              <svg className="w-full h-8 -mt-4" viewBox="0 0 100 32" preserveAspectRatio="none">
+              <svg width="60" height="12" viewBox="0 0 60 12" className="drop-shadow-sm mt-1">
                 <defs>
-                  <linearGradient id="connectionGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#8b5cf6" />
-                    <stop offset="50%" stopColor="#3b82f6" />
-                    <stop offset="100%" stopColor="#8b5cf6" />
+                  <linearGradient id="smallArrowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#94a3b8" />
+                    <stop offset="100%" stopColor="#cbd5e1" />
                   </linearGradient>
                 </defs>
-
-                <line
-                  x1="0"
-                  y1="16"
-                  x2="100"
-                  y2="16"
-                  stroke="url(#connectionGrad)"
-                  strokeWidth="2"
-                  opacity="0.6"
-                  className="animate-pulse"
+                <path
+                  d={
+                    isGraphExpanded
+                      ? "M 10 8 L 30 2 L 50 8 L 45 8 L 30 4 L 15 8 Z"
+                      : "M 10 4 L 30 10 L 50 4 L 45 4 L 30 8 L 15 4 Z"
+                  }
+                  fill="url(#smallArrowGrad)"
+                  stroke="#e2e8f0"
+                  strokeWidth="0.5"
+                  className="transition-all duration-300"
                 />
-
-                <circle r="3" fill="#8b5cf6" opacity="0.8">
-                  <animateMotion dur="5s" repeatCount="indefinite">
-                    <mpath href="#connectionPath" />
-                  </animateMotion>
-                </circle>
-                <circle r="2.5" fill="#3b82f6" opacity="0.7">
-                  <animateMotion dur="5s" repeatCount="indefinite" begin="2.5s">
-                    <mpath href="#connectionPath" />
-                  </animateMotion>
-                </circle>
-
-                <path id="connectionPath" d="M 0 16 L 100 16" fill="none" opacity="0" />
-
-                <circle
-                  cx="35"
-                  cy="16"
-                  r="2"
-                  fill="#8b5cf6"
-                  className="animate-ping"
-                  style={{ animationDelay: "0.5s" }}
-                />
-                <circle
-                  cx="65"
-                  cy="16"
-                  r="1.5"
-                  fill="#3b82f6"
-                  className="animate-ping"
-                  style={{ animationDelay: "1.2s" }}
-                />
-
-                <line x1="0" y1="16" x2="35" y2="16" stroke="#8b5cf6" strokeWidth="1" opacity="0.4" />
-                <line x1="35" y1="16" x2="65" y2="16" stroke="#3b82f6" strokeWidth="1" opacity="0.4" />
-                <line x1="65" y1="16" x2="100" y2="16" stroke="#8b5cf6" strokeWidth="1" opacity="0.4" />
               </svg>
             </div>
 
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsGraphExpanded(!isGraphExpanded)}
-              className="flex items-center gap-2 relative z-10 bg-slate-800 border-2 border-slate-500 text-slate-400 font-bold hover:bg-slate-700 hover:border-slate-400 hover:text-slate-300 transition-all duration-300 shadow-lg hover:shadow-slate-500/25"
-            >
-              {isGraphExpanded ? (
-                <>
-                  <ChevronUp className="w-4 h-4" />
-                  Collapse
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="w-4 h-4" />
-                  Expand
-                </>
-              )}
-            </Button>
+            <div className="absolute left-0 right-0 top-0 h-px overflow-visible pointer-events-none">
+              <svg className="w-full h-8" viewBox="0 0 400 32" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="leftGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#8b5cf6" />
+                    <stop offset="100%" stopColor="transparent" />
+                  </linearGradient>
+                  <linearGradient id="rightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="transparent" />
+                    <stop offset="100%" stopColor="#3b82f6" />
+                  </linearGradient>
+                </defs>
+
+                <circle r="2.5" fill="#8b5cf6" opacity="0.8">
+                  <animateMotion dur="4s" repeatCount="indefinite">
+                    <mpath href="#leftPath" />
+                  </animateMotion>
+                </circle>
+                <circle r="2" fill="#8b5cf6" opacity="0.6">
+                  <animateMotion dur="4s" repeatCount="indefinite" begin="2s">
+                    <mpath href="#leftPath" />
+                  </animateMotion>
+                </circle>
+
+                <circle r="2.5" fill="#3b82f6" opacity="0.8">
+                  <animateMotion dur="4s" repeatCount="indefinite">
+                    <mpath href="#rightPath" />
+                  </animateMotion>
+                </circle>
+                <circle r="2" fill="#3b82f6" opacity="0.6">
+                  <animateMotion dur="4s" repeatCount="indefinite" begin="2s">
+                    <mpath href="#rightPath" />
+                  </animateMotion>
+                </circle>
+
+                <path id="leftPath" d="M 140 16 L 50 16" fill="none" opacity="0" />
+                <path id="rightPath" d="M 260 16 L 350 16" fill="none" opacity="0" />
+
+                <line x1="50" y1="16" x2="140" y2="16" stroke="url(#leftGrad)" strokeWidth="1" opacity="0.4" />
+                <line x1="260" y1="16" x2="350" y2="16" stroke="url(#rightGrad)" strokeWidth="1" opacity="0.4" />
+              </svg>
+            </div>
+
+            {isGraphExpanded && (
+              <GraphCard className="p-6 h-[500px]">
+                <div className="text-sm mb-4 text-center text-black">
+                  Click and drag to pan • Scroll to zoom • Click nodes to highlight connections
+                </div>
+                <SkillsGraph onSkillSelect={setSelectedSkill} selectedSkill={selectedSkill} />
+              </GraphCard>
+            )}
           </div>
 
-          {isGraphExpanded && (
-            <GraphCard className="p-6 h-[500px]">
-              <div className="text-sm mb-4 text-center text-black">
-                Click and drag to pan • Scroll to zoom • Click nodes to highlight connections
-              </div>
-              <SkillsGraph onSkillSelect={setSelectedSkill} selectedSkill={selectedSkill} />
-            </GraphCard>
-          )}
+          <Tabs defaultValue="experience" className="w-full">
+            <TabsList className="grid w-full grid-cols-5">
+              <TabsTrigger
+                value="experience"
+                className={`text-white font-semibold data-[state=active]:text-foreground transition-all duration-300 ${
+                  tabsWithMatches.has("experience")
+                    ? "ring-2 ring-purple-400 shadow-lg shadow-purple-200 bg-purple-500/20"
+                    : ""
+                }`}
+              >
+                Work Experience
+              </TabsTrigger>
+              <TabsTrigger
+                value="research"
+                className={`text-white font-semibold data-[state=active]:text-foreground transition-all duration-300 ${
+                  tabsWithMatches.has("research")
+                    ? "ring-2 ring-purple-400 shadow-lg shadow-purple-200 bg-purple-500/20"
+                    : ""
+                }`}
+              >
+                Academia
+              </TabsTrigger>
+              <TabsTrigger
+                value="public-service"
+                className={`text-white font-semibold data-[state=active]:text-foreground transition-all duration-300 ${
+                  tabsWithMatches.has("public-service")
+                    ? "ring-2 ring-purple-400 shadow-lg shadow-purple-200 bg-purple-500/20"
+                    : ""
+                }`}
+              >
+                Public Service
+              </TabsTrigger>
+              <TabsTrigger
+                value="extracurriculars"
+                className={`text-white font-semibold data-[state=active]:text-foreground transition-all duration-300 ${
+                  tabsWithMatches.has("extracurriculars")
+                    ? "ring-2 ring-purple-400 shadow-lg shadow-purple-200 bg-purple-500/20"
+                    : ""
+                }`}
+              >
+                Extracurriculars
+              </TabsTrigger>
+              <TabsTrigger
+                value="education"
+                className={`text-white font-semibold data-[state=active]:text-foreground transition-all duration-300 ${
+                  tabsWithMatches.has("education")
+                    ? "ring-2 ring-purple-400 shadow-lg shadow-purple-200 bg-purple-500/20"
+                    : ""
+                }`}
+              >
+                Education
+              </TabsTrigger>
+            </TabsList>
+
+            <div className="mt-6 space-y-6">
+              <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} onSearchEnter={handleSearchEnter} />
+            </div>
+
+            <TabsContent value="experience" className="mt-6" ref={experienceRef}>
+              <WorkExperience searchQuery={searchQuery} selectedSkill={selectedSkill} hasAnyMatches={hasAnyMatches} />
+            </TabsContent>
+
+            <TabsContent value="research" className="mt-6" ref={researchRef}>
+              <Academia searchQuery={searchQuery} selectedSkill={selectedSkill} hasAnyMatches={hasAnyMatches} />
+            </TabsContent>
+
+            <TabsContent value="public-service" className="mt-6" ref={publicServiceRef}>
+              <PublicService searchQuery={searchQuery} selectedSkill={selectedSkill} hasAnyMatches={hasAnyMatches} />
+            </TabsContent>
+
+            <TabsContent value="extracurriculars" className="mt-6" ref={extracurricularsRef}>
+              <Extracurriculars searchQuery={searchQuery} selectedSkill={selectedSkill} hasAnyMatches={hasAnyMatches} />
+            </TabsContent>
+
+            <TabsContent value="education" className="mt-6" ref={educationRef}>
+              <Education searchQuery={searchQuery} selectedSkill={selectedSkill} hasAnyMatches={hasAnyMatches} />
+            </TabsContent>
+          </Tabs>
         </div>
-
-        <Tabs defaultValue="experience" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="experience" className="text-white font-semibold data-[state=active]:text-foreground">
-              Work Experience
-            </TabsTrigger>
-            <TabsTrigger value="research" className="text-white font-semibold data-[state=active]:text-foreground">
-              Academia
-            </TabsTrigger>
-            <TabsTrigger
-              value="public-service"
-              className="text-white font-semibold data-[state=active]:text-foreground"
-            >
-              Public Service
-            </TabsTrigger>
-            <TabsTrigger
-              value="extracurriculars"
-              className="text-white font-semibold data-[state=active]:text-foreground"
-            >
-              Extracurriculars
-            </TabsTrigger>
-            <TabsTrigger value="education" className="text-white font-semibold data-[state=active]:text-foreground">
-              Education
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="experience" className="mt-6" ref={experienceRef}>
-            <WorkExperience searchQuery={searchQuery} selectedSkill={selectedSkill} />
-          </TabsContent>
-
-          <TabsContent value="research" className="mt-6" ref={researchRef}>
-            <Academia searchQuery={searchQuery} selectedSkill={selectedSkill} />
-          </TabsContent>
-
-          <TabsContent value="public-service" className="mt-6" ref={publicServiceRef}>
-            <PublicService searchQuery={searchQuery} selectedSkill={selectedSkill} />
-          </TabsContent>
-
-          <TabsContent value="extracurriculars" className="mt-6" ref={extracurricularsRef}>
-            <Extracurriculars searchQuery={searchQuery} selectedSkill={selectedSkill} />
-          </TabsContent>
-
-          <TabsContent value="education" className="mt-6" ref={educationRef}>
-            <Education searchQuery={searchQuery} selectedSkill={selectedSkill} />
-          </TabsContent>
-        </Tabs>
       </main>
     </div>
   )
