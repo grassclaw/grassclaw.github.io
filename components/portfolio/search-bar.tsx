@@ -27,7 +27,7 @@ export function SearchBar({ searchQuery, onSearchChange }: SearchBarProps) {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-2 justify-center">
-        <span className="text-sm text-muted-foreground mr-2">Quick search:</span>
+        <span className="text-sm text-white mr-2">Quick search:</span>
         {suggestedKeywords.map((keyword) => (
           <Badge
             key={keyword}
