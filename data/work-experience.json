@@ -1,0 +1,405 @@
+{
+  "workExperience": [
+    {
+      "id": "nagra-2025",
+      "title": "Consulting Senior Cyber ML Architect",
+      "company": "Nagra Kudelski Group",
+      "location": "Working remotely from USA",
+      "period": "2025 — Present",
+      "type": "Contract/Research Partner",
+      "tags": [
+        "security",
+        "ml",
+        "consulting",
+        "architecture",
+        "current",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ],
+      "description": "Redesigned the NL2KQL investigative pipeline by adding schema validation, prompt normalization, and modular evaluation layers. Built a custom KQL emulator for runtime testing and error catching.",
+      "bullets": [
+        {
+          "text": "Reduced analyst triage time by 80% through multi-step NL2KQL inference pipeline",
+          "tags": ["security", "ml", "efficiency", "automation"]
+        },
+        {
+          "text": "Improved LLM runtime efficiency by 300% with prompt compression",
+          "tags": ["ml", "optimization", "llm"]
+        },
+        {
+          "text": "Built AWS architecture including Lambda, EC2, and S3 for Bedrock-powered investigative assistant",
+          "tags": ["cloud", "aws", "architecture", "ml"]
+        }
+      ],
+      "skills": ["langchain", "aws", "python", "sql", "kql", "llm", "security"]
+    },
+    {
+      "id": "netstar-2024",
+      "title": "Senior Machine Learning Engineer - Threat Intelligence",
+      "company": "Netstar DTA Global Reach, Inc.",
+      "location": "Working remotely from USA",
+      "period": "2024 — Present",
+      "type": "Full-time",
+      "tags": [
+        "security",
+        "ml",
+        "threat-intel",
+        "current",
+        "research",
+        "webdev",
+        "ai",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "academic",
+        "leadership"
+      ],
+      "description": "Designed and deployed a modular micro-LLM system for classifying 40M+ domains quarterly. Built secure ML pipelines with full lifecycle ownership including model development, evaluation, containerized deployment.",
+      "bullets": [
+        {
+          "text": "Selected to present peer-reviewed AI threat detection research at global 2025 conference",
+          "tags": ["research", "academic", "security", "ml"]
+        },
+        {
+          "text": "Built Graph Neural Network pipeline accelerating categorization by 90%",
+          "tags": ["ml", "gnn", "optimization", "security"]
+        },
+        {
+          "text": "Reduced quarterly processing costs from $50K to $4K while scaling efficiency",
+          "tags": ["cost-optimization", "efficiency", "ml", "ops"]
+        },
+        {
+          "text": "Designed MCP Threat Intelligence Server with S3, Postgres/Timescale integration",
+          "tags": ["architecture", "security", "data", "integration"]
+        }
+      ],
+      "skills": ["llm", "aws", "docker", "kubernetes", "postgres", "python", "golang", "stix", "mitre"]
+    },
+    {
+      "id": "self-2022",
+      "title": "Web Security Auditor & AI Web Consultant",
+      "company": "Self-Proprietor",
+      "location": "Working remotely from USA",
+      "period": "2022 — 2024",
+      "type": "Consulting",
+      "tags": [
+        "security",
+        "consulting",
+        "webdev",
+        "ai",
+        "entrepreneurship",
+        "ml",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ],
+      "description": "Applied AI techniques to improve training simulations for autonomous systems. Conducted security audits and optimized authentication systems for various clients.",
+      "bullets": [
+        {
+          "text": "Resolved 100% of authentication logout failures in OpenContour platform",
+          "tags": ["security", "webdev", "debugging", "authentication"]
+        },
+        {
+          "text": "Cut autonomous vehicle onboarding time by 2 days, saving $4K per employee",
+          "tags": ["ai", "optimization", "cost-savings", "automation"]
+        },
+        {
+          "text": "Optimized SaaS 3D plane-to-vector mesh conversion from O(n²) to O(n)",
+          "tags": ["algorithms", "optimization", "performance", "3d"]
+        }
+      ],
+      "skills": ["python", "sql", "react", "mongodb", "security-audit"]
+    },
+    {
+      "id": "2u-2021",
+      "title": "Staffing Operations Technical Lead",
+      "company": "2U Education",
+      "location": "Working remotely from USA",
+      "period": "2021 — 2022",
+      "type": "Full-time",
+      "tags": [
+        "leadership",
+        "operations",
+        "education",
+        "automation",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "research",
+        "academic"
+      ],
+      "description": "Automated employee lifecycle management through Salesforce, ADP, and Greenhouse. Provided technical leadership to cross-functional teams in cybersecurity bootcamp operations.",
+      "bullets": [
+        {
+          "text": "Reduced annual new hire costs by $85K through efficient remote upskilling",
+          "tags": ["cost-optimization", "leadership", "education", "remote"]
+        },
+        {
+          "text": "Updated technical training materials for API utilization and Python Anaconda",
+          "tags": ["education", "training", "python", "api"]
+        }
+      ],
+      "skills": ["python", "salesforce", "api-integration", "leadership"]
+    },
+    {
+      "id": "netstar-2020",
+      "title": "Threat Intelligence Research Engineer",
+      "company": "Netstar",
+      "location": "Working remotely from USA",
+      "period": "2020 — 2021",
+      "type": "Full-time",
+      "tags": [
+        "security",
+        "threat-intel",
+        "research",
+        "revenue",
+        "ml",
+        "webdev",
+        "ai",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "academic",
+        "leadership"
+      ],
+      "description": "Collaborated on fortifying software security by identifying vulnerabilities. Created comprehensive technical documentation and designed demo environments for SaaS security products.",
+      "bullets": [
+        {
+          "text": "Engineered software libraries to automate threat intelligence categorization",
+          "tags": ["security", "automation", "threat-intel", "development"]
+        },
+        {
+          "text": "Strengthened detection capabilities for Insite Threat Intelligence Service",
+          "tags": ["security", "product", "threat-intel"]
+        },
+        {
+          "text": "Generated up to $1.3M in annual revenue through new enterprise client feeds",
+          "tags": ["revenue", "business", "enterprise", "threat-intel"]
+        }
+      ],
+      "skills": ["threat-intel", "stix", "python", "security-audit"]
+    },
+    {
+      "id": "barrick-2018",
+      "title": "Environmental Engineer",
+      "company": "Barrick Gold/Nevada Gold Mines",
+      "location": "Carlin, NV",
+      "period": "2018 — 2020",
+      "type": "Full-time",
+      "tags": [
+        "engineering",
+        "compliance",
+        "automation",
+        "data-analysis",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "research",
+        "academic",
+        "leadership"
+      ],
+      "description": "Executed internal audits following ISO14001 standards. Automated anomaly detection and data analysis through Python, PI Systems, and PowerBI.",
+      "bullets": [
+        {
+          "text": "Led regulatory engagement efforts, driving 90% reduction in compliance deficiencies",
+          "tags": ["compliance", "leadership", "regulatory", "improvement"]
+        },
+        {
+          "text": "Cut reportable air incidents from 25 to 3 per year via automated anomaly detection",
+          "tags": ["automation", "safety", "data-analysis", "python"]
+        }
+      ],
+      "skills": ["python", "powerbi", "data-analysis", "automation"]
+    }
+  ],
+  "technicalSkills": {
+    "LLM & ML Frameworks/Tools": [
+      {
+        "name": "LangChain",
+        "id": "langchain",
+        "jobs": ["nagra-2025", "netstar-2024"],
+        "tags": ["ml", "llm", "framework"]
+      },
+      { "name": "Unsloth", "id": "unsloth", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "optimization"] },
+      {
+        "name": "Transformers (HuggingFace)",
+        "id": "transformers",
+        "jobs": ["netstar-2024"],
+        "tags": ["ml", "llm", "nlp"]
+      },
+      { "name": "LoRA fine-tuning", "id": "lora", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "fine-tuning"] },
+      { "name": "ggml", "id": "ggml", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "inference"] },
+      { "name": "GPTQ", "id": "gptq", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "quantization"] },
+      {
+        "name": "sentence-transformers",
+        "id": "sentence-transformers",
+        "jobs": ["netstar-2024"],
+        "tags": ["ml", "nlp", "embeddings"]
+      },
+      {
+        "name": "RAG pipelines",
+        "id": "rag",
+        "jobs": ["nagra-2025", "netstar-2024"],
+        "tags": ["ml", "llm", "retrieval"]
+      },
+      {
+        "name": "MCP servers",
+        "id": "mcp",
+        "jobs": ["nagra-2025", "netstar-2024"],
+        "tags": ["ml", "architecture", "integration"]
+      }
+    ],
+    "ML Infrastructure & MLOps": [
+      {
+        "name": "AWS (S3, EC2, Lambda, CloudTrail, SageMaker)",
+        "id": "aws",
+        "jobs": ["nagra-2025", "netstar-2024"],
+        "tags": ["cloud", "ml", "infrastructure"]
+      },
+      { "name": "Azure AI Services", "id": "azure", "jobs": ["netstar-2024"], "tags": ["cloud", "ml", "microsoft"] },
+      {
+        "name": "Docker",
+        "id": "docker",
+        "jobs": ["netstar-2024"],
+        "tags": ["containerization", "devops", "deployment"]
+      },
+      {
+        "name": "Kubernetes",
+        "id": "kubernetes",
+        "jobs": ["netstar-2024"],
+        "tags": ["orchestration", "devops", "scaling"]
+      },
+      {
+        "name": "Terraform",
+        "id": "terraform",
+        "jobs": ["netstar-2024"],
+        "tags": ["infrastructure", "iac", "automation"]
+      },
+      {
+        "name": "Ansible",
+        "id": "ansible",
+        "jobs": ["netstar-2024"],
+        "tags": ["automation", "configuration", "devops"]
+      },
+      {
+        "name": "Makefiles",
+        "id": "makefiles",
+        "jobs": ["netstar-2024"],
+        "tags": ["build", "automation", "development"]
+      }
+    ],
+    "Security & Threat Intelligence Tools": [
+      {
+        "name": "STIX/TAXII",
+        "id": "stix",
+        "jobs": ["netstar-2024", "netstar-2020"],
+        "tags": ["security", "threat-intel", "standards"]
+      },
+      {
+        "name": "MITRE ATT&CK",
+        "id": "mitre",
+        "jobs": ["netstar-2024", "netstar-2020"],
+        "tags": ["security", "threat-intel", "framework"]
+      },
+      { "name": "KQL (Sentinel emulation)", "id": "kql", "jobs": ["nagra-2025"], "tags": ["security", "query", "siem"] }
+    ],
+    "Programming & Scripting Languages": [
+      {
+        "name": "Python",
+        "id": "python",
+        "jobs": ["nagra-2025", "netstar-2024", "self-2022", "2u-2021", "netstar-2020", "barrick-2018"],
+        "tags": ["programming", "ml", "automation"]
+      },
+      { "name": "Golang", "id": "golang", "jobs": ["netstar-2024"], "tags": ["programming", "backend", "performance"] },
+      {
+        "name": "SQL",
+        "id": "sql",
+        "jobs": ["nagra-2025", "netstar-2024", "self-2022"],
+        "tags": ["database", "query", "data"]
+      }
+    ],
+    "Data & Database Tools": [
+      { "name": "MongoDB", "id": "mongodb", "jobs": ["self-2022"], "tags": ["database", "nosql", "document"] },
+      { "name": "PostgreSQL", "id": "postgres", "jobs": ["netstar-2024"], "tags": ["database", "sql", "relational"] },
+      {
+        "name": "TimescaleDB",
+        "id": "timescaledb",
+        "jobs": ["netstar-2024"],
+        "tags": ["database", "timeseries", "analytics"]
+      },
+      { "name": "Neo4j", "id": "neo4j", "jobs": ["netstar-2024"], "tags": ["database", "graph", "relationships"] },
+      {
+        "name": "Custom vector store generation",
+        "id": "vectordb",
+        "jobs": ["netstar-2024"],
+        "tags": ["ml", "embeddings", "search"]
+      },
+      {
+        "name": "Graph enrichment tools",
+        "id": "graph-tools",
+        "jobs": ["netstar-2024"],
+        "tags": ["data", "graph", "analysis"]
+      },
+      {
+        "name": "REST API interface design",
+        "id": "rest-api",
+        "jobs": ["netstar-2024", "self-2022"],
+        "tags": ["api", "webdev", "integration"]
+      }
+    ],
+    "Collaboration & Dev Tools": [
+      {
+        "name": "GitHub Projects",
+        "id": "github",
+        "jobs": ["netstar-2024", "self-2022"],
+        "tags": ["version-control", "collaboration", "project-management"]
+      },
+      { "name": "GitLab CI", "id": "gitlab", "jobs": ["netstar-2024"], "tags": ["ci-cd", "devops", "automation"] },
+      {
+        "name": "Jira",
+        "id": "jira",
+        "jobs": ["netstar-2024", "2u-2021"],
+        "tags": ["project-management", "agile", "tracking"]
+      },
+      {
+        "name": "Confluence",
+        "id": "confluence",
+        "jobs": ["netstar-2024", "2u-2021"],
+        "tags": ["documentation", "collaboration", "knowledge"]
+      },
+      { "name": "VS Code", "id": "vscode", "jobs": ["netstar-2024"], "tags": ["ide", "development", "productivity"] },
+      { "name": "Cursor", "id": "cursor", "jobs": ["netstar-2024"], "tags": ["ide", "ai-assisted", "development"] },
+      {
+        "name": "ServiceNow",
+        "id": "servicenow",
+        "jobs": ["netstar-2024", "2u-2021"],
+        "tags": ["itsm", "workflow", "enterprise"]
+      }
+    ]
+  }
+}

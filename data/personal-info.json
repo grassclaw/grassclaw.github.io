@@ -1,0 +1,47 @@
+{
+  "personalInfo": {
+    "name": "Aaron E",
+    "location": "Working remotely from USA",
+    "introduction": {
+      "default": "Experienced cybersecurity researcher and machine learning engineer specializing in threat intelligence, AI-driven security solutions, and scalable ML pipelines.",
+      "variations": {
+        "security": "Cybersecurity researcher and threat intelligence specialist with expertise in AI-driven security solutions, threat detection methodologies, and large-scale security analytics.",
+        "software": "Senior software engineer and ML architect with expertise in full-stack development, cloud infrastructure, and scalable AI/ML pipeline design.",
+        "research": "Academic researcher focused on cybersecurity education, semantic technologies, and AI applications in threat detection with peer-reviewed publications.",
+        "leadership": "Technical leader with experience in cross-functional team management, mentoring, and driving organizational efficiency through automation and process optimization."
+      }
+    }
+  },
+  "resumeVariations": {
+    "cybersecurity": {
+      "name": "Cybersecurity Specialist",
+      "tagFilters": ["security", "threat-intel", "cybersecurity", "research", "government"],
+      "skillPriority": ["security", "ml", "threat-intel"],
+      "introduction": "cybersecurity"
+    },
+    "software": {
+      "name": "Software Engineer",
+      "tagFilters": ["webdev", "ml", "programming", "cloud", "automation"],
+      "skillPriority": ["programming", "webdev", "cloud", "ml"],
+      "introduction": "software"
+    },
+    "webux": {
+      "name": "Web/UX Developer",
+      "tagFilters": ["webdev", "programming", "cloud", "automation", "ai"],
+      "skillPriority": ["webdev", "programming", "cloud"],
+      "introduction": "software"
+    },
+    "research": {
+      "name": "Research Scientist",
+      "tagFilters": ["research", "academic", "ml", "ai", "education"],
+      "skillPriority": ["research", "ml", "academic"],
+      "introduction": "research"
+    },
+    "leadership": {
+      "name": "Technical Leader",
+      "tagFilters": ["leadership", "mentoring", "management", "consulting", "education"],
+      "skillPriority": ["leadership", "management", "mentoring"],
+      "introduction": "leadership"
+    }
+  }
+}

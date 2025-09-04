@@ -1,0 +1,138 @@
+{
+  "extracurriculars": [
+    {
+      "id": "webaphors-initiative",
+      "title": "Webaphors Channel Initiative",
+      "organization": "Creative Content Platform",
+      "location": "Online Platform",
+      "period": "2023 — Present",
+      "description": "Founded and developed the Webaphors channel initiative, creating educational content that bridges complex technical concepts with accessible metaphors and visual storytelling.",
+      "responsibilities": [
+        "Develop creative content strategy for technical education",
+        "Create visual metaphors for complex programming concepts",
+        "Build audience engagement through innovative storytelling",
+        "Collaborate with educators and content creators"
+      ],
+      "skills": ["content-creation", "creative-writing", "technical-communication", "visual-design"],
+      "tags": [
+        "creative",
+        "education",
+        "content",
+        "storytelling",
+        "current",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    },
+    {
+      "id": "youtube-discord-community",
+      "title": "YouTube Shorts & Discord Learning Community",
+      "organization": "Newine – YouTube Platform",
+      "location": "Online Platform",
+      "period": "2022 — Present",
+      "description": "Create educational YouTube Shorts and manage Discord learning community focused on technology, AI, and cybersecurity topics. Build audience engagement through short-form video content and interactive discussions.",
+      "responsibilities": [
+        "Research and script educational content on emerging technologies",
+        "Produce and edit short-form video content",
+        "Moderate Discord community and facilitate learning discussions",
+        "Stay current with trends in AI, cybersecurity, and technology"
+      ],
+      "skills": ["content-creation", "video-editing", "community-management", "social-media"],
+      "tags": [
+        "creative",
+        "education",
+        "community",
+        "ai",
+        "cybersecurity",
+        "current",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    },
+    {
+      "id": "math-tutor-byu",
+      "title": "Math Tutor (Calculus/Statistics)",
+      "organization": "Brigham Young University",
+      "location": "Provo, UT",
+      "period": "2020 — 2022",
+      "description": "Provided one-on-one and group tutoring for undergraduate students in advanced mathematics courses, specializing in calculus and statistics with focus on practical applications.",
+      "responsibilities": [
+        "Tutor students in calculus, statistics, and related mathematics courses",
+        "Develop personalized learning strategies for diverse learning styles",
+        "Create practice problems and study materials",
+        "Track student progress and adjust teaching methods accordingly"
+      ],
+      "skills": ["education", "mathematics", "mentoring", "curriculum-development"],
+      "tags": [
+        "education",
+        "tutoring",
+        "mathematics",
+        "mentoring",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    },
+    {
+      "id": "cybersecurity-bootcamp-mentor",
+      "title": "Cybersecurity Bootcamp Mentor",
+      "organization": "Various Bootcamp Programs",
+      "location": "Remote",
+      "period": "2023 — Present",
+      "description": "Mentor students and assist faculty in cybersecurity bootcamps, helping build knowledge assessments and providing guidance on practical cybersecurity skills and career development.",
+      "responsibilities": [
+        "Mentor students in cybersecurity fundamentals and advanced topics",
+        "Assist faculty in developing knowledge assessments and curriculum",
+        "Provide career guidance and industry insights",
+        "Review and improve educational materials and exercises"
+      ],
+      "skills": ["mentoring", "cybersecurity", "curriculum-development", "career-guidance"],
+      "tags": [
+        "mentoring",
+        "cybersecurity",
+        "education",
+        "career",
+        "current",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    }
+  ]
+}

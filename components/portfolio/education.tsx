@@ -1,95 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { GraduationCap, Award, Users, ExternalLink } from "lucide-react"
+import { usePortfolio } from "@/contexts/portfolio-context"
 
 interface EducationProps {
   searchQuery: string
   selectedSkill: string | null
   hasAnyMatches: boolean
+  otherTabsWithMatches?: string[]
 }
 
-export function Education({ searchQuery, selectedSkill, hasAnyMatches }: EducationProps) {
-  const education = [
-    {
-      id: "ms-cyber-ops",
-      degree: "Master of Science in Cyber & Information Operations",
-      institution: "University of Arizona",
-      year: "2026",
-      status: "in-progress",
-    },
-    {
-      id: "fullstack-cert",
-      degree: "Full Stack Web Development Certificate",
-      institution: "University of Arizona",
-      year: "2019",
-      status: "completed",
-    },
-    {
-      id: "bs-asu",
-      degree: "Bachelor of Science",
-      institution: "Arizona State University",
-      year: "2017",
-      status: "completed",
-    },
-    {
-      id: "associates",
-      degree: "Associate Degree",
-      institution: "Bellevue College",
-      year: "2015",
-      status: "completed",
-    },
-  ]
-
-  const certificates = [
-    {
-      id: "security-plus",
-      name: "CompTIA Security+",
-      issuer: "CompTIA",
-      year: "2025",
-      status: "expected",
-    },
-    {
-      id: "eagle-scout",
-      name: "Eagle Scout",
-      issuer: "Boy Scouts of America",
-      year: "Achievement",
-      status: "completed",
-    },
-  ]
-
-  const campusInvolvement = [
-    {
-      id: "perplexity-partner",
-      title: "Sponsored Perplexity AI Campus Partner",
-      organization: "Perplexity AI",
-      year: "2025-Present",
-      description:
-        "Advocate for AI-driven research and learning, host AI-related events, work with clubs and professors as partnership liaison",
-      url: "https://www.perplexity.ai/hub/legal/campus-partners-program-terms",
-    },
-    {
-      id: "creative-lab",
-      title: "AI and Coding Workshop Instructor",
-      organization: "University of Arizona Creative Lab",
-      year: "2025",
-      description: "Teaching AI applications and coding fundamentals to students",
-    },
-    {
-      id: "social-media-coordinator",
-      title: "Social Media Coordinator",
-      organization: "Cyber Saguaro Club",
-      year: "2024-2025",
-      description: "Managing social media presence and digital outreach for cybersecurity club",
-      url: "https://cybersaguaros.com/",
-    },
-    {
-      id: "research-assistant",
-      title: "Student Research Assistant",
-      organization: "University of Arizona",
-      year: "2024-Present",
-      description: "Contributing to cybersecurity and AI research initiatives",
-    },
-  ]
+export function Education({ searchQuery, selectedSkill, hasAnyMatches, otherTabsWithMatches = [] }: EducationProps) {
+  const { portfolioData } = usePortfolio()
 
   const highlightText = (text: string, query: string) => {
     if (!query.trim()) return text
@@ -127,15 +49,25 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches }: Educati
   }
 
   const hasMatches =
-    education.some(matchesSearch) || certificates.some(matchesSearch) || campusInvolvement.some(matchesSearch)
-  const showNoResultsMessage = searchQuery !== "" && !hasMatches && !hasAnyMatches
+    portfolioData.education.some(matchesSearch) ||
+    portfolioData.certificates.some(matchesSearch) ||
+    portfolioData.campusInvolvement.some(matchesSearch)
+
+  const showNoResultsMessage = searchQuery !== "" && !hasMatches
 
   return (
     <div className="space-y-8">
       {showNoResultsMessage && (
         <Card className="p-8 text-center border-2 border-dashed border-muted">
-          <p className="text-slate-700 text-lg mb-2">Sorry, nothing was found for "{searchQuery}"</p>
-          <p className="text-sm text-slate-600">However, it doesn't mean I haven't done it! Feel free to reach out.</p>
+          {otherTabsWithMatches.length > 0 ? (
+            <p className="text-slate-700 text-lg">
+              There are results for '{searchQuery}' on the following tabs: {otherTabsWithMatches.join(", ")}
+            </p>
+          ) : (
+            <p className="text-slate-700 text-lg">
+              0 results, this does not mean I haven't done it. Feel free to reach out and check!
+            </p>
+          )}
         </Card>
       )}
 
@@ -154,7 +86,7 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches }: Educati
               <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-slate-300"></div>
 
               <div className="space-y-6">
-                {education.map((edu, index) => (
+                {portfolioData.education.map((edu, index) => (
                   <div
                     key={edu.id}
                     className={`relative flex items-start gap-4 ${
@@ -201,7 +133,7 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches }: Educati
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {certificates.map((cert) => (
+              {portfolioData.certificates.map((cert) => (
                 <div
                   key={cert.id}
                   className={`p-4 rounded-lg border ${
@@ -233,7 +165,7 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches }: Educati
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-6">
-            {campusInvolvement.map((involvement) => (
+            {portfolioData.campusInvolvement.map((involvement) => (
               <div
                 key={involvement.id}
                 className={`p-4 rounded-lg border ${

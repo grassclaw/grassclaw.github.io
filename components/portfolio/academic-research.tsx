@@ -1,52 +1,22 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { BookOpen, Calendar, Users } from "lucide-react"
+import { usePortfolio } from "@/contexts/portfolio-context"
 
 interface AcademiaProps {
   searchQuery: string
   selectedSkill: string | null
+  hasAnyMatches?: boolean
+  otherTabsWithMatches?: string[]
 }
 
-export function Academia({ searchQuery, selectedSkill }: AcademiaProps) {
-  const researchPapers = [
-    {
-      id: "iscap-semantic-tech",
-      title:
-        "Semantic Technologies for Cybersecurity Education Competencies: JSON-LD Implementation of Distributed Learning Analytics",
-      status: "Final Review",
-      conference: "Information Systems & Computing Academic Professionals (ISCAP)",
-      researchGroup: "University of Arizona cybersecurity research lab",
-      year: "2025",
-      description:
-        "Implementation of semantic technologies using JSON-LD for distributed learning analytics in cybersecurity education competency frameworks.",
-      link: null,
-      skills: ["JSON-LD", "Semantic Web", "Learning Analytics", "Cybersecurity Education"],
-    },
-    {
-      id: "ai-threat-2025",
-      title: "AI Threat Detection Methodologies: Graph Neural Networks for Large-Scale Threat Categorization",
-      status: "Pending",
-      conference: "pending",
-      researchGroup: "University of Arizona cybersecurity research lab",
-      year: "2025",
-      description:
-        "Pioneering research on cost-effective ML pipeline optimization reducing processing costs by 89% through advanced Graph Neural Network implementations for automated threat categorization.",
-      link: null,
-      skills: ["Graph Neural Networks", "LLMs", "Threat Intelligence", "Python", "AWS"],
-    },
-    {
-      id: "nl2kql-research",
-      title: "Natural Language to KQL Translation for Cybersecurity Analysis",
-      status: "Pending",
-      conference: "pending",
-      researchGroup: "University of Arizona cybersecurity research lab",
-      year: "2025",
-      description:
-        "Development of advanced NL2KQL pipeline with schema validation, prompt normalization, and modular evaluation layers for enhanced security query generation.",
-      link: null,
-      skills: ["LangChain", "KQL", "Security Automation", "Prompt Engineering"],
-    },
-  ]
+export function Academia({
+  searchQuery,
+  selectedSkill,
+  hasAnyMatches = false,
+  otherTabsWithMatches = [],
+}: AcademiaProps) {
+  const { portfolioData } = usePortfolio()
 
   const highlightText = (text: string, query: string) => {
     if (!query.trim()) return text
@@ -79,19 +49,26 @@ export function Academia({ searchQuery, selectedSkill }: AcademiaProps) {
     )
   }
 
-  const hasMatches = researchPapers.some(matchesSearch)
+  const hasMatches = portfolioData.academicResearch.some(matchesSearch)
   const showNoResultsMessage = searchQuery !== "" && !hasMatches
 
   return (
     <div className="space-y-6">
       {showNoResultsMessage && (
         <Card className="p-8 text-center border-2 border-dashed border-muted">
-          <p className="text-slate-700 text-lg mb-2">Sorry, nothing was found for "{searchQuery}"</p>
-          <p className="text-sm text-slate-600">However, it doesn't mean I haven't done it! Feel free to reach out.</p>
+          {otherTabsWithMatches.length > 0 ? (
+            <p className="text-slate-700 text-lg">
+              There are results for '{searchQuery}' on the following tabs: {otherTabsWithMatches.join(", ")}
+            </p>
+          ) : (
+            <p className="text-slate-700 text-lg">
+              0 results, this does not mean I haven't done it. Feel free to reach out and check!
+            </p>
+          )}
         </Card>
       )}
 
-      {researchPapers.map((paper) => (
+      {portfolioData.academicResearch.map((paper) => (
         <Card
           key={paper.id}
           className={`p-6 ${
