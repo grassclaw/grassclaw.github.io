@@ -1,91 +1,29 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Users, Mic } from "lucide-react"
+import { usePortfolio } from "@/contexts/portfolio-context"
 
 interface ExtracurricularsProps {
   searchQuery: string
   selectedSkill: string | null
   hasAnyMatches: boolean
+  otherTabsWithMatches?: string[]
 }
 
-export function Extracurriculars({ searchQuery, selectedSkill, hasAnyMatches }: ExtracurricularsProps) {
-  const creativeInitiatives = [
-    {
-      id: "webaphors-initiative",
-      title: "Webaphors Channel Initiative",
-      organization: "Creative Content Platform",
-      location: "Online Platform",
-      period: "2023 — Present",
-      description:
-        "Founded and developed the Webaphors channel initiative, creating educational content that bridges complex technical concepts with accessible metaphors and visual storytelling.",
-      responsibilities: [
-        "Develop creative content strategy for technical education",
-        "Create visual metaphors for complex programming concepts",
-        "Build audience engagement through innovative storytelling",
-        "Collaborate with educators and content creators",
-      ],
-      skills: ["content-creation", "creative-writing", "technical-communication", "visual-design"],
-      icon: Mic,
-    },
-    {
-      id: "youtube-discord-community",
-      title: "YouTube Shorts & Discord Learning Community",
-      organization: "Newine – YouTube Platform",
-      location: "Online Platform",
-      period: "2022 — Present",
-      description:
-        "Create educational YouTube Shorts and manage Discord learning community focused on technology, AI, and cybersecurity topics. Build audience engagement through short-form video content and interactive discussions.",
-      responsibilities: [
-        "Research and script educational content on emerging technologies",
-        "Produce and edit short-form video content",
-        "Moderate Discord community and facilitate learning discussions",
-        "Stay current with trends in AI, cybersecurity, and technology",
-      ],
-      skills: ["content-creation", "video-editing", "community-management", "social-media"],
-      icon: Mic,
-    },
-  ]
+export function Extracurriculars({
+  searchQuery,
+  selectedSkill,
+  hasAnyMatches,
+  otherTabsWithMatches = [],
+}: ExtracurricularsProps) {
+  const { portfolioData } = usePortfolio()
 
-  const tutoringMentoring = [
-    {
-      id: "math-tutor-byu",
-      title: "Math Tutor (Calculus/Statistics)",
-      organization: "Brigham Young University",
-      location: "Provo, UT",
-      period: "2020 — 2022",
-      description:
-        "Provided one-on-one and group tutoring for undergraduate students in advanced mathematics courses, specializing in calculus and statistics with focus on practical applications.",
-      responsibilities: [
-        "Tutor students in calculus, statistics, and related mathematics courses",
-        "Develop personalized learning strategies for diverse learning styles",
-        "Create practice problems and study materials",
-        "Track student progress and adjust teaching methods accordingly",
-      ],
-      skills: ["education", "mathematics", "mentoring", "curriculum-development"],
-      icon: Users,
-    },
-    {
-      id: "cybersecurity-bootcamp-mentor",
-      title: "Cybersecurity Bootcamp Mentor",
-      organization: "Various Bootcamp Programs",
-      location: "Remote",
-      period: "2023 — Present",
-      description:
-        "Mentor students and assist faculty in cybersecurity bootcamps, helping build knowledge assessments and providing guidance on practical cybersecurity skills and career development.",
-      responsibilities: [
-        "Mentor students in cybersecurity fundamentals and advanced topics",
-        "Assist faculty in developing knowledge assessments and curriculum",
-        "Provide career guidance and industry insights",
-        "Review and improve educational materials and exercises",
-      ],
-      skills: ["mentoring", "cybersecurity", "curriculum-development", "career-guidance"],
-      icon: Users,
-    },
-  ]
+  const creativeInitiatives = portfolioData.extracurriculars.filter((activity) => activity.tags?.includes("creative"))
+  const tutoringMentoring = portfolioData.extracurriculars.filter(
+    (activity) => activity.tags?.includes("tutoring") || activity.tags?.includes("mentoring"),
+  )
 
-  const allActivities = [...creativeInitiatives, ...tutoringMentoring]
-
-  const activitiesWithHighlight = allActivities.map((activity) => {
+  const activitiesWithHighlight = portfolioData.extracurriculars.map((activity) => {
     const matchesSearch =
       searchQuery === "" ||
       activity.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -103,7 +41,8 @@ export function Extracurriculars({ searchQuery, selectedSkill, hasAnyMatches }: 
   })
 
   const hasMatches = activitiesWithHighlight.some((activity) => activity.isHighlighted)
-  const showNoResultsMessage = searchQuery !== "" && !hasMatches && !hasAnyMatches
+
+  const showNoResultsMessage = searchQuery !== "" && !hasMatches
 
   const highlightText = (text: string, query: string) => {
     if (!query.trim()) return text
@@ -124,7 +63,7 @@ export function Extracurriculars({ searchQuery, selectedSkill, hasAnyMatches }: 
   }
 
   const renderActivityCard = (activity: any) => {
-    const IconComponent = activity.icon
+    const IconComponent = activity.tags?.includes("creative") ? Mic : Users
     return (
       <Card
         key={activity.id}
@@ -185,8 +124,15 @@ export function Extracurriculars({ searchQuery, selectedSkill, hasAnyMatches }: 
     <div className="space-y-6">
       {showNoResultsMessage && (
         <Card className="p-8 text-center border-2 border-dashed border-muted">
-          <p className="text-slate-700 text-lg mb-2">Sorry, nothing was found for "{searchQuery}"</p>
-          <p className="text-sm text-slate-600">However, it doesn't mean I haven't done it! Feel free to reach out.</p>
+          {otherTabsWithMatches.length > 0 ? (
+            <p className="text-slate-700 text-lg">
+              There are results for '{searchQuery}' on the following tabs: {otherTabsWithMatches.join(", ")}
+            </p>
+          ) : (
+            <p className="text-slate-700 text-lg">
+              0 results, this does not mean I haven't done it. Feel free to reach out and check!
+            </p>
+          )}
         </Card>
       )}
 

@@ -1,0 +1,247 @@
+{
+  "education": [
+    {
+      "id": "ms-cyber-ops",
+      "degree": "Master of Science in Cyber & Information Operations",
+      "institution": "University of Arizona",
+      "year": "2026",
+      "status": "in-progress",
+      "tags": [
+        "education",
+        "cybersecurity",
+        "graduate",
+        "current",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    },
+    {
+      "id": "fullstack-cert",
+      "degree": "Full Stack Web Development Certificate",
+      "institution": "University of Arizona",
+      "year": "2019",
+      "status": "completed",
+      "tags": [
+        "education",
+        "webdev",
+        "certificate",
+        "programming",
+        "security",
+        "ml",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    },
+    {
+      "id": "bs-asu",
+      "degree": "Bachelor of Science",
+      "institution": "Arizona State University",
+      "year": "2017",
+      "status": "completed",
+      "tags": [
+        "education",
+        "undergraduate",
+        "science",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    },
+    {
+      "id": "associates",
+      "degree": "Associate Degree",
+      "institution": "Bellevue College",
+      "year": "2015",
+      "status": "completed",
+      "tags": [
+        "education",
+        "associate",
+        "foundation",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "id": "security-plus",
+      "name": "CompTIA Security+",
+      "issuer": "CompTIA",
+      "year": "2025",
+      "status": "expected",
+      "tags": [
+        "certification",
+        "security",
+        "comptia",
+        "expected",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    },
+    {
+      "id": "eagle-scout",
+      "name": "Eagle Scout",
+      "issuer": "Boy Scouts of America",
+      "year": "Achievement",
+      "status": "completed",
+      "tags": [
+        "achievement",
+        "leadership",
+        "youth",
+        "service",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic"
+      ]
+    }
+  ],
+  "campusInvolvement": [
+    {
+      "id": "perplexity-partner",
+      "title": "Sponsored Perplexity AI Campus Partner",
+      "organization": "Perplexity AI",
+      "year": "2025-Present",
+      "description": "Advocate for AI-driven research and learning, host AI-related events, work with clubs and professors as partnership liaison",
+      "url": "https://www.perplexity.ai/hub/legal/campus-partners-program-terms",
+      "tags": [
+        "ai",
+        "partnership",
+        "advocacy",
+        "current",
+        "research",
+        "security",
+        "ml",
+        "webdev",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "academic",
+        "leadership"
+      ]
+    },
+    {
+      "id": "creative-lab",
+      "title": "AI and Coding Workshop Instructor",
+      "organization": "University of Arizona Creative Lab",
+      "year": "2025",
+      "description": "Teaching AI applications and coding fundamentals to students",
+      "tags": [
+        "education",
+        "ai",
+        "teaching",
+        "programming",
+        "current",
+        "security",
+        "ml",
+        "webdev",
+        "threat-intel",
+        "cybersecurity",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    },
+    {
+      "id": "social-media-coordinator",
+      "title": "Social Media Coordinator",
+      "organization": "Cyber Saguaro Club",
+      "year": "2024-2025",
+      "description": "Managing social media presence and digital outreach for cybersecurity club",
+      "url": "https://cybersaguaros.com/",
+      "tags": [
+        "cybersecurity",
+        "social-media",
+        "outreach",
+        "current",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    },
+    {
+      "id": "research-assistant",
+      "title": "Student Research Assistant",
+      "organization": "University of Arizona",
+      "year": "2024-Present",
+      "description": "Contributing to cybersecurity and AI research initiatives",
+      "tags": [
+        "research",
+        "cybersecurity",
+        "ai",
+        "academic",
+        "current",
+        "security",
+        "ml",
+        "webdev",
+        "threat-intel",
+        "programming",
+        "cloud",
+        "automation",
+        "leadership"
+      ]
+    }
+  ]
+}

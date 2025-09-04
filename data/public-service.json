@@ -1,0 +1,141 @@
+{
+  "publicService": [
+    {
+      "id": "commissioner-2025",
+      "title": "Commissioner - Planning & Zones Committee",
+      "organization": "Town of Sahuarita",
+      "location": "Sahuarita, AZ",
+      "period": "2025 — Present",
+      "type": "Government Service",
+      "url": "https://sahuaritaaz.gov/262/Planning-Zoning-Commission",
+      "description": "Appointed to serve on the Planning & Zones Committee, responsible for reviewing development proposals, zoning changes, and land use planning decisions that impact community growth and development.",
+      "responsibilities": [
+        "Review and evaluate development proposals and zoning applications",
+        "Participate in public hearings and community engagement sessions",
+        "Collaborate with city planners and community stakeholders",
+        "Ensure compliance with municipal planning codes and regulations"
+      ],
+      "skills": ["leadership", "public-speaking", "policy-analysis", "community-engagement"],
+      "tags": [
+        "government",
+        "leadership",
+        "planning",
+        "community",
+        "current",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic"
+      ]
+    },
+    {
+      "id": "youth-group-leader",
+      "title": "Community Youth Group Leader",
+      "organization": "EastMark Mesa Arizona",
+      "location": "Arizona",
+      "period": "2021 — 2023",
+      "type": "Public Service",
+      "description": "Guided youth in organizing skills training, community service projects, and outdoor recreational activities. Focused on character development, leadership skills, and community engagement through hands-on learning experiences.",
+      "responsibilities": [
+        "Guided youth in organizing skills training workshops and activities",
+        "Coordinated community service projects and volunteer initiatives",
+        "Led outdoor recreational activities and team-building exercises",
+        "Mentored young people in leadership development and character building"
+      ],
+      "skills": ["leadership", "youth-development", "project-management", "mentoring", "community-service"],
+      "tags": [
+        "public-service",
+        "youth",
+        "leadership",
+        "mentoring",
+        "community",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic"
+      ]
+    },
+    {
+      "id": "census-enumerator-2020",
+      "title": "Census Enumerator",
+      "organization": "U.S. Bureau of Census",
+      "location": "Arizona",
+      "period": "2020",
+      "type": "Government Service",
+      "description": "Conducted door-to-door interviews and data collection for the 2020 U.S. Census, ensuring accurate population counts and demographic data collection for federal representation and funding allocation.",
+      "responsibilities": [
+        "Conducted household interviews and collected demographic data",
+        "Maintained confidentiality and data security protocols",
+        "Navigated diverse communities and built rapport with residents",
+        "Utilized government-issued technology for data entry and reporting"
+      ],
+      "skills": ["data-collection", "communication", "attention-to-detail", "community-outreach"],
+      "tags": [
+        "government",
+        "data",
+        "federal",
+        "community-outreach",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic",
+        "leadership"
+      ]
+    },
+    {
+      "id": "cub-scout-leader",
+      "title": "Cub Scout Leader",
+      "organization": "Boy Scouts of America",
+      "location": "Arizona",
+      "period": "2016 — 2017",
+      "type": "Public Service",
+      "description": "Lead and mentor young scouts in character development, outdoor skills, and leadership training. Focus on youth development through hands-on activities and community service projects.",
+      "responsibilities": [
+        "Plan and execute weekly den meetings and activities",
+        "Mentor youth in leadership skills and character development",
+        "Organize community service projects and outdoor adventures",
+        "Collaborate with parents and other leaders on program development"
+      ],
+      "skills": ["youth-development", "leadership", "mentoring", "program-management"],
+      "tags": [
+        "public-service",
+        "youth",
+        "leadership",
+        "mentoring",
+        "scouting",
+        "security",
+        "ml",
+        "webdev",
+        "ai",
+        "threat-intel",
+        "cybersecurity",
+        "programming",
+        "cloud",
+        "automation",
+        "research",
+        "academic"
+      ]
+    }
+  ]
+}

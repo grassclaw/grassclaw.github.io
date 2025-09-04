@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { MapPin, Linkedin } from "lucide-react"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
+import { usePortfolio } from "@/contexts/portfolio-context"
 
 const roles = [
   {
@@ -16,6 +17,7 @@ const roles = [
     description:
       "Innovative professional with progressive experience in artificial intelligence, cybersecurity, and advanced threat detection. Skilled in designing and deploying AI/ML-driven models to identify, analyze, and predict cyber threats.",
     badges: ["LLMs", "AWS", "LangChain", "MLOps", "Python", "Golang"],
+    variation: "software" as const,
   },
   {
     id: "threat-intel",
@@ -24,6 +26,7 @@ const roles = [
     description:
       "Cybersecurity expert specializing in threat intelligence analysis, OSINT investigations, and security research. Experienced in building threat detection systems and analyzing advanced persistent threats across diverse threat landscapes.",
     badges: ["Threat Intelligence", "OSINT", "STIX/TAXII", "KQL", "MITRE ATT&CK", "Python"],
+    variation: "cybersecurity" as const,
   },
   {
     id: "web-ux",
@@ -32,14 +35,31 @@ const roles = [
     description:
       "Full-stack developer and UX researcher focused on creating intuitive, user-centered digital experiences. Skilled in modern web technologies, user research methodologies, and product development from concept to deployment.",
     badges: ["React", "Next.js", "UX Research", "Figma", "TypeScript", "Node.js"],
+    variation: "webux" as const,
   },
 ]
 
 export function HeroSection() {
+  const { currentVariation, setCurrentVariation } = usePortfolio()
   const [selectedRole, setSelectedRole] = useState("ai-ml")
   const [isDragging, setIsDragging] = useState(false)
   const tabsRef = useRef<HTMLDivElement>(null)
   const currentRole = roles.find((role) => role.id === selectedRole) || roles[0]
+
+  useEffect(() => {
+    const role = roles.find((r) => r.variation === currentVariation)
+    if (role && role.id !== selectedRole) {
+      setSelectedRole(role.id)
+    }
+  }, [currentVariation, selectedRole])
+
+  const handleRoleChange = (roleId: string) => {
+    setSelectedRole(roleId)
+    const role = roles.find((r) => r.id === roleId)
+    if (role) {
+      setCurrentVariation(role.variation)
+    }
+  }
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true)
@@ -62,13 +82,17 @@ export function HeroSection() {
     const relativeX = clientX - rect.left
     const percentage = Math.max(0, Math.min(1, relativeX / rect.width))
 
-    // Determine which role based on drag position
+    let newRoleId: string
     if (percentage < 0.33) {
-      setSelectedRole("ai-ml")
+      newRoleId = "ai-ml"
     } else if (percentage < 0.67) {
-      setSelectedRole("threat-intel")
+      newRoleId = "threat-intel"
     } else {
-      setSelectedRole("web-ux")
+      newRoleId = "web-ux"
+    }
+
+    if (newRoleId !== selectedRole) {
+      handleRoleChange(newRoleId)
     }
   }
 
@@ -82,7 +106,6 @@ export function HeroSection() {
               <stop offset="100%" stopColor="#3b82f6" />
             </linearGradient>
           </defs>
-          {/* Animated network nodes */}
           <g className="animate-pulse">
             <circle cx="100" cy="100" r="3" fill="url(#grad1)" />
             <circle cx="300" cy="150" r="2" fill="url(#grad1)" />
@@ -91,7 +114,6 @@ export function HeroSection() {
             <circle cx="900" cy="120" r="3" fill="url(#grad1)" />
             <circle cx="1100" cy="180" r="2" fill="url(#grad1)" />
           </g>
-          {/* Connecting lines */}
           <g className="animate-pulse" style={{ animationDelay: "0.5s" }}>
             <line x1="100" y1="100" x2="300" y2="150" stroke="url(#grad1)" strokeWidth="1" opacity="0.3" />
             <line x1="300" y1="150" x2="500" y2="80" stroke="url(#grad1)" strokeWidth="1" opacity="0.3" />
@@ -99,7 +121,6 @@ export function HeroSection() {
             <line x1="700" y1="200" x2="900" y2="120" stroke="url(#grad1)" strokeWidth="1" opacity="0.3" />
             <line x1="900" y1="120" x2="1100" y2="180" stroke="url(#grad1)" strokeWidth="1" opacity="0.3" />
           </g>
-          {/* Data flow particles */}
           <g>
             <circle cx="200" cy="125" r="1" fill="#60a5fa" className="animate-ping" />
             <circle cx="400" cy="115" r="1" fill="#3b82f6" className="animate-ping" style={{ animationDelay: "1s" }} />
@@ -125,7 +146,6 @@ export function HeroSection() {
                 alt="Aaron Escamilla"
                 className="w-48 h-48 rounded-full object-cover border-4 border-slate-500/30 shadow-2xl shadow-slate-500/20"
               />
-              {/* Animated graph elements around profile */}
               <div
                 className="absolute -top-4 -right-4 w-8 h-8 bg-slate-800/50 border border-slate-600/30 rounded-full animate-bounce"
                 style={{ animationDelay: "0s" }}
@@ -151,7 +171,7 @@ export function HeroSection() {
               </h2>
 
               <div className="flex justify-center lg:justify-start mb-4">
-                <Tabs value={selectedRole} onValueChange={setSelectedRole} className="w-full max-w-2xl">
+                <Tabs value={selectedRole} onValueChange={handleRoleChange} className="w-full max-w-2xl">
                   <TabsList
                     ref={tabsRef}
                     className={`grid w-full grid-cols-3 bg-slate-800/50 border border-slate-600/30 ${isDragging ? "cursor-grabbing" : "cursor-grab"} select-none`}

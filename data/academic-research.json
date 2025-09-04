@@ -1,0 +1,72 @@
+{
+  "academicResearch": [
+    {
+      "id": "iscap-semantic-tech",
+      "title": "Semantic Technologies for Cybersecurity Education Competencies: JSON-LD Implementation of Distributed Learning Analytics",
+      "status": "Final Review",
+      "conference": "Information Systems & Computing Academic Professionals (ISCAP)",
+      "researchGroup": "University of Arizona cybersecurity research lab",
+      "year": "2025",
+      "description": "Implementation of semantic technologies using JSON-LD for distributed learning analytics in cybersecurity education competency frameworks.",
+      "skills": ["JSON-LD", "Semantic Web", "Learning Analytics", "Cybersecurity Education"],
+      "tags": [
+        "research",
+        "academic",
+        "cybersecurity",
+        "education",
+        "semantic-web",
+        "current",
+        "ml",
+        "ai",
+        "webdev",
+        "security",
+        "threat-intel"
+      ]
+    },
+    {
+      "id": "ai-threat-2025",
+      "title": "Pending",
+      "status": "Pending",
+      "conference": "pending",
+      "researchGroup": "University of Arizona cybersecurity research lab",
+      "year": "2025",
+      "description": "Pioneering research on cost-effective ML pipeline optimization reducing processing costs by 89% through advanced Graph Neural Network implementations for automated threat categorization.",
+      "skills": ["Graph Neural Networks", "LLMs", "Threat Intelligence", "Python", "AWS"],
+      "tags": [
+        "research",
+        "academic",
+        "ml",
+        "threat-intel",
+        "gnn",
+        "current",
+        "webdev",
+        "security",
+        "ai",
+        "cybersecurity"
+      ]
+    },
+    {
+      "id": "nl2kql-research",
+      "title": "Pending",
+      "status": "Pending",
+      "conference": "pending",
+      "researchGroup": "University of Arizona cybersecurity research lab",
+      "year": "2025",
+      "description": "Development of advanced NL2KQL pipeline with schema validation, prompt normalization, and modular evaluation layers for enhanced security query generation.",
+      "skills": ["LangChain", "KQL", "Security Automation", "Prompt Engineering"],
+      "tags": [
+        "research",
+        "academic",
+        "security",
+        "nlp",
+        "automation",
+        "current",
+        "ml",
+        "ai",
+        "webdev",
+        "threat-intel",
+        "cybersecurity"
+      ]
+    }
+  ]
+}

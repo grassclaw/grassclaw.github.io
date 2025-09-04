@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useRef, useEffect } from "react"
 import { HeroSection } from "@/components/portfolio/hero-section"
 import { SearchBar } from "@/components/portfolio/search-bar"
@@ -13,8 +12,13 @@ import { Extracurriculars } from "@/components/portfolio/extracurriculars"
 import { PublicService } from "@/components/portfolio/public-service"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { GraphCard } from "@/components/ui/card"
+import { PortfolioProvider, usePortfolio } from "@/contexts/portfolio-context"
+import { getVariationKeywords } from "@/lib/portfolio-data"
 
-export default function Portfolio() {
+import searchKeywordsData from "@/data/search-keywords.json"
+
+function PortfolioContent() {
+  const { currentVariation } = usePortfolio()
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
   const [isGraphExpanded, setIsGraphExpanded] = useState(false)
@@ -36,140 +40,23 @@ export default function Portfolio() {
     const sections = [
       {
         ref: experienceRef,
-        keywords: [
-          "experience",
-          "work",
-          "job",
-          "career",
-          "engineer",
-          "developer",
-          "ml",
-          "ai",
-          "threat",
-          "intelligence",
-          "technical",
-          "skills",
-          "tools",
-          "technology",
-          "programming",
-          "framework",
-          "nagra",
-          "netstar",
-          "consulting",
-          "architect",
-          "python",
-          "aws",
-          "langchain",
-          "kql",
-          "docker",
-          "kubernetes",
-        ],
+        keywords: searchKeywordsData.workExperience,
       },
       {
         ref: educationRef,
-        keywords: [
-          "education",
-          "degree",
-          "university",
-          "college",
-          "certificate",
-          "school",
-          "bellevue",
-          "arizona",
-          "state",
-          "masters",
-          "associates",
-          "full",
-          "stack",
-          "web",
-          "development",
-          "perplexity",
-          "ai", // Added "ai" keyword to match AI-related content in education section
-          "campus",
-          "partner",
-          "cyber",
-          "saguaro",
-          "creative",
-          "lab",
-          "instructor",
-          "research",
-          "assistant",
-          "comptia",
-          "security",
-          "eagle",
-          "scout",
-        ],
+        keywords: searchKeywordsData.education,
       },
       {
         ref: researchRef,
-        keywords: [
-          "research",
-          "academic",
-          "academia",
-          "paper",
-          "publication",
-          "conference",
-          "pending",
-          "threat",
-          "detection",
-          "ai",
-          "machine",
-          "learning",
-          "semantic",
-          "technologies",
-          "cybersecurity",
-          "iscap",
-          "json",
-          "ld",
-          "distributed",
-          "analytics",
-        ],
+        keywords: searchKeywordsData.academia,
       },
       {
         ref: extracurricularsRef,
-        keywords: [
-          "extracurricular",
-          "volunteer",
-          "leadership",
-          "community",
-          "creative",
-          "tutoring",
-          "mentoring",
-          "webaphors",
-          "youtube",
-          "discord",
-          "math",
-          "calculus",
-          "statistics",
-          "cybersecurity",
-          "bootcamp",
-        ],
+        keywords: searchKeywordsData.extracurriculars,
       },
       {
         ref: publicServiceRef,
-        keywords: [
-          "public",
-          "service",
-          "commissioner",
-          "government",
-          "civic",
-          "census",
-          "bureau",
-          "enumerator",
-          "youth",
-          "group",
-          "community",
-          "leader",
-          "scout",
-          "cub",
-          "data",
-          "collection",
-          "eastmark",
-          "mesa",
-          "sahuarita",
-          "planning",
-          "zoning",
-        ],
+        keywords: searchKeywordsData.publicService,
       },
     ]
 
@@ -197,71 +84,21 @@ export default function Portfolio() {
     const query = searchQuery.toLowerCase()
     const matchingTabs = new Set<string>()
 
+    const variationKeywords = getVariationKeywords(currentVariation)
+
     // Check Work Experience
     const workKeywords = [
-      "experience",
-      "work",
-      "job",
-      "career",
-      "engineer",
-      "developer",
-      "ml",
-      "ai",
-      "threat",
-      "intelligence",
-      "technical",
-      "skills",
-      "tools",
-      "technology",
-      "programming",
-      "framework",
-      "nagra",
-      "netstar",
-      "consulting",
-      "architect",
-      "python",
-      "aws",
-      "langchain",
-      "kql",
-      "docker",
-      "kubernetes",
+      ...searchKeywordsData.workExperience,
+      ...variationKeywords.filter((k) => k.includes("work") || k.includes("job") || k.includes("engineer")),
     ]
     if (workKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
       matchingTabs.add("experience")
     }
 
-    // Check Education - include actual content terms
+    // Check Education
     const educationKeywords = [
-      "education",
-      "degree",
-      "university",
-      "college",
-      "certificate",
-      "school",
-      "bellevue",
-      "arizona",
-      "state",
-      "masters",
-      "associates",
-      "full",
-      "stack",
-      "web",
-      "development",
-      "perplexity",
-      "ai", // Added "ai" keyword to match AI-related content in education section
-      "campus",
-      "partner",
-      "cyber",
-      "saguaro",
-      "creative",
-      "lab",
-      "instructor",
-      "research",
-      "assistant",
-      "comptia",
-      "security",
-      "eagle",
-      "scout",
+      ...searchKeywordsData.education,
+      ...variationKeywords.filter((k) => k.includes("education") || k.includes("university") || k.includes("degree")),
     ]
     if (educationKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
       matchingTabs.add("education")
@@ -269,26 +106,8 @@ export default function Portfolio() {
 
     // Check Academia
     const academiaKeywords = [
-      "research",
-      "academic",
-      "academia",
-      "paper",
-      "publication",
-      "conference",
-      "pending",
-      "threat",
-      "detection",
-      "ai",
-      "machine",
-      "learning",
-      "semantic",
-      "technologies",
-      "cybersecurity",
-      "iscap",
-      "json",
-      "ld",
-      "distributed",
-      "analytics",
+      ...searchKeywordsData.academia,
+      ...variationKeywords.filter((k) => k.includes("research") || k.includes("academic")),
     ]
     if (academiaKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
       matchingTabs.add("research")
@@ -296,21 +115,8 @@ export default function Portfolio() {
 
     // Check Extracurriculars
     const extracurricularKeywords = [
-      "extracurricular",
-      "volunteer",
-      "leadership",
-      "community",
-      "creative",
-      "tutoring",
-      "mentoring",
-      "webaphors",
-      "youtube",
-      "discord",
-      "math",
-      "calculus",
-      "statistics",
-      "cybersecurity",
-      "bootcamp",
+      ...searchKeywordsData.extracurriculars,
+      ...variationKeywords.filter((k) => k.includes("creative") || k.includes("mentor") || k.includes("tutor")),
     ]
     if (extracurricularKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
       matchingTabs.add("extracurriculars")
@@ -318,27 +124,8 @@ export default function Portfolio() {
 
     // Check Public Service
     const publicServiceKeywords = [
-      "public",
-      "service",
-      "commissioner",
-      "government",
-      "civic",
-      "census",
-      "bureau",
-      "enumerator",
-      "youth",
-      "group",
-      "community",
-      "leader",
-      "scout",
-      "cub",
-      "data",
-      "collection",
-      "eastmark",
-      "mesa",
-      "sahuarita",
-      "planning",
-      "zoning",
+      ...searchKeywordsData.publicService,
+      ...variationKeywords.filter((k) => k.includes("service") || k.includes("government") || k.includes("public")),
     ]
     if (publicServiceKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
       matchingTabs.add("public-service")
@@ -346,7 +133,24 @@ export default function Portfolio() {
 
     setTabsWithMatches(matchingTabs)
     setHasAnyMatches(matchingTabs.size > 0)
-  }, [searchQuery])
+  }, [searchQuery, currentVariation])
+
+  const getTabDisplayName = (tabId: string) => {
+    const tabNames: Record<string, string> = {
+      experience: "Work Experience",
+      education: "Education",
+      research: "Academia",
+      extracurriculars: "Extracurriculars",
+      "public-service": "Public Service",
+    }
+    return tabNames[tabId] || tabId
+  }
+
+  const getOtherTabsWithMatches = (currentTab: string) => {
+    return Array.from(tabsWithMatches)
+      .filter((tab) => tab !== currentTab)
+      .map(getTabDisplayName)
+  }
 
   return (
     <div className="min-h-screen relative bg-gradient-to-b from-slate-900 via-slate-800 via-slate-600 via-slate-400 to-slate-100">
@@ -421,9 +225,9 @@ export default function Portfolio() {
         </svg>
 
         <svg className="absolute top-2/3 right-16 w-44 h-44 opacity-20" viewBox="0 0 100 100">
-          <circle cx="40" cy="20" r="2.5" fill="#3b82f6" className="animate-ping" style={{ animationDelay: "2s" }} />
-          <circle cx="20" cy="60" r="2" fill="#8b5cf6" className="animate-ping" style={{ animationDelay: "0.3s" }} />
-          <circle cx="80" cy="80" r="3" fill="#3b82f6" className="animate-ping" style={{ animationDelay: "1.8s" }} />
+          <circle cx="40" cy="20" r="2.5" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "2s" }} />
+          <circle cx="20" cy="60" r="2" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "0.3s" }} />
+          <circle cx="80" cy="80" r="3" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "1.8s" }} />
           <circle cx="70" cy="40" r="2.5" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "1s" }} />
           <line x1="40" y1="20" x2="20" y2="60" stroke="#8b5cf6" strokeWidth="1" opacity="0.5" />
           <line x1="20" y1="60" x2="80" y2="80" stroke="#3b82f6" strokeWidth="1" opacity="0.5" />
@@ -435,7 +239,7 @@ export default function Portfolio() {
           <circle cx="30" cy="30" r="2.5" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "0.7s" }} />
           <circle cx="70" cy="50" r="2" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "1.4s" }} />
           <circle cx="50" cy="80" r="3" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "0.2s" }} />
-          <circle cx="15" cy="65" r="2" fill="#3b82f6" className="animate-pulse" style={{ animationDelay: "1.8s" }} />
+          <circle cx="15" cy="65" r="2" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "1.8s" }} />
           <circle cx="85" cy="25" r="2.5" fill="#8b5cf6" className="animate-pulse" style={{ animationDelay: "0.9s" }} />
           <line x1="30" y1="30" x2="70" y2="50" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.6" />
           <line x1="70" y1="50" x2="50" y2="80" stroke="#3b82f6" strokeWidth="0.8" opacity="0.6" />
@@ -458,6 +262,11 @@ export default function Portfolio() {
 
       <main className="container mx-auto px-4 pt-4 pb-8 space-y-8 relative z-10">
         <div className="space-y-4">
+          <div className="text-center space-y-2">
+            
+            
+          </div>
+
           <div className="flex flex-col items-center relative">
             <div
               onClick={() => setIsGraphExpanded(!isGraphExpanded)}
@@ -547,7 +356,7 @@ export default function Portfolio() {
             </div>
 
             {isGraphExpanded && (
-              <GraphCard className="p-6 h-[500px]">
+              <GraphCard className="p-6 h-[400px]">
                 <SkillsGraph onSkillSelect={setSelectedSkill} selectedSkill={selectedSkill} />
               </GraphCard>
             )}
@@ -612,27 +421,60 @@ export default function Portfolio() {
             </div>
 
             <TabsContent value="experience" className="mt-6" ref={experienceRef}>
-              <WorkExperience searchQuery={searchQuery} selectedSkill={selectedSkill} hasAnyMatches={hasAnyMatches} />
+              <WorkExperience
+                searchQuery={searchQuery}
+                selectedSkill={selectedSkill}
+                hasAnyMatches={hasAnyMatches}
+                otherTabsWithMatches={getOtherTabsWithMatches("experience")}
+              />
             </TabsContent>
 
             <TabsContent value="research" className="mt-6" ref={researchRef}>
-              <Academia searchQuery={searchQuery} selectedSkill={selectedSkill} hasAnyMatches={hasAnyMatches} />
+              <Academia
+                searchQuery={searchQuery}
+                selectedSkill={selectedSkill}
+                hasAnyMatches={hasAnyMatches}
+                otherTabsWithMatches={getOtherTabsWithMatches("research")}
+              />
             </TabsContent>
 
             <TabsContent value="public-service" className="mt-6" ref={publicServiceRef}>
-              <PublicService searchQuery={searchQuery} selectedSkill={selectedSkill} hasAnyMatches={hasAnyMatches} />
+              <PublicService
+                searchQuery={searchQuery}
+                selectedSkill={selectedSkill}
+                hasAnyMatches={hasAnyMatches}
+                otherTabsWithMatches={getOtherTabsWithMatches("public-service")}
+              />
             </TabsContent>
 
             <TabsContent value="extracurriculars" className="mt-6" ref={extracurricularsRef}>
-              <Extracurriculars searchQuery={searchQuery} selectedSkill={selectedSkill} hasAnyMatches={hasAnyMatches} />
+              <Extracurriculars
+                searchQuery={searchQuery}
+                selectedSkill={selectedSkill}
+                hasAnyMatches={hasAnyMatches}
+                otherTabsWithMatches={getOtherTabsWithMatches("extracurriculars")}
+              />
             </TabsContent>
 
             <TabsContent value="education" className="mt-6" ref={educationRef}>
-              <Education searchQuery={searchQuery} selectedSkill={selectedSkill} hasAnyMatches={hasAnyMatches} />
+              <Education
+                searchQuery={searchQuery}
+                selectedSkill={selectedSkill}
+                hasAnyMatches={hasAnyMatches}
+                otherTabsWithMatches={getOtherTabsWithMatches("education")}
+              />
             </TabsContent>
           </Tabs>
         </div>
       </main>
     </div>
+  )
+}
+
+export default function Portfolio() {
+  return (
+    <PortfolioProvider>
+      <PortfolioContent />
+    </PortfolioProvider>
   )
 }
