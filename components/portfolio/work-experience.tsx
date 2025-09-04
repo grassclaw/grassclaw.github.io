@@ -40,6 +40,10 @@ export function WorkExperience({
   const { portfolioData } = usePortfolio()
   const [isSkillsExpanded, setIsSkillsExpanded] = useState(true)
 
+  const isSkillHighlighted = (skillName: string) => {
+    return searchQuery !== "" && skillName.toLowerCase().includes(searchQuery.toLowerCase())
+  }
+
   const experiencesWithHighlight = portfolioData.workExperience.map((exp) => {
     const matchesSearch =
       searchQuery === "" ||
@@ -95,12 +99,18 @@ export function WorkExperience({
             {Object.entries(portfolioData.technicalSkills).map(([category, skills]) => (
               <div key={category}>
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="text-sm font-semibold text-slate-800 whitespace-nowrap">{category}:</h3>
+                  <h3 className="text-sm font-semibold whitespace-nowrap bg-slate-800 text-white px-1.5 rounded-xl opacity-90">
+                    {category}:
+                  </h3>
                   {skills.map((skill) => (
                     <Badge
                       key={skill.id}
                       variant="outline"
-                      className="bg-blue-600 text-white border-blue-600 font-medium text-xs"
+                      className={`font-medium text-xs transition-all duration-300 ${
+                        isSkillHighlighted(skill.name)
+                          ? "bg-purple-600 text-white border-purple-600 ring-2 ring-purple-300 shadow-lg"
+                          : "border-black"
+                      }`}
                     >
                       {skill.name}
                     </Badge>

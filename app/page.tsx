@@ -14,19 +14,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { GraphCard } from "@/components/ui/card"
 import { PortfolioProvider, usePortfolio } from "@/contexts/portfolio-context"
 import { getVariationKeywords } from "@/lib/portfolio-data"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-
 import searchKeywordsData from "@/data/search-keywords.json"
 
 function PortfolioContent() {
-  const { currentVariation } = usePortfolio()
+  const { currentVariation, portfolioData } = usePortfolio()
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
   const [isGraphExpanded, setIsGraphExpanded] = useState(false)
-  const [user, setUser] = useState<any>(null)
-  const [isAuthEnabled, setIsAuthEnabled] = useState(false)
-
   const experienceRef = useRef<HTMLDivElement>(null)
   const educationRef = useRef<HTMLDivElement>(null)
   const researchRef = useRef<HTMLDivElement>(null)
@@ -36,38 +30,6 @@ function PortfolioContent() {
 
   const [tabsWithMatches, setTabsWithMatches] = useState<Set<string>>(new Set())
   const [hasAnyMatches, setHasAnyMatches] = useState(false)
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      // Only try to load Supabase if environment variables are present
-      if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-        try {
-          const { createBrowserClient } = await import("@/lib/supabase/client")
-          const supabase = createBrowserClient()
-          setIsAuthEnabled(true)
-
-          const {
-            data: { user },
-          } = await supabase.auth.getUser()
-          setUser(user)
-
-          // Listen for auth changes
-          const {
-            data: { subscription },
-          } = supabase.auth.onAuthStateChange((event, session) => {
-            setUser(session?.user ?? null)
-          })
-
-          return () => subscription.unsubscribe()
-        } catch (error) {
-          console.warn("[v0] Authentication not available:", error)
-          setIsAuthEnabled(false)
-        }
-      }
-    }
-
-    checkAuth()
-  }, [])
 
   const handleSearchEnter = () => {
     if (!searchQuery.trim()) return
@@ -123,16 +85,20 @@ function PortfolioContent() {
 
     const variationKeywords = getVariationKeywords(currentVariation)
 
-    // Check Work Experience
+    const technicalSkillsMatch = portfolioData?.technicalSkills
+      ? Object.values(portfolioData.technicalSkills)
+          .flat()
+          .some((skill) => skill.name.toLowerCase().includes(query))
+      : false
+
     const workKeywords = [
       ...searchKeywordsData.workExperience,
       ...variationKeywords.filter((k) => k.includes("work") || k.includes("job") || k.includes("engineer")),
     ]
-    if (workKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
+    if (workKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword)) || technicalSkillsMatch) {
       matchingTabs.add("experience")
     }
 
-    // Check Education
     const educationKeywords = [
       ...searchKeywordsData.education,
       ...variationKeywords.filter((k) => k.includes("education") || k.includes("university") || k.includes("degree")),
@@ -141,7 +107,6 @@ function PortfolioContent() {
       matchingTabs.add("education")
     }
 
-    // Check Academia
     const academiaKeywords = [
       ...searchKeywordsData.academia,
       ...variationKeywords.filter((k) => k.includes("research") || k.includes("academic")),
@@ -150,7 +115,6 @@ function PortfolioContent() {
       matchingTabs.add("research")
     }
 
-    // Check Extracurriculars
     const extracurricularKeywords = [
       ...searchKeywordsData.extracurriculars,
       ...variationKeywords.filter((k) => k.includes("creative") || k.includes("mentor") || k.includes("tutor")),
@@ -159,7 +123,6 @@ function PortfolioContent() {
       matchingTabs.add("extracurriculars")
     }
 
-    // Check Public Service
     const publicServiceKeywords = [
       ...searchKeywordsData.publicService,
       ...variationKeywords.filter((k) => k.includes("service") || k.includes("government") || k.includes("public")),
@@ -170,7 +133,7 @@ function PortfolioContent() {
 
     setTabsWithMatches(matchingTabs)
     setHasAnyMatches(matchingTabs.size > 0)
-  }, [searchQuery, currentVariation])
+  }, [searchQuery, currentVariation, portfolioData])
 
   const getTabDisplayName = (tabId: string) => {
     const tabNames: Record<string, string> = {
@@ -191,39 +154,6 @@ function PortfolioContent() {
 
   return (
     <div className="min-h-screen relative bg-gradient-to-b from-slate-900 via-slate-800 via-slate-600 via-slate-400 to-slate-100">
-      {isAuthEnabled && (
-        <div className="absolute top-4 right-4 z-50 flex gap-2">
-          {user ? (
-            <Link href="/dashboard">
-              <Button
-                variant="outline"
-                size="sm"
-                className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20"
-              >
-                Dashboard
-              </Button>
-            </Link>
-          ) : (
-            <>
-              <Link href="/auth/login">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20"
-                >
-                  Sign In
-                </Button>
-              </Link>
-              <Link href="/auth/sign-up">
-                <Button size="sm" className="bg-purple-600 hover:bg-purple-700 text-white">
-                  Create Account
-                </Button>
-              </Link>
-            </>
-          )}
-        </div>
-      )}
-
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <svg className="absolute top-32 left-16 w-48 h-48 opacity-20" viewBox="0 0 100 100">
           <defs>
@@ -332,7 +262,10 @@ function PortfolioContent() {
 
       <main className="container mx-auto px-4 pt-4 pb-8 space-y-8 relative z-10">
         <div className="space-y-4">
-          <div className="text-center space-y-2"></div>
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl font-bold mb-2 text-balance text-white">Search Portfolio</h2>
+            <p className="text-muted-foreground mb-4">Find specific skills, technologies, and experience</p>
+          </div>
 
           <div className="flex flex-col items-center relative">
             <div
