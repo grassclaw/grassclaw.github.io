@@ -239,167 +239,103 @@
   ],
   "technicalSkills": {
     "LLM & ML Frameworks/Tools": [
-      {
-        "name": "LangChain",
-        "id": "langchain",
-        "jobs": ["nagra-2025", "netstar-2024"],
-        "tags": ["ml", "llm", "framework"]
-      },
-      { "name": "Unsloth", "id": "unsloth", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "optimization"] },
-      {
-        "name": "Transformers (HuggingFace)",
-        "id": "transformers",
-        "jobs": ["netstar-2024"],
-        "tags": ["ml", "llm", "nlp"]
-      },
-      { "name": "LoRA fine-tuning", "id": "lora", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "fine-tuning"] },
-      { "name": "ggml", "id": "ggml", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "inference"] },
-      { "name": "GPTQ", "id": "gptq", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "quantization"] },
-      {
-        "name": "sentence-transformers",
-        "id": "sentence-transformers",
-        "jobs": ["netstar-2024"],
-        "tags": ["ml", "nlp", "embeddings"]
-      },
-      {
-        "name": "RAG pipelines",
-        "id": "rag",
-        "jobs": ["nagra-2025", "netstar-2024"],
-        "tags": ["ml", "llm", "retrieval"]
-      },
-      {
-        "name": "MCP servers",
-        "id": "mcp",
-        "jobs": ["nagra-2025", "netstar-2024"],
-        "tags": ["ml", "architecture", "integration"]
-      }
-    ],
-    "ML Infrastructure & MLOps": [
-      {
-        "name": "AWS (S3, EC2, Lambda, CloudTrail, SageMaker)",
-        "id": "aws",
-        "jobs": ["nagra-2025", "netstar-2024"],
-        "tags": ["cloud", "ml", "infrastructure"]
-      },
-      { "name": "Azure AI Services", "id": "azure", "jobs": ["netstar-2024"], "tags": ["cloud", "ml", "microsoft"] },
-      {
-        "name": "Docker",
-        "id": "docker",
-        "jobs": ["netstar-2024"],
-        "tags": ["containerization", "devops", "deployment"]
-      },
-      {
-        "name": "Kubernetes",
-        "id": "kubernetes",
-        "jobs": ["netstar-2024"],
-        "tags": ["orchestration", "devops", "scaling"]
-      },
-      {
-        "name": "Terraform",
-        "id": "terraform",
-        "jobs": ["netstar-2024"],
-        "tags": ["infrastructure", "iac", "automation"]
-      },
-      {
-        "name": "Ansible",
-        "id": "ansible",
-        "jobs": ["netstar-2024"],
-        "tags": ["automation", "configuration", "devops"]
-      },
-      {
-        "name": "Makefiles",
-        "id": "makefiles",
-        "jobs": ["netstar-2024"],
-        "tags": ["build", "automation", "development"]
-      }
-    ],
-    "Security & Threat Intelligence Tools": [
-      {
-        "name": "STIX/TAXII",
-        "id": "stix",
-        "jobs": ["netstar-2024", "netstar-2020"],
-        "tags": ["security", "threat-intel", "standards"]
-      },
-      {
-        "name": "MITRE ATT&CK",
-        "id": "mitre",
-        "jobs": ["netstar-2024", "netstar-2020"],
-        "tags": ["security", "threat-intel", "framework"]
-      },
-      { "name": "KQL (Sentinel emulation)", "id": "kql", "jobs": ["nagra-2025"], "tags": ["security", "query", "siem"] }
-    ],
-    "Programming & Scripting Languages": [
-      {
-        "name": "Python",
-        "id": "python",
-        "jobs": ["nagra-2025", "netstar-2024", "self-2022", "2u-2021", "netstar-2020", "barrick-2018"],
-        "tags": ["programming", "ml", "automation"]
-      },
-      { "name": "Golang", "id": "golang", "jobs": ["netstar-2024"], "tags": ["programming", "backend", "performance"] },
-      {
-        "name": "SQL",
-        "id": "sql",
-        "jobs": ["nagra-2025", "netstar-2024", "self-2022"],
-        "tags": ["database", "query", "data"]
-      }
-    ],
-    "Data & Database Tools": [
-      { "name": "MongoDB", "id": "mongodb", "jobs": ["self-2022"], "tags": ["database", "nosql", "document"] },
-      { "name": "PostgreSQL", "id": "postgres", "jobs": ["netstar-2024"], "tags": ["database", "sql", "relational"] },
-      {
-        "name": "TimescaleDB",
-        "id": "timescaledb",
-        "jobs": ["netstar-2024"],
-        "tags": ["database", "timeseries", "analytics"]
-      },
-      { "name": "Neo4j", "id": "neo4j", "jobs": ["netstar-2024"], "tags": ["database", "graph", "relationships"] },
-      {
-        "name": "Custom vector store generation",
-        "id": "vectordb",
-        "jobs": ["netstar-2024"],
-        "tags": ["ml", "embeddings", "search"]
-      },
-      {
-        "name": "Graph enrichment tools",
-        "id": "graph-tools",
-        "jobs": ["netstar-2024"],
-        "tags": ["data", "graph", "analysis"]
-      },
-      {
-        "name": "REST API interface design",
-        "id": "rest-api",
-        "jobs": ["netstar-2024", "self-2022"],
-        "tags": ["api", "webdev", "integration"]
-      }
-    ],
-    "Collaboration & Dev Tools": [
-      {
-        "name": "GitHub Projects",
-        "id": "github",
-        "jobs": ["netstar-2024", "self-2022"],
-        "tags": ["version-control", "collaboration", "project-management"]
-      },
-      { "name": "GitLab CI", "id": "gitlab", "jobs": ["netstar-2024"], "tags": ["ci-cd", "devops", "automation"] },
-      {
-        "name": "Jira",
-        "id": "jira",
-        "jobs": ["netstar-2024", "2u-2021"],
-        "tags": ["project-management", "agile", "tracking"]
-      },
-      {
-        "name": "Confluence",
-        "id": "confluence",
-        "jobs": ["netstar-2024", "2u-2021"],
-        "tags": ["documentation", "collaboration", "knowledge"]
-      },
-      { "name": "VS Code", "id": "vscode", "jobs": ["netstar-2024"], "tags": ["ide", "development", "productivity"] },
-      { "name": "Cursor", "id": "cursor", "jobs": ["netstar-2024"], "tags": ["ide", "ai-assisted", "development"] },
-      {
-        "name": "ServiceNow",
-        "id": "servicenow",
-        "jobs": ["netstar-2024", "2u-2021"],
-        "tags": ["itsm", "workflow", "enterprise"]
-      }
-    ]
+        { "name": "LangChain", "id": "langchain", "jobs": ["nagra-2025", "netstar-2024"], "tags": ["ml", "llm", "framework", "webdev", "integration"] },
+        { "name": "Unsloth", "id": "unsloth", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "optimization"] },
+        { "name": "Transformers (HuggingFace)", "id": "transformers", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "nlp"] },
+        { "name": "LoRA fine-tuning", "id": "lora", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "fine-tuning"] },
+        { "name": "ggml", "id": "ggml", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "inference"] },
+        { "name": "GPTQ", "id": "gptq", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "quantization"] },
+        { "name": "sentence-transformers", "id": "sentence-transformers", "jobs": ["netstar-2024"], "tags": ["ml", "nlp", "embeddings", "webdev"] },
+        { "name": "RAG pipelines", "id": "rag", "jobs": ["nagra-2025", "netstar-2024"], "tags": ["ml", "llm", "retrieval", "webdev", "integration"] },
+        { "name": "MCP servers", "id": "mcp", "jobs": ["nagra-2025", "netstar-2024"], "tags": ["ml", "architecture", "integration", "cybersecurity", "webdev"] },
+        { "name": "OpenAI API", "id": "openai", "jobs": ["netstar-2024", "nagra-2025"], "tags": ["ml", "llm", "api", "cloud"] },
+        { "name": "AWS Bedrock", "id": "bedrock", "jobs": ["netstar-2024", "nagra-2025"], "tags": ["ml", "llm", "cloud", "automation"] },
+        { "name": "Ollama", "id": "ollama", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "inference"] },
+        { "name": "Llama models", "id": "llama", "jobs": ["netstar-2024"], "tags": ["ml", "llm"] },
+        { "name": "Mistral models", "id": "mistral", "jobs": ["netstar-2024"], "tags": ["ml", "llm"] },
+        { "name": "LangGraph", "id": "langgraph", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "framework", "automation"] },
+        { "name": "LangSmith", "id": "langsmith", "jobs": ["netstar-2024"], "tags": ["ml", "llm", "evaluation"] },
+        { "name": "ChromaDB", "id": "chromadb", "jobs": ["netstar-2024"], "tags": ["ml", "embeddings", "search"] }
+      ],
+      "ML Infrastructure & MLOps": [
+        { "name": "AWS (S3, EC2, Lambda, CloudTrail, SageMaker)", "id": "aws", "jobs": ["nagra-2025", "netstar-2024"], "tags": ["cloud", "ml", "infrastructure", "automation", "cybersecurity"] },
+        { "name": "Azure AI Services", "id": "azure", "jobs": ["netstar-2024"], "tags": ["cloud", "ml", "microsoft", "automation"] },
+        { "name": "Docker", "id": "docker", "jobs": ["netstar-2024"], "tags": ["containerization", "devops", "deployment", "automation", "cloud"] },
+        { "name": "Kubernetes", "id": "kubernetes", "jobs": ["netstar-2024"], "tags": ["orchestration", "devops", "scaling", "cloud"] },
+        { "name": "Terraform", "id": "terraform", "jobs": ["netstar-2024"], "tags": ["infrastructure", "iac", "automation", "cloud"] },
+        { "name": "Ansible", "id": "ansible", "jobs": ["netstar-2024"], "tags": ["automation", "configuration", "devops", "cloud"] },
+        { "name": "Makefiles", "id": "makefiles", "jobs": ["netstar-2024"], "tags": ["build", "automation", "development"] },
+        { "name": "Poetry", "id": "poetry", "jobs": ["netstar-2024"], "tags": ["build", "packaging", "automation"] },
+        { "name": "Docker Compose", "id": "docker-compose", "jobs": ["netstar-2024"], "tags": ["containerization", "automation", "deployment"] }
+      ],
+      "Security & Threat Intelligence Tools": [
+        { "name": "STIX/TAXII", "id": "stix", "jobs": ["netstar-2024", "netstar-2020"], "tags": ["security", "threat-intel", "standards", "cybersecurity", "research"] },
+        { "name": "MITRE ATT&CK", "id": "mitre", "jobs": ["netstar-2024", "netstar-2020"], "tags": ["security", "threat-intel", "framework", "cybersecurity", "research"] },
+        { "name": "KQL (Sentinel emulation)", "id": "kql", "jobs": ["nagra-2025"], "tags": ["security", "query", "siem", "cybersecurity", "research"] },
+        { "name": "Microsoft Sentinel", "id": "sentinel", "jobs": ["nagra-2025"], "tags": ["security", "threat-intel", "siem", "cybersecurity", "research"] },
+        { "name": "CrowdStrike Falcon", "id": "crowdstrike", "jobs": ["nagra-2025"], "tags": ["security", "threat-intel", "edr", "cybersecurity"] },
+        { "name": "Splunk", "id": "splunk", "jobs": ["nagra-2025"], "tags": ["security", "siem", "cybersecurity"] },
+        { "name": "Elastic (Elasticsearch/ELK)", "id": "elastic", "jobs": ["netstar-2024"], "tags": ["security", "search", "observability", "cybersecurity"] },
+        { "name": "LogRhythm", "id": "logrhythm", "jobs": ["nagra-2025"], "tags": ["security", "siem", "cybersecurity"] },
+        { "name": "Arkime", "id": "arkime", "jobs": ["netstar-2024"], "tags": ["security", "pcap", "network", "cybersecurity", "research"] },
+        { "name": "JA3/JA4 fingerprinting", "id": "ja4", "jobs": ["netstar-2024"], "tags": ["security", "network", "threat-intel", "cybersecurity", "research"] },
+        { "name": "VirusTotal", "id": "virustotal", "jobs": ["netstar-2024"], "tags": ["security", "threat-intel", "cybersecurity", "research"] },
+        { "name": "AbuseIPDB", "id": "abuseipdb", "jobs": ["netstar-2024"], "tags": ["security", "threat-intel", "cybersecurity"] },
+        { "name": "OTX AlienVault", "id": "otx", "jobs": ["netstar-2024"], "tags": ["security", "threat-intel", "cybersecurity", "research"] },
+        { "name": "IBM X-Force Exchange", "id": "xforce", "jobs": ["netstar-2024"], "tags": ["security", "threat-intel", "cybersecurity", "research"] },
+        { "name": "Spamhaus", "id": "spamhaus", "jobs": ["netstar-2024"], "tags": ["security", "threat-intel", "cybersecurity"] },
+        { "name": "Censys", "id": "censys", "jobs": ["netstar-2024"], "tags": ["security", "threat-intel", "cybersecurity", "research"] },
+        { "name": "MISP", "id": "misp", "jobs": ["netstar-2024"], "tags": ["security", "threat-intel", "standards", "cybersecurity"] },
+        { "name": "CISA AIS TAXII 2.1", "id": "cisa-ais", "jobs": ["netstar-2024"], "tags": ["security", "threat-intel", "government", "cybersecurity"] }
+      ],
+      "Programming & Scripting Languages": [
+        { "name": "Python", "id": "python", "jobs": ["nagra-2025", "netstar-2024", "self-2022", "2u-2021", "netstar-2020", "barrick-2018"], "tags": ["programming", "ml", "automation"] },
+        { "name": "Golang", "id": "golang", "jobs": ["netstar-2024"], "tags": ["programming", "backend", "performance"] },
+        { "name": "SQL", "id": "sql", "jobs": ["nagra-2025", "netstar-2024", "self-2022"], "tags": ["database", "query", "data"] },
+        { "name": "TypeScript", "id": "typescript", "jobs": ["self-2022", "netstar-2024"], "tags": ["programming", "webdev"] },
+        { "name": "Node.js", "id": "node", "jobs": ["self-2022", "netstar-2024"], "tags": ["programming", "webdev", "backend"] },
+        { "name": "Express", "id": "express", "jobs": ["self-2022"], "tags": ["webdev", "backend", "api"] },
+        { "name": "HTML/CSS/JS", "id": "html-css-js", "jobs": ["self-2022", "2u-2021"], "tags": ["webdev", "programming", "ui"] }
+      ],
+      "Data & Database Tools": [
+        { "name": "MongoDB", "id": "mongodb", "jobs": ["self-2022"], "tags": ["database", "nosql", "document"] },
+        { "name": "PostgreSQL", "id": "postgres", "jobs": ["netstar-2024"], "tags": ["database", "sql", "relational", "backend"] },
+        { "name": "TimescaleDB", "id": "timescaledb", "jobs": ["netstar-2024"], "tags": ["database", "timeseries", "analytics", "backend"] },
+        { "name": "Neo4j", "id": "neo4j", "jobs": ["netstar-2024"], "tags": ["database", "graph", "relationships", "backend", "analytics"] },
+        { "name": "Custom vector store generation", "id": "vectordb", "jobs": ["netstar-2024"], "tags": ["ml", "embeddings", "search", "webdev"] },
+        { "name": "Graph enrichment tools", "id": "graph-tools", "jobs": ["netstar-2024"], "tags": ["data", "graph", "analysis", "analytics", "research"] },
+        { "name": "REST API interface design", "id": "rest-api", "jobs": ["netstar-2024", "self-2022"], "tags": ["api", "webdev", "integration", "programming"] },
+        { "name": "OpenSearch", "id": "opensearch", "jobs": ["netstar-2024"], "tags": ["search", "analytics", "security"] },
+        { "name": "Elasticsearch", "id": "elasticsearch", "jobs": ["netstar-2024"], "tags": ["search", "analytics", "security"] }
+      ],
+      "Frontend & Web": [
+        { "name": "React", "id": "react", "jobs": ["self-2022", "netstar-2024", "nagra-2025"], "tags": ["webdev", "programming", "ui"] },
+        { "name": "Next.js", "id": "nextjs", "jobs": ["self-2022", "netstar-2024"], "tags": ["webdev", "programming", "cloud"] },
+        { "name": "Tailwind CSS", "id": "tailwind", "jobs": ["self-2022"], "tags": ["webdev", "ui"] },
+        { "name": "Vite", "id": "vite", "jobs": ["self-2022"], "tags": ["webdev", "build"] },
+        { "name": "shadcn/ui", "id": "shadcn", "jobs": ["self-2022"], "tags": ["webdev", "ui"] },
+        { "name": "Framer Motion", "id": "framer-motion", "jobs": ["self-2022"], "tags": ["webdev", "ui", "animation"] },
+        { "name": "Cloudflare Workers", "id": "cloudflare-workers", "jobs": ["netstar-2024"], "tags": ["webdev", "cloud", "automation"] },
+        { "name": "Wrangler CLI", "id": "wrangler", "jobs": ["netstar-2024"], "tags": ["webdev", "cloud", "automation"] },
+        { "name": "Vercel", "id": "vercel", "jobs": ["self-2022"], "tags": ["webdev", "cloud", "deployment"] },
+        { "name": "Figma", "id": "figma", "jobs": ["self-2022"], "tags": ["webdev", "ui", "design"] },
+        { "name": "Canva", "id": "canva", "jobs": ["self-2022"], "tags": ["webdev", "design"] },
+        { "name": "Nginx", "id": "nginx", "jobs": ["self-2022", "netstar-2024"], "tags": ["webdev", "backend", "deployment"] }
+      ],
+      "Collaboration & Dev Tools": [
+        { "name": "GitHub Projects", "id": "github", "jobs": ["netstar-2024", "self-2022"], "tags": ["version-control", "collaboration", "project-management"] },
+        { "name": "GitHub Actions", "id": "github-actions", "jobs": ["netstar-2024", "self-2022"], "tags": ["ci-cd", "automation", "devops"] },
+        { "name": "GitLab CI", "id": "gitlab", "jobs": ["netstar-2024"], "tags": ["ci-cd", "devops", "automation"] },
+        { "name": "Jira", "id": "jira", "jobs": ["netstar-2024", "2u-2021"], "tags": ["project-management", "agile", "tracking"] },
+        { "name": "Confluence", "id": "confluence", "jobs": ["netstar-2024", "2u-2021"], "tags": ["documentation", "collaboration", "knowledge"] },
+        { "name": "VS Code", "id": "vscode", "jobs": ["netstar-2024"], "tags": ["ide", "development", "productivity", "webdev"] },
+        { "name": "Cursor", "id": "cursor", "jobs": ["netstar-2024"], "tags": ["ide", "ai-assisted", "development", "webdev"] },
+        { "name": "ServiceNow", "id": "servicenow", "jobs": ["netstar-2024", "2u-2021"], "tags": ["itsm", "workflow", "enterprise", "cybersecurity"] },
+        { "name": "Salesforce", "id": "salesforce", "jobs": ["2u-2021"], "tags": ["crm", "automation", "cloud"] },
+        { "name": "Wrike", "id": "wrike", "jobs": ["2u-2021"], "tags": ["project-management", "collaboration"] },
+        { "name": "Zendesk", "id": "zendesk", "jobs": ["2u-2021"], "tags": ["support", "workflow", "enterprise"] },
+        { "name": "Microsoft Business Suite", "id": "ms-suite", "jobs": ["2u-2021"], "tags": ["productivity", "enterprise"] },
+        { "name": "Trello", "id": "trello", "jobs": ["self-2022"], "tags": ["project-management", "collaboration"] }
+      ]
   }
 }
