@@ -263,8 +263,8 @@ function PortfolioContent() {
       <main className="container mx-auto px-4 pt-4 pb-8 space-y-8 relative z-10">
         <div className="space-y-4">
           <div className="text-center space-y-2">
-            <h2 className="text-2xl font-bold mb-2 text-balance text-white">Search Portfolio</h2>
-            <p className="text-muted-foreground mb-4">Find specific skills, technologies, and experience</p>
+            
+            
           </div>
 
           <div className="flex flex-col items-center relative">
