@@ -4,6 +4,7 @@ import extracurricularsData from "@/data/extracurriculars.json"
 import publicServiceData from "@/data/public-service.json"
 import academicResearchData from "@/data/academic-research.json"
 import personalInfoData from "@/data/personal-info.json"
+import conferencesData from "@/data/conferences.json"
 
 export type ResumeVariation = "default" | "cybersecurity" | "software" | "webux" | "research" | "leadership"
 
@@ -17,6 +18,7 @@ export interface FilteredPortfolioData {
   extracurriculars: typeof extracurricularsData.extracurriculars
   publicService: typeof publicServiceData.publicService
   academicResearch: typeof academicResearchData.academicResearch
+  conferences: typeof conferencesData.conferences
 }
 
 export function filterByTags<T extends { tags?: string[] }>(
@@ -84,6 +86,7 @@ export function getPortfolioData(
       extracurriculars: extracurricularsData.extracurriculars,
       publicService: publicServiceData.publicService,
       academicResearch: academicResearchData.academicResearch,
+      conferences: conferencesData.conferences,
     }
   }
 
@@ -124,6 +127,8 @@ export function getPortfolioData(
     allTagFilters.length > 0
       ? filterByTags(academicResearchData.academicResearch, allTagFilters)
       : academicResearchData.academicResearch
+  const filteredConferences =
+    allTagFilters.length > 0 ? filterByTags(conferencesData.conferences, allTagFilters) : conferencesData.conferences
 
   return {
     personalInfo: {
@@ -146,6 +151,7 @@ export function getPortfolioData(
     publicService: filteredPublicService.length > 0 ? filteredPublicService : publicServiceData.publicService,
     academicResearch:
       filteredAcademicResearch.length > 0 ? filteredAcademicResearch : academicResearchData.academicResearch,
+    conferences: filteredConferences.length > 0 ? filteredConferences : conferencesData.conferences,
   }
 }
 
@@ -192,6 +198,13 @@ export function getVariationKeywords(variation: ResumeVariation): string[] {
   data.academicResearch.forEach((item) => {
     keywords.push(item.title.toLowerCase())
     item.tags?.forEach((tag) => keywords.push(tag.toLowerCase()))
+  })
+
+  data.conferences.forEach((item) => {
+    keywords.push(item.name.toLowerCase())
+    if (item.companyName) keywords.push(item.companyName.toLowerCase())
+    item.tags?.forEach((tag) => keywords.push(tag.toLowerCase()))
+    item.searchKeywords?.forEach((keyword) => keywords.push(keyword.toLowerCase()))
   })
 
   // Remove duplicates and return

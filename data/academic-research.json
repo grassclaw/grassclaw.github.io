@@ -3,10 +3,14 @@
     {
       "id": "iscap-semantic-tech",
       "title": "Semantic Technologies for Cybersecurity Education Competencies: JSON-LD Implementation of Distributed Learning Analytics",
-      "status": "Final Review",
+      "status": "Published",
+      "authors": ["Dr. Ryan Straight", "M.S. Aaron Escamilla"],
       "conference": "Information Systems & Computing Academic Professionals (ISCAP)",
+      "conferenceId": "iscap-conference",
       "researchGroup": "University of Arizona cybersecurity research lab",
       "year": "2025",
+      "paperLink": "https://iscap.us/proceedings/2025/pdf/6443.pdf",
+      "citation": "©2025 ISCAP (Information Systems and Computing Academic Professionals) Page 1 https://iscap.us/proceedings/ 2025 Proceedings of the ISCAP Conference ISSN: 2473-4901 Louisville, KY v11 n6443",
       "description": "Implementation of semantic technologies using JSON-LD for distributed learning analytics in cybersecurity education competency frameworks.",
       "skills": ["JSON-LD", "Semantic Web", "Learning Analytics", "Cybersecurity Education"],
       "tags": [
@@ -20,7 +24,9 @@
         "ai",
         "webdev",
         "security",
-        "threat-intel"
+        "threat-intel",
+        "student",
+        "co-presenter"
       ]
     },
     {

@@ -1,0 +1,76 @@
+{
+  "conferences": [
+    {
+      "id": "apwg-ecrime-2025",
+      "name": "APWG eCrime Conference",
+      "date": "November 2025",
+      "location": "San Diego, California",
+      "link": "https://apwg.org/events/ecrime2025",
+      "linkLabel": "Speaker Page",
+      "companyName": "NetSTAR Global, Inc",
+      "track": "Technical",
+      "tags": ["Speaker", "Sponsor", "Professional"],
+      "sessions": [
+        {
+          "title": "Can LLMs Outsmart Phishers? A Reality Check on AI Defenses",
+          "type": "Workshop"
+        },
+        {
+          "title": "Outsmarting Crimebots: How Graph Analytics and Fingerprints Beat Static Rules",
+          "type": "Session"
+        }
+      ],
+      "searchKeywords": ["apwg", "ecrime", "phishing", "llm", "ai", "graph analytics", "threat intelligence"]
+    },
+    {
+      "id": "openssl-prague-2025",
+      "name": "OpenSSL Inaugural Conference",
+      "location": "Prague, Czech Republic",
+      "date": "2025",
+      "links": {
+        "speaker": "https://2025.openssl-conference.org/speaker/detail-132",
+        "company": "https://netstar.ai/openssl-conference-2025/"
+      },
+      "companyName": "NetSTAR Global, Inc",
+      "track": "Technical",
+      "tags": ["Speaker", "Sponsor", "Professional"],
+      "sessions": [
+        {
+          "title": "Making OpenSSL Approachable: Interactive Labs, Automation, and AI Insights",
+          "type": "Session"
+        }
+      ],
+      "searchKeywords": ["openssl", "security", "cryptography", "automation", "ai", "labs"]
+    },
+    {
+      "id": "iscap-conference",
+      "name": "ISCAP Conference",
+      "date": "2025",
+      "location": "Louisville, KY",
+      "links": {
+        "speaker": "https://www.iscap.us/docs/program2025.pdf",
+        "presentation": "https://ryanstraight.com/research/iscap-2025-posthuman-json-ld/_deck/slides#/title-slide",
+        "paper": "https://iscap.us/proceedings/2025/pdf/6443.pdf"
+      },
+      "companyName": "University of Arizona",
+      "track": "Educational",
+      "tags": ["Student", "Co-Presenter", "Research"],
+      "speakers": ["Dr. Ryan Straight", "M.S. Aaron Escamilla"],
+      "sessions": [
+        {
+          "title": "Semantic Technologies for Cybersecurity Education Competencies: JSON-LD Implementation of Distributed Learning Analytics",
+          "type": "Session"
+        }
+      ],
+      "searchKeywords": [
+        "iscap",
+        "academic",
+        "education",
+        "cybersecurity",
+        "university of arizona",
+        "semantic",
+        "json-ld"
+      ]
+    }
+  ]
+}
