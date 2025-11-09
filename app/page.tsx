@@ -91,11 +91,15 @@ function PortfolioContent() {
           .some((skill) => skill.name.toLowerCase().includes(query))
       : false
 
+    const isExactMatch = (keyword: string, searchQuery: string) => {
+      return keyword.toLowerCase() === searchQuery || searchQuery.includes(keyword.toLowerCase())
+    }
+
     const workKeywords = [
       ...searchKeywordsData.workExperience,
       ...variationKeywords.filter((k) => k.includes("work") || k.includes("job") || k.includes("engineer")),
     ]
-    if (workKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword)) || technicalSkillsMatch) {
+    if (workKeywords.some((keyword) => isExactMatch(keyword, query)) || technicalSkillsMatch) {
       matchingTabs.add("experience")
     }
 
@@ -103,7 +107,7 @@ function PortfolioContent() {
       ...searchKeywordsData.education,
       ...variationKeywords.filter((k) => k.includes("education") || k.includes("university") || k.includes("degree")),
     ]
-    if (educationKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
+    if (educationKeywords.some((keyword) => isExactMatch(keyword, query))) {
       matchingTabs.add("education")
     }
 
@@ -111,7 +115,7 @@ function PortfolioContent() {
       ...searchKeywordsData.academia,
       ...variationKeywords.filter((k) => k.includes("research") || k.includes("academic")),
     ]
-    if (academiaKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
+    if (academiaKeywords.some((keyword) => isExactMatch(keyword, query))) {
       matchingTabs.add("research")
     }
 
@@ -119,7 +123,7 @@ function PortfolioContent() {
       ...searchKeywordsData.extracurriculars,
       ...variationKeywords.filter((k) => k.includes("creative") || k.includes("mentor") || k.includes("tutor")),
     ]
-    if (extracurricularKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
+    if (extracurricularKeywords.some((keyword) => isExactMatch(keyword, query))) {
       matchingTabs.add("extracurriculars")
     }
 
@@ -127,7 +131,7 @@ function PortfolioContent() {
       ...searchKeywordsData.publicService,
       ...variationKeywords.filter((k) => k.includes("service") || k.includes("government") || k.includes("public")),
     ]
-    if (publicServiceKeywords.some((keyword) => keyword.includes(query) || query.includes(keyword))) {
+    if (publicServiceKeywords.some((keyword) => isExactMatch(keyword, query))) {
       matchingTabs.add("public-service")
     }
 
@@ -139,7 +143,7 @@ function PortfolioContent() {
     const tabNames: Record<string, string> = {
       experience: "Work Experience",
       education: "Education",
-      research: "Academia",
+      research: "Research and Conferences", // Updated from "Academia" to "Research and Conferences"
       extracurriculars: "Extracurriculars",
       "public-service": "Public Service",
     }
@@ -262,10 +266,7 @@ function PortfolioContent() {
 
       <main className="container mx-auto px-4 pt-4 pb-8 space-y-8 relative z-10">
         <div className="space-y-4">
-          <div className="text-center space-y-2">
-            
-            
-          </div>
+          <div className="text-center space-y-2"></div>
 
           <div className="flex flex-col items-center relative">
             <div
@@ -382,7 +383,7 @@ function PortfolioContent() {
                     : ""
                 }`}
               >
-                Academia
+                Research and Conferences
               </TabsTrigger>
               <TabsTrigger
                 value="public-service"
