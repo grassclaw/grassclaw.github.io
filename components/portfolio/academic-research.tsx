@@ -68,8 +68,8 @@ export function Academia({
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-slate-800 mb-2">Research and Conferences</h2>
-        <p className="text-slate-600">Academic publications and professional conference presentations</p>
+        <h2 className="text-3xl font-bold mb-2 text-white">Research and Conferences</h2>
+        <p className="text-card">Academic publications and professional conference presentations</p>
       </div>
 
       {showNoResultsMessage && (

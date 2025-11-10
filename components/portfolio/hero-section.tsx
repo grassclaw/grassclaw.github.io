@@ -142,7 +142,7 @@ export function HeroSection() {
           <div className="flex-shrink-0 relative">
             <div className="relative">
               <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/188-HfYogLPVvZA-Tuwb2JauwSpe2uO55FRqGrieIv5sTI.jpeg"
+                src="/images/design-mode/188-HfYogLPVvZA.jpeg"
                 alt="Aaron Escamilla"
                 className="w-48 h-48 rounded-full object-cover border-4 border-slate-500/30 shadow-2xl shadow-slate-500/20"
               />
