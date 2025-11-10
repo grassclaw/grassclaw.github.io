@@ -111,11 +111,23 @@ function PortfolioContent() {
       matchingTabs.add("education")
     }
 
+    const researchTagsMatch = portfolioData?.academicResearch
+      ? portfolioData.academicResearch.some((paper) =>
+          paper.tags?.some((tag: string) => tag.toLowerCase().includes(query)),
+        )
+      : false
+
+    const conferenceTagsMatch = portfolioData?.conferences
+      ? portfolioData.conferences.some((conference: any) =>
+          conference.tags?.some((tag: string) => tag.toLowerCase().includes(query)),
+        )
+      : false
+
     const academiaKeywords = [
       ...searchKeywordsData.academia,
       ...variationKeywords.filter((k) => k.includes("research") || k.includes("academic")),
     ]
-    if (academiaKeywords.some((keyword) => isExactMatch(keyword, query))) {
+    if (academiaKeywords.some((keyword) => isExactMatch(keyword, query)) || researchTagsMatch || conferenceTagsMatch) {
       matchingTabs.add("research")
     }
 
