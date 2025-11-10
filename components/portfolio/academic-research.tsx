@@ -90,11 +90,12 @@ export function Academia({
         <div className="space-y-6">
           <h3 className="text-2xl font-semibold text-slate-800 mb-4">Scholarly Research</h3>
           {portfolioData.academicResearch.map((paper) => {
-            const isHighlighted = hoveredConferenceId === paper.conferenceId
+            const isHighlighted =
+              hoveredPaperId === paper.id || (paper.conferenceId && hoveredConferenceId === paper.conferenceId)
             return (
               <Card
                 key={paper.id}
-                onMouseEnter={() => setHoveredPaperId(paper.conferenceId || null)}
+                onMouseEnter={() => setHoveredPaperId(paper.id)}
                 onMouseLeave={() => setHoveredPaperId(null)}
                 className={`p-6 ${
                   matchesSearch(paper) && searchQuery !== ""
@@ -197,7 +198,9 @@ export function Academia({
         <div className="space-y-6">
           <h3 className="text-2xl font-semibold text-slate-800 mb-4">Conferences</h3>
           {portfolioData.conferences?.map((conference: any) => {
-            const isHighlighted = hoveredPaperId === conference.id
+            const relatedPaper = portfolioData.academicResearch.find((paper) => paper.conferenceId === conference.id)
+            const isHighlighted =
+              hoveredConferenceId === conference.id || (relatedPaper && hoveredPaperId === relatedPaper.id)
             return (
               <Card
                 key={conference.id}
