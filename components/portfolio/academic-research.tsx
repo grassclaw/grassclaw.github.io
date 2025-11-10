@@ -55,6 +55,7 @@ export function Academia({
       item.location?.toLowerCase().includes(searchLower) ||
       item.sessions?.some((session: any) => session.title?.toLowerCase().includes(searchLower)) ||
       item.searchKeywords?.some((keyword: string) => keyword.toLowerCase().includes(searchLower)) ||
+      item.tags?.some((tag: string) => tag.toLowerCase().includes(searchLower)) ||
       (item.skills && item.skills.some((skill: string) => skill.toLowerCase().includes(searchLower)))
     )
   }
@@ -142,14 +143,6 @@ export function Academia({
                         {highlightText(paper.description, searchQuery)}
                       </p>
 
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {paper.skills.map((skill) => (
-                          <Badge key={skill} variant="secondary" className="text-xs">
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-
                       {paper.paperLink && (
                         <div className="space-y-2 mb-4">
                           <a
@@ -167,11 +160,23 @@ export function Academia({
 
                       {paper.tags && paper.tags.length > 0 && (
                         <div className="flex flex-wrap gap-2">
-                          {paper.tags.map((tag: string) => (
-                            <Badge key={tag} variant="outline" className="text-xs">
-                              {tag}
-                            </Badge>
-                          ))}
+                          {paper.tags.map((tag: string) => {
+                            const isMatching = searchQuery && tag.toLowerCase().includes(searchQuery.toLowerCase())
+                            const isSponsor = tag.toLowerCase() === "sponsor"
+                            return (
+                              <Badge
+                                key={tag}
+                                variant="outline"
+                                className={`text-xs ${
+                                  isSponsor
+                                    ? "bg-yellow-500 text-white border-yellow-500"
+                                    : "bg-blue-600 text-white border-blue-600"
+                                } ${isMatching ? "ring-2 ring-purple-400 shadow-lg shadow-purple-200" : ""}`}
+                              >
+                                {tag}
+                              </Badge>
+                            )
+                          })}
                         </div>
                       )}
                     </div>
@@ -231,11 +236,21 @@ export function Academia({
                   )}
 
                   <div className="flex flex-wrap gap-2">
-                    {conference.tags.map((tag: string) => (
-                      <Badge key={tag} variant="default" className="bg-blue-600">
-                        {tag}
-                      </Badge>
-                    ))}
+                    {conference.tags.map((tag: string) => {
+                      const isMatching = searchQuery && tag.toLowerCase().includes(searchQuery.toLowerCase())
+                      const isSponsor = tag.toLowerCase() === "sponsor"
+                      return (
+                        <Badge
+                          key={tag}
+                          variant="default"
+                          className={`${isSponsor ? "bg-yellow-500 hover:bg-yellow-600" : "bg-blue-600"} ${
+                            isMatching ? "ring-2 ring-purple-400 shadow-lg shadow-purple-200" : ""
+                          }`}
+                        >
+                          {tag}
+                        </Badge>
+                      )
+                    })}
                   </div>
 
                   <div className="text-sm">
