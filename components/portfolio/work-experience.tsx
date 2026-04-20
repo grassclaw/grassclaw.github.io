@@ -14,6 +14,115 @@ interface WorkExperienceProps {
   otherTabsWithMatches?: string[]
 }
 
+interface Phase {
+  title: string
+  period: string
+  phase?: string
+  description?: string
+  bullets?: Array<{ text: string; tags?: string[] }>
+}
+
+function JobTimeline({
+  phases,
+  searchQuery,
+  highlightText,
+}: {
+  phases: Phase[]
+  searchQuery: string
+  highlightText: (text: string, query: string) => React.ReactNode
+}) {
+  const matchesSearch = (phase: Phase) => {
+    if (!searchQuery.trim()) return false
+    const q = searchQuery.toLowerCase()
+    return (
+      phase.title.toLowerCase().includes(q) ||
+      (phase.description || "").toLowerCase().includes(q) ||
+      (phase.bullets || []).some((b) => b.text.toLowerCase().includes(q))
+    )
+  }
+
+  const [manuallyToggled, setManuallyToggled] = useState<Record<number, boolean>>({})
+
+  const isExpanded = (index: number) => {
+    if (index in manuallyToggled) return manuallyToggled[index]
+    if (searchQuery.trim() && matchesSearch(phases[index])) return true
+    return index === 0
+  }
+
+  const toggle = (index: number) => {
+    setManuallyToggled((prev) => ({ ...prev, [index]: !isExpanded(index) }))
+  }
+
+  return (
+    <div className="relative pl-8 pt-1">
+      {/* vertical connector line */}
+      <div className="absolute left-3 top-3 bottom-3 w-0.5 bg-gradient-to-b from-purple-400 via-slate-300 to-slate-300" />
+      {phases.map((phase, i) => {
+        const expanded = isExpanded(i)
+        const isCurrent = i === 0
+        return (
+          <div key={i} className={`relative ${i < phases.length - 1 ? "mb-6" : ""}`}>
+            {/* milestone dot */}
+            <div
+              className={`absolute -left-8 top-1 w-6 h-6 rounded-full border-2 flex items-center justify-center z-10 ${
+                isCurrent
+                  ? "bg-purple-500 border-purple-600 shadow-md shadow-purple-300"
+                  : "bg-white border-slate-400"
+              }`}
+            >
+              {isCurrent && <div className="w-2 h-2 rounded-full bg-white" />}
+            </div>
+            <button
+              type="button"
+              onClick={() => toggle(i)}
+              className="w-full text-left group"
+              aria-expanded={expanded}
+            >
+              <div className="flex items-baseline flex-wrap gap-x-2 gap-y-1">
+                <h4
+                  className={`${
+                    isCurrent ? "text-base font-semibold text-slate-900" : "text-sm font-semibold text-slate-700"
+                  } group-hover:text-purple-700 transition-colors`}
+                >
+                  {highlightText(phase.title, searchQuery)}
+                </h4>
+                <span className="text-xs text-slate-500">{phase.period}</span>
+                {isCurrent && (
+                  <Badge
+                    variant="outline"
+                    className="text-[10px] uppercase tracking-wide border-purple-400 text-purple-700"
+                  >
+                    Current
+                  </Badge>
+                )}
+                <ChevronDown
+                  className={`w-4 h-4 text-slate-500 transition-transform ml-auto ${expanded ? "rotate-180" : ""}`}
+                />
+              </div>
+            </button>
+            {expanded && (
+              <div className="mt-2 space-y-2 pl-0">
+                {phase.description && (
+                  <p className="text-sm text-slate-700 text-pretty">{highlightText(phase.description, searchQuery)}</p>
+                )}
+                {phase.bullets && phase.bullets.length > 0 && (
+                  <ul className="list-disc list-inside space-y-1 text-sm text-slate-700">
+                    {phase.bullets.map((bullet, j) => (
+                      <li key={j} className="text-pretty">
+                        {highlightText(bullet.text, searchQuery)}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 const highlightText = (text: string, searchQuery: string) => {
   if (!searchQuery.trim()) return text
 
@@ -148,10 +257,15 @@ export function WorkExperience({
           <CardHeader>
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
-                <CardTitle className="text-xl text-balance">{highlightText(exp.title, searchQuery)}</CardTitle>
-                {(exp as any).titleProgression && (
-                  <p className="text-xs text-slate-500 italic mt-1">
-                    Progression: {(exp as any).titleProgression}
+                <CardTitle className="text-xl text-balance">
+                  {(exp as any).titleHistory && (exp as any).titleHistory.length > 1
+                    ? highlightText(exp.company, searchQuery)
+                    : highlightText(exp.title, searchQuery)}
+                </CardTitle>
+                {(exp as any).titleHistory && (exp as any).titleHistory.length > 1 && (
+                  <p className="text-sm text-slate-600 mt-1">
+                    {(exp as any).titleHistory.length} roles across this tenure — most recent:{" "}
+                    <span className="font-medium text-slate-800">{exp.title}</span>
                   </p>
                 )}
                 <div className="flex items-center gap-4 mt-2 text-slate-800">
@@ -173,18 +287,27 @@ export function WorkExperience({
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-pretty">{highlightText(exp.description, searchQuery)}</p>
-
-            <div>
-              <h4 className="font-semibold mb-2">Key Achievements:</h4>
-              <ul className="list-disc list-inside space-y-1 text-sm">
-                {exp.bullets.map((bullet, index) => (
-                  <li key={index} className="text-pretty">
-                    {highlightText(bullet.text, searchQuery)}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {(exp as any).titleHistory && (exp as any).titleHistory.length > 1 ? (
+              <JobTimeline
+                phases={(exp as any).titleHistory}
+                searchQuery={searchQuery}
+                highlightText={highlightText}
+              />
+            ) : (
+              <>
+                <p className="text-pretty">{highlightText(exp.description, searchQuery)}</p>
+                <div>
+                  <h4 className="font-semibold mb-2">Key Achievements:</h4>
+                  <ul className="list-disc list-inside space-y-1 text-sm">
+                    {exp.bullets.map((bullet, index) => (
+                      <li key={index} className="text-pretty">
+                        {highlightText(bullet.text, searchQuery)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
 
             <div className="flex flex-wrap gap-2">
               {exp.skills.map((skill) => (
