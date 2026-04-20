@@ -83,6 +83,36 @@ export function flattenJobBullets(
   return (job.titleHistory || []).flatMap((phase) => phase.bullets || [])
 }
 
+// Legacy-shape adapter: synthesizes `title`, `description`, `bullets`, `skills`,
+// `type`, and `titleProgression` on each job so the existing React UI
+// (work-experience.tsx, etc.) keeps working without being rewritten.
+function asLegacyJob(job: any) {
+  const phases = job.titleHistory || []
+  const latest = phases[0] || {}
+  const bullets = phases.flatMap((p: any) => p.bullets || [])
+  const titleProgression =
+    phases.length > 1
+      ? phases
+          .slice()
+          .reverse()
+          .map((p: any) => `${p.title} (${p.period})`)
+          .join(" → ")
+      : undefined
+  return {
+    ...job,
+    title: latest.title || "",
+    description: latest.description || "",
+    bullets,
+    skills: job.stack || [],
+    type: job.employmentType || "",
+    titleProgression,
+  }
+}
+
+function adaptWorkExperience(jobs: any[]) {
+  return jobs.map(asLegacyJob)
+}
+
 export function rankBullets(bullets: Bullet[], emphasizedTags: string[] = []): Bullet[] {
   return [...bullets].sort((a, b) => {
     const boostA = (a.tags || []).some((t) => emphasizedTags.includes(t)) ? -0.5 : 0
@@ -106,7 +136,7 @@ export function getPortfolioData(
   if (!angleConfig && additionalAngles.length === 0) {
     return {
       personalInfo: personalInfoData.personalInfo,
-      workExperience: workExperienceData.workExperience,
+      workExperience: adaptWorkExperience(workExperienceData.workExperience) as any,
       technicalSkills: workExperienceData.technicalSkills,
       education: educationData.education,
       certificates: educationData.certificates,
@@ -151,7 +181,9 @@ export function getPortfolioData(
 
   return {
     personalInfo: personalInfoData.personalInfo,
-    workExperience: filteredWorkExperience.length > 0 ? filteredWorkExperience : workExperienceData.workExperience,
+    workExperience: adaptWorkExperience(
+      filteredWorkExperience.length > 0 ? filteredWorkExperience : workExperienceData.workExperience,
+    ) as any,
     technicalSkills: filteredTechnicalSkills,
     education: filteredEducation.length > 0 ? filteredEducation : educationData.education,
     certificates: filteredCertificates.length > 0 ? filteredCertificates : educationData.certificates,

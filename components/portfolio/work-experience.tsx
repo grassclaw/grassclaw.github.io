@@ -149,6 +149,11 @@ export function WorkExperience({
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <CardTitle className="text-xl text-balance">{highlightText(exp.title, searchQuery)}</CardTitle>
+                {(exp as any).titleProgression && (
+                  <p className="text-xs text-slate-500 italic mt-1">
+                    Progression: {(exp as any).titleProgression}
+                  </p>
+                )}
                 <div className="flex items-center gap-4 mt-2 text-slate-800">
                   <div className="flex items-center gap-1">
                     <Building className="w-4 h-4" />
