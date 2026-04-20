@@ -14,7 +14,7 @@
       ],
       "skills": ["content-creation", "creative-writing", "technical-communication", "visual-design"],
       "angles": ["leadership"],
-      "tags": ["education", "community", "current"]
+      "tags": ["education", "community", "creative", "current"]
     },
     {
       "id": "youtube-discord-community",
@@ -30,7 +30,7 @@
       ],
       "skills": ["content-creation", "video-editing", "community-management"],
       "angles": ["leadership"],
-      "tags": ["education", "community", "current"]
+      "tags": ["education", "community", "creative", "current"]
     },
     {
       "id": "math-tutor-byu",
@@ -46,7 +46,7 @@
       ],
       "skills": ["education", "mathematics", "mentoring"],
       "angles": ["leadership"],
-      "tags": ["education", "mentoring"]
+      "tags": ["education", "mentoring", "tutoring"]
     },
     {
       "id": "cybersecurity-bootcamp-mentor",

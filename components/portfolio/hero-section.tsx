@@ -11,37 +11,37 @@ import { usePortfolio } from "@/contexts/portfolio-context"
 
 const roles = [
   {
-    id: "ai-ml",
-    title: "Senior AI/ML Engineer",
-    subtitle: "Senior AI & ML Engineer • Cybersecurity Researcher • Academic",
+    id: "architecture",
+    title: "Principal Engineer & Architect",
+    subtitle: "Principal Architect • Platform Design • Integration Contracts",
     description:
-      "Innovative professional with progressive experience in artificial intelligence, cybersecurity, and advanced threat detection. Skilled in designing and deploying AI/ML-driven models to identify, analyze, and predict cyber threats.",
-    badges: ["LLMs", "AWS", "LangChain", "MLOps", "Python", "Golang"],
-    variation: "software" as const,
+      "Principal-level architect and engineering lead. I work at the architecture layer — platform patterns, integration contracts, evaluation frameworks — and prove the design by building it. Currently own architectural design across NetSTAR's full security-solutions portfolio.",
+    badges: ["Architecture", "MCP", "Temporal", "OSCAL", "AWS", "Python"],
+    variation: "architecture" as const,
+  },
+  {
+    id: "ai-ml",
+    title: "Senior AI / ML Engineer",
+    subtitle: "ML Engineer • LLM Pipelines • Graph Neural Networks",
+    description:
+      "Senior ML / AI engineer with six years shipping research-grade systems into production. LLM categorization pipelines classifying 40M+ domains quarterly, GNN architectures, MCP servers, and AI model-security scanning on Temporal durable workflows.",
+    badges: ["LLMs", "LangChain", "GNN", "AWS Bedrock", "Python", "Golang"],
+    variation: "ml-ai" as const,
   },
   {
     id: "threat-intel",
-    title: "Senior Threat Intelligence Researcher",
-    subtitle: "Threat Intelligence Researcher • OSINT Investigator • Database Architect",
+    title: "Threat Intelligence Researcher",
+    subtitle: "Threat Intelligence • OSINT • Detection Engineering",
     description:
-      "Cybersecurity expert specializing in threat intelligence analysis, OSINT investigations, and security research. Experienced in building threat detection systems and analyzing advanced persistent threats across diverse threat landscapes.",
-    badges: ["Threat Intelligence", "OSINT", "STIX/TAXII", "KQL", "MITRE ATT&CK", "Python"],
+      "Cybersecurity researcher and threat-intelligence architect. Designed platforms unifying STIX/TAXII, MITRE ATT&CK, and federal CISA AIS feeds; initiated NetSTAR Shield end-user protection; peer-reviewed research on AI-driven threat detection.",
+    badges: ["Threat Intelligence", "STIX/TAXII", "KQL", "MITRE ATT&CK", "CISA AIS", "Python"],
     variation: "cybersecurity" as const,
-  },
-  {
-    id: "web-ux",
-    title: "Web Development and UXUI",
-    subtitle: "Full-Stack Developer • UXUI Research • Product Development",
-    description:
-      "Full-stack developer and UX researcher focused on creating intuitive, user-centered digital experiences. Skilled in modern web technologies, user research methodologies, and product development from concept to deployment.",
-    badges: ["React", "Next.js", "UX Research", "Figma", "TypeScript", "Node.js"],
-    variation: "webux" as const,
   },
 ]
 
 export function HeroSection() {
   const { currentVariation, setCurrentVariation } = usePortfolio()
-  const [selectedRole, setSelectedRole] = useState("ai-ml")
+  const [selectedRole, setSelectedRole] = useState("architecture")
   const [isDragging, setIsDragging] = useState(false)
   const tabsRef = useRef<HTMLDivElement>(null)
   const currentRole = roles.find((role) => role.id === selectedRole) || roles[0]
@@ -84,11 +84,11 @@ export function HeroSection() {
 
     let newRoleId: string
     if (percentage < 0.33) {
-      newRoleId = "ai-ml"
+      newRoleId = "architecture"
     } else if (percentage < 0.67) {
-      newRoleId = "threat-intel"
+      newRoleId = "ai-ml"
     } else {
-      newRoleId = "web-ux"
+      newRoleId = "threat-intel"
     }
 
     if (newRoleId !== selectedRole) {
@@ -181,22 +181,22 @@ export function HeroSection() {
                     onMouseLeave={handleMouseUp}
                   >
                     <TabsTrigger
+                      value="architecture"
+                      className="text-white font-semibold data-[state=active]:text-foreground data-[state=active]:bg-white/90 transition-all duration-300 pointer-events-none"
+                    >
+                      Architect
+                    </TabsTrigger>
+                    <TabsTrigger
                       value="ai-ml"
                       className="text-white font-semibold data-[state=active]:text-foreground data-[state=active]:bg-white/90 transition-all duration-300 pointer-events-none"
                     >
-                      AI/ML Engineer
+                      AI / ML
                     </TabsTrigger>
                     <TabsTrigger
                       value="threat-intel"
                       className="text-white font-semibold data-[state=active]:text-foreground data-[state=active]:bg-white/90 transition-all duration-300 pointer-events-none"
                     >
                       Threat Intel
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="web-ux"
-                      className="text-white font-semibold data-[state=active]:text-foreground data-[state=active]:bg-white/90 transition-all duration-300 pointer-events-none"
-                    >
-                      Web/UX
                     </TabsTrigger>
                   </TabsList>
                 </Tabs>
