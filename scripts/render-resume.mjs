@@ -158,8 +158,10 @@ const renderResearch = () => {
     const statusTail =
       r.status && r.conference && r.conference !== "pending" ? ` — ${r.status}` : ""
     lines.push(`**${r.title}**`)
-    const meta = [`*${venuePart}${statusTail}.*`, r.role, r.researchGroup].filter(Boolean).join(" · ")
+    const authorLabel = Array.isArray(r.authors) && r.authors.length > 0 ? r.authors.join(", ") : r.role
+    const meta = [`*${venuePart}${statusTail}.*`, authorLabel, r.researchGroup].filter(Boolean).join(" · ")
     lines.push(meta)
+    if (r.paperLink) lines.push(`[Paper](${r.paperLink})`)
     if (r.description) lines.push("", r.description)
     lines.push("")
   }

@@ -5,6 +5,7 @@ import publicServiceData from "@/data/public-service.json"
 import academicResearchData from "@/data/academic-research.json"
 import personalInfoData from "@/data/personal-info.json"
 import resumeVariationsData from "@/data/resume-variations.json"
+import conferencesData from "@/data/conferences.json"
 
 export type ResumeAngle =
   | "default"
@@ -47,6 +48,7 @@ export interface FilteredPortfolioData {
   extracurriculars: typeof extracurricularsData.extracurriculars
   publicService: typeof publicServiceData.publicService
   academicResearch: typeof academicResearchData.academicResearch
+  conferences: typeof conferencesData.conferences
 }
 
 export function filterByAngles<T extends Tagged>(
@@ -144,6 +146,7 @@ export function getPortfolioData(
       extracurriculars: extracurricularsData.extracurriculars,
       publicService: publicServiceData.publicService,
       academicResearch: academicResearchData.academicResearch,
+      conferences: conferencesData.conferences,
     }
   }
 
@@ -170,6 +173,8 @@ export function getPortfolioData(
     angleFilter.length > 0
       ? filterByAngles(academicResearchData.academicResearch, angleFilter)
       : academicResearchData.academicResearch
+  // Conferences are venue/reference data — always return the full list regardless of angle filter
+  const filteredConferences = conferencesData.conferences
 
   const filteredTechnicalSkills: typeof workExperienceData.technicalSkills = {} as any
   Object.entries(workExperienceData.technicalSkills).forEach(([category, skills]) => {
@@ -194,6 +199,7 @@ export function getPortfolioData(
     publicService: filteredPublicService.length > 0 ? filteredPublicService : publicServiceData.publicService,
     academicResearch:
       filteredAcademicResearch.length > 0 ? filteredAcademicResearch : academicResearchData.academicResearch,
+    conferences: filteredConferences.length > 0 ? filteredConferences : conferencesData.conferences,
   }
 }
 
@@ -239,6 +245,13 @@ export function getVariationKeywords(variation: ResumeVariation): string[] {
   data.academicResearch.forEach((item) => {
     keywords.push(item.title.toLowerCase())
     item.tags?.forEach((t) => keywords.push(t.toLowerCase()))
+  })
+
+  data.conferences.forEach((item: any) => {
+    keywords.push(item.name.toLowerCase())
+    if (item.companyName) keywords.push(item.companyName.toLowerCase())
+    item.tags?.forEach((tag: string) => keywords.push(tag.toLowerCase()))
+    item.searchKeywords?.forEach((keyword: string) => keywords.push(keyword.toLowerCase()))
   })
 
   return [...new Set(keywords)]
