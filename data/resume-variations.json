@@ -1,0 +1,39 @@
+{
+  "angles": {
+    "architecture": {
+      "name": "Principal Architect",
+      "tagFilters": ["architecture", "platform", "integration"],
+      "skillPriority": ["architecture", "platform", "ml", "security", "cloud"],
+      "introduction": "architecture",
+      "description": "Platform patterns, integration contracts, evaluation frameworks. Principal / Staff / Lead Architect roles."
+    },
+    "ml-ai": {
+      "name": "ML / AI Engineer",
+      "tagFilters": ["ml-ai", "llm", "gnn", "ml-ops"],
+      "skillPriority": ["ml", "ai", "ml-ops", "programming"],
+      "introduction": "ml-ai",
+      "description": "ML-focused engineering roles — LLM / GNN / MLOps, applied research to production."
+    },
+    "cybersecurity": {
+      "name": "Cybersecurity / Threat Intelligence",
+      "tagFilters": ["cybersecurity", "threat-intel", "standards"],
+      "skillPriority": ["security", "threat-intel", "ml", "standards"],
+      "introduction": "cybersecurity",
+      "description": "SOC, threat research, detection engineering, threat-intel platforms."
+    },
+    "research": {
+      "name": "Research Engineer / Scientist",
+      "tagFilters": ["research", "academic"],
+      "skillPriority": ["research", "ml", "academic", "architecture"],
+      "introduction": "research",
+      "description": "R&D labs, academic research, DARPA-adjacent rapid prototyping."
+    },
+    "leadership": {
+      "name": "Technical Leader",
+      "tagFilters": ["leadership"],
+      "skillPriority": ["leadership", "architecture", "ml-ops"],
+      "introduction": "leadership",
+      "description": "Tech lead, Staff+, Director. Cross-team technical direction and mentorship."
+    }
+  }
+}
