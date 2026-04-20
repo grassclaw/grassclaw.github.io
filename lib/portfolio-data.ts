@@ -4,8 +4,38 @@ import extracurricularsData from "@/data/extracurriculars.json"
 import publicServiceData from "@/data/public-service.json"
 import academicResearchData from "@/data/academic-research.json"
 import personalInfoData from "@/data/personal-info.json"
+import resumeVariationsData from "@/data/resume-variations.json"
 
-export type ResumeVariation = "default" | "cybersecurity" | "software" | "webux" | "research" | "leadership"
+export type ResumeAngle =
+  | "default"
+  | "architecture"
+  | "ml-ai"
+  | "cybersecurity"
+  | "research"
+  | "leadership"
+
+export type ResumeVariation = ResumeAngle
+
+export interface Bullet {
+  text: string
+  weight?: number
+  angles?: string[]
+  tags?: string[]
+}
+
+export interface TitlePhase {
+  title: string
+  period: string
+  phase?: string
+  description?: string
+  angles?: string[]
+  bullets: Bullet[]
+}
+
+export interface Tagged {
+  angles?: string[]
+  tags?: string[]
+}
 
 export interface FilteredPortfolioData {
   personalInfo: typeof personalInfoData.personalInfo
@@ -19,61 +49,61 @@ export interface FilteredPortfolioData {
   academicResearch: typeof academicResearchData.academicResearch
 }
 
-export function filterByTags<T extends { tags?: string[] }>(
+export function filterByAngles<T extends Tagged>(
   items: T[],
-  tagFilters: string[],
+  angles: string[],
   mode: "any" | "all" = "any",
 ): T[] {
-  if (tagFilters.length === 0) return items
+  if (angles.length === 0) return items
+  return items.filter((item) => {
+    if (!item.angles || item.angles.length === 0) return false
+    return mode === "any"
+      ? angles.some((a) => item.angles!.includes(a))
+      : angles.every((a) => item.angles!.includes(a))
+  })
+}
 
+export function filterByTags<T extends Tagged>(
+  items: T[],
+  tags: string[],
+  mode: "any" | "all" = "any",
+): T[] {
+  if (tags.length === 0) return items
   return items.filter((item) => {
     if (!item.tags || item.tags.length === 0) return false
-
-    if (mode === "any") {
-      return tagFilters.some((tag) => item.tags!.includes(tag))
-    } else {
-      return tagFilters.every((tag) => item.tags!.includes(tag))
-    }
+    return mode === "any"
+      ? tags.some((t) => item.tags!.includes(t))
+      : tags.every((t) => item.tags!.includes(t))
   })
 }
 
-export function filterWorkExperienceBullets(
-  workExperience: typeof workExperienceData.workExperience,
-  tagFilters: string[],
-): typeof workExperienceData.workExperience {
-  return workExperience.map((job) => ({
-    ...job,
-    bullets: filterByTags(job.bullets, tagFilters),
-  }))
+export function flattenJobBullets(
+  job: typeof workExperienceData.workExperience[number],
+): Bullet[] {
+  return (job.titleHistory || []).flatMap((phase) => phase.bullets || [])
 }
 
-export function filterTechnicalSkills(
-  technicalSkills: typeof workExperienceData.technicalSkills,
-  tagFilters: string[],
-): typeof workExperienceData.technicalSkills {
-  const filtered: typeof workExperienceData.technicalSkills = {}
-
-  Object.entries(technicalSkills).forEach(([category, skills]) => {
-    const filteredSkills = filterByTags(skills, tagFilters)
-    if (filteredSkills.length > 0) {
-      filtered[category] = filteredSkills
-    }
+export function rankBullets(bullets: Bullet[], emphasizedTags: string[] = []): Bullet[] {
+  return [...bullets].sort((a, b) => {
+    const boostA = (a.tags || []).some((t) => emphasizedTags.includes(t)) ? -0.5 : 0
+    const boostB = (b.tags || []).some((t) => emphasizedTags.includes(t)) ? -0.5 : 0
+    return (a.weight ?? 2) + boostA - ((b.weight ?? 2) + boostB)
   })
-
-  return filtered
 }
 
 export function getPortfolioData(
   variation: ResumeVariation = "default",
-  additionalFilters: string[] = [],
+  additionalAngles: string[] = [],
 ): FilteredPortfolioData {
-  const variationConfig = personalInfoData.resumeVariations[variation as keyof typeof personalInfoData.resumeVariations]
+  const angleConfig =
+    variation !== "default"
+      ? resumeVariationsData.angles[variation as keyof typeof resumeVariationsData.angles]
+      : undefined
 
-  // Combine variation tag filters with additional filters
-  const allTagFilters = variationConfig ? [...variationConfig.tagFilters, ...additionalFilters] : additionalFilters
+  const angleFilter =
+    angleConfig !== undefined ? [variation, ...additionalAngles] : additionalAngles
 
-  if (!variationConfig && additionalFilters.length === 0) {
-    // Return all data for default variation with no filters
+  if (!angleConfig && additionalAngles.length === 0) {
     return {
       personalInfo: personalInfoData.personalInfo,
       workExperience: workExperienceData.workExperience,
@@ -87,55 +117,41 @@ export function getPortfolioData(
     }
   }
 
-  // Filter work experience and bullets
   const filteredWorkExperience =
-    allTagFilters.length > 0
-      ? filterByTags(workExperienceData.workExperience, allTagFilters)
+    angleFilter.length > 0
+      ? filterByAngles(workExperienceData.workExperience, angleFilter)
       : workExperienceData.workExperience
-  const workExperienceWithFilteredBullets =
-    allTagFilters.length > 0
-      ? filterWorkExperienceBullets(filteredWorkExperience, allTagFilters)
-      : filteredWorkExperience
 
-  // Filter technical skills
-  const filteredTechnicalSkills =
-    allTagFilters.length > 0
-      ? filterTechnicalSkills(workExperienceData.technicalSkills, allTagFilters)
-      : workExperienceData.technicalSkills
-
-  // Filter other sections
   const filteredEducation =
-    allTagFilters.length > 0 ? filterByTags(educationData.education, allTagFilters) : educationData.education
+    angleFilter.length > 0 ? filterByAngles(educationData.education, angleFilter) : educationData.education
   const filteredCertificates =
-    allTagFilters.length > 0 ? filterByTags(educationData.certificates, allTagFilters) : educationData.certificates
+    angleFilter.length > 0 ? filterByAngles(educationData.certificates, angleFilter) : educationData.certificates
   const filteredCampusInvolvement =
-    allTagFilters.length > 0
-      ? filterByTags(educationData.campusInvolvement, allTagFilters)
+    angleFilter.length > 0
+      ? filterByAngles(educationData.campusInvolvement, angleFilter)
       : educationData.campusInvolvement
   const filteredExtracurriculars =
-    allTagFilters.length > 0
-      ? filterByTags(extracurricularsData.extracurriculars, allTagFilters)
+    angleFilter.length > 0
+      ? filterByAngles(extracurricularsData.extracurriculars, angleFilter)
       : extracurricularsData.extracurriculars
   const filteredPublicService =
-    allTagFilters.length > 0
-      ? filterByTags(publicServiceData.publicService, allTagFilters)
-      : publicServiceData.publicService
+    angleFilter.length > 0 ? filterByAngles(publicServiceData.publicService, angleFilter) : publicServiceData.publicService
   const filteredAcademicResearch =
-    allTagFilters.length > 0
-      ? filterByTags(academicResearchData.academicResearch, allTagFilters)
+    angleFilter.length > 0
+      ? filterByAngles(academicResearchData.academicResearch, angleFilter)
       : academicResearchData.academicResearch
 
+  const filteredTechnicalSkills: typeof workExperienceData.technicalSkills = {} as any
+  Object.entries(workExperienceData.technicalSkills).forEach(([category, skills]) => {
+    const filteredSkills = angleFilter.length > 0 ? filterByAngles(skills as any, angleFilter) : skills
+    if ((filteredSkills as any[]).length > 0) {
+      ;(filteredTechnicalSkills as any)[category] = filteredSkills
+    }
+  })
+
   return {
-    personalInfo: {
-      ...personalInfoData.personalInfo,
-      introduction: {
-        ...personalInfoData.personalInfo.introduction,
-        current:
-          (variationConfig && personalInfoData.personalInfo.introduction.variations[variationConfig.introduction]) ||
-          personalInfoData.personalInfo.introduction.default,
-      },
-    },
-    workExperience: workExperienceWithFilteredBullets,
+    personalInfo: personalInfoData.personalInfo,
+    workExperience: filteredWorkExperience.length > 0 ? filteredWorkExperience : workExperienceData.workExperience,
     technicalSkills: filteredTechnicalSkills,
     education: filteredEducation.length > 0 ? filteredEducation : educationData.education,
     certificates: filteredCertificates.length > 0 ? filteredCertificates : educationData.certificates,
@@ -150,10 +166,11 @@ export function getPortfolioData(
 }
 
 export function getAvailableVariations() {
-  return Object.entries(personalInfoData.resumeVariations).map(([key, config]) => ({
-    id: key as ResumeVariation,
+  return Object.entries(resumeVariationsData.angles).map(([key, config]) => ({
+    id: key as ResumeAngle,
     name: config.name,
     tagFilters: config.tagFilters,
+    description: config.description,
   }))
 }
 
@@ -161,39 +178,36 @@ export function getVariationKeywords(variation: ResumeVariation): string[] {
   const data = getPortfolioData(variation)
   const keywords: string[] = []
 
-  // Extract keywords from work experience
   data.workExperience.forEach((job) => {
-    keywords.push(job.title.toLowerCase(), job.company.toLowerCase())
-    job.skills.forEach((skill) => keywords.push(skill.toLowerCase()))
-    job.bullets.forEach((bullet) => {
-      bullet.tags?.forEach((tag) => keywords.push(tag.toLowerCase()))
+    keywords.push(job.company.toLowerCase())
+    ;(job.titleHistory || []).forEach((phase) => {
+      keywords.push(phase.title.toLowerCase())
+      phase.bullets?.forEach((b) => b.tags?.forEach((t) => keywords.push(t.toLowerCase())))
     })
+    job.tags?.forEach((t) => keywords.push(t.toLowerCase()))
   })
 
-  // Extract keywords from technical skills
   Object.values(data.technicalSkills)
     .flat()
-    .forEach((skill) => {
+    .forEach((skill: any) => {
       keywords.push(skill.name.toLowerCase(), skill.id.toLowerCase())
-      skill.tags?.forEach((tag) => keywords.push(tag.toLowerCase()))
+      skill.tags?.forEach((t: string) => keywords.push(t.toLowerCase()))
     })
 
-  // Extract keywords from other sections
   data.extracurriculars.forEach((item) => {
     keywords.push(item.title.toLowerCase(), item.organization.toLowerCase())
-    item.tags?.forEach((tag) => keywords.push(tag.toLowerCase()))
+    item.tags?.forEach((t) => keywords.push(t.toLowerCase()))
   })
 
   data.publicService.forEach((item) => {
     keywords.push(item.title.toLowerCase(), item.organization.toLowerCase())
-    item.tags?.forEach((tag) => keywords.push(tag.toLowerCase()))
+    item.tags?.forEach((t) => keywords.push(t.toLowerCase()))
   })
 
   data.academicResearch.forEach((item) => {
     keywords.push(item.title.toLowerCase())
-    item.tags?.forEach((tag) => keywords.push(tag.toLowerCase()))
+    item.tags?.forEach((t) => keywords.push(t.toLowerCase()))
   })
 
-  // Remove duplicates and return
   return [...new Set(keywords)]
 }
