@@ -32,3 +32,9 @@ next-env.d.ts
 # generated resumes — keep source data + renderer public, outputs local
 resumes/*
 !resumes/README.md
+
+# local PII overrides — never commit (email, full name, etc.)
+data/*.local.json
+
+# role configs — per-application, contain recruiter names + other private context
+data/roles/*.json

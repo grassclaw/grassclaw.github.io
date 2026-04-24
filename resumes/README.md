@@ -14,9 +14,38 @@ Reads `data/roles/<role-id>.json` → writes `resumes/<role-id>.md`.
 
 ## Add a new role
 
-1. Copy `data/roles/jataware-engineering.json` to `data/roles/<new-role>.json`
-2. Edit `anglePrimary`, `angles`, `tagEmphasize`, `omitIds`, `introOverride`, `whyCompany`, and any section toggles
+Role configs live in `data/roles/*.json` and are **gitignored** — they carry per-application context (recruiter names, posting dates) and stay local.
+
+1. Create `data/roles/<new-role>.json` with the schema below
+2. Set `anglePrimary`, `angles`, `tagEmphasize`, `omitIds`, `introOverride`, `whyCompany`, and any section toggles
 3. Run `pnpm resume <new-role>`
+
+Schema:
+
+```json
+{
+  "id": "<role-id>",
+  "company": "<Company>",
+  "role": "<Role title>",
+  "anglePrimary": "architecture | ml-ai | cybersecurity | research | leadership",
+  "angles": ["architecture", "..."],
+  "tagEmphasize": ["threat-intel", "..."],
+  "omitIds": ["<work-experience-id-to-omit>"],
+  "introOverride": "...",
+  "whyCompany": "...",
+  "headerSubtitle": "...",
+  "maxBulletsPerJob": 6,
+  "includeSections": {
+    "technicalSkills": true,
+    "experience": true,
+    "research": true,
+    "education": true,
+    "publicService": false,
+    "extracurriculars": false,
+    "whyCompany": true
+  }
+}
+```
 
 ## The 5 angles
 
