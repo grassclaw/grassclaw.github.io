@@ -86,7 +86,7 @@ export function TechnicalProficiencies({ searchQuery, onSkillClick, selectedSkil
 
   const jobTitles = {
     "nagra-2025": "Nagra Kudelski Group - Senior Cyber ML Architect",
-    "netstar-2024": "Netstar DTA - Senior ML Engineer",
+    "netstar-2024": "NetSTAR Global - Principal Engineer & Architect",
     "self-2022": "Self-Proprietor - Security Auditor & AI Consultant",
     "2u-2021": "2U Education - Technical Lead",
     "netstar-2020": "Netstar - Threat Intelligence Engineer",

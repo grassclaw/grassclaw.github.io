@@ -7,6 +7,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, "..")
 
 const readJson = (rel) => JSON.parse(readFileSync(resolve(ROOT, rel), "utf8"))
+const readJsonIfExists = (rel) => {
+  const abs = resolve(ROOT, rel)
+  return existsSync(abs) ? JSON.parse(readFileSync(abs, "utf8")) : null
+}
 
 const roleId = process.argv[2]
 if (!roleId) {
@@ -16,7 +20,13 @@ if (!roleId) {
 }
 
 const role = readJson(`data/roles/${roleId}.json`)
-const personal = readJson("data/personal-info.json").personalInfo
+const personalBase = readJson("data/personal-info.json").personalInfo
+const personalLocal = readJsonIfExists("data/personal-info.local.json")?.personalInfo || {}
+const personal = { ...personalBase, ...personalLocal }
+if (!personalLocal.email) {
+  console.warn("⚠  No data/personal-info.local.json found — resume will render without email.")
+  console.warn("   Create data/personal-info.local.json (gitignored) with { personalInfo: { email, fullName, name } } to include PII.")
+}
 const variations = readJson("data/resume-variations.json").angles
 const work = readJson("data/work-experience.json")
 const edu = readJson("data/education.json")
