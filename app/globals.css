@@ -3,81 +3,102 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+  0xSpectra-family palette — deep navy base, cyan→blue→violet spectral accent.
+  The app renders a single dark, editorial theme; :root carries it directly.
+*/
 :root {
-  /* Updated color tokens to match professional portfolio design brief */
-  --background: oklch(1 0 0); /* #ffffff */
-  --foreground: oklch(0.205 0 0); /* #1f2937 */
-  --card: oklch(0.97 0 0); /* #f1f5f9 */
-  --card-foreground: oklch(0.269 0 0); /* #374151 */
-  --popover: oklch(1 0 0); /* #ffffff */
-  --popover-foreground: oklch(0.205 0 0); /* #1f2937 */
-  --primary: oklch(0.205 0 0); /* #1f2937 */
-  --primary-foreground: oklch(1 0 0); /* #ffffff */
-  --secondary: oklch(0.646 0.222 285.12); /* #8b5cf6 */
-  --secondary-foreground: oklch(1 0 0); /* #ffffff */
-  --muted: oklch(0.556 0 0); /* #6b7280 */
-  --muted-foreground: oklch(1 0 0); /* #ffffff */
-  --accent: oklch(0.646 0.222 285.12); /* #8b5cf6 */
-  --accent-foreground: oklch(1 0 0); /* #ffffff */
-  --destructive: oklch(0.577 0.245 27.325); /* #dc2626 */
-  --destructive-foreground: oklch(1 0 0); /* #ffffff */
-  --border: oklch(0.922 0 0); /* #e5e7eb */
-  --input: oklch(0.97 0 0); /* #f3f4f6 */
-  --ring: oklch(0.646 0.222 285.12 / 0.5); /* rgba(139, 92, 246, 0.5) */
-  --chart-1: oklch(0.6 0.118 264.376); /* #6366f1 */
-  --chart-2: oklch(0.646 0.222 41.116); /* #f97316 */
-  --chart-3: oklch(0.6 0.118 184.704); /* #3b82f6 */
-  --chart-4: oklch(0.6 0.118 164.704); /* #10b981 */
-  --chart-5: oklch(0.577 0.245 27.325); /* #ef4444 */
-  --radius: 0.5rem;
-  --sidebar: oklch(0.97 0 0); /* #f1f5f9 */
-  --sidebar-foreground: oklch(0.205 0 0); /* #1f2937 */
-  --sidebar-primary: oklch(0.269 0 0); /* #374151 */
-  --sidebar-primary-foreground: oklch(1 0 0); /* #ffffff */
-  --sidebar-accent: oklch(0.646 0.222 285.12); /* #8b5cf6 */
-  --sidebar-accent-foreground: oklch(1 0 0); /* #ffffff */
-  --sidebar-border: oklch(0.922 0 0); /* #e5e7eb */
-  --sidebar-ring: oklch(0.646 0.222 285.12 / 0.5); /* rgba(139, 92, 246, 0.5) */
+  --background: oklch(0.16 0.03 264); /* deep navy #070d1d */
+  --foreground: oklch(0.95 0.01 250); /* near-white, faintly cool */
+
+  --card: oklch(0.205 0.035 264); /* elevated navy surface */
+  --card-foreground: oklch(0.95 0.01 250);
+
+  --popover: oklch(0.2 0.035 264);
+  --popover-foreground: oklch(0.95 0.01 250);
+
+  --primary: oklch(0.78 0.13 230); /* spectral cyan-blue, for emphasis UI */
+  --primary-foreground: oklch(0.16 0.03 264);
+
+  --secondary: oklch(0.26 0.04 264); /* quiet navy chip */
+  --secondary-foreground: oklch(0.9 0.02 250);
+
+  --muted: oklch(0.26 0.03 264);
+  --muted-foreground: oklch(0.72 0.03 252); /* readable mid-gray-blue (fixes white bug) */
+
+  --accent: oklch(0.7 0.15 285); /* violet end of the spectrum */
+  --accent-foreground: oklch(0.98 0.01 250);
+
+  --destructive: oklch(0.62 0.21 18);
+  --destructive-foreground: oklch(0.98 0.01 250);
+
+  --border: oklch(0.32 0.03 262 / 0.6);
+  --input: oklch(0.24 0.035 264);
+  --ring: oklch(0.78 0.13 230 / 0.55);
+
+  /* spectral stops, reused across gradients */
+  --spectra-cyan: #5bc8ff;
+  --spectra-blue: #6f8eff;
+  --spectra-violet: #a285f2;
+
+  --chart-1: oklch(0.78 0.13 230);
+  --chart-2: oklch(0.7 0.15 285);
+  --chart-3: oklch(0.8 0.12 200);
+  --chart-4: oklch(0.72 0.14 160);
+  --chart-5: oklch(0.7 0.16 50);
+
+  --radius: 0.75rem;
+
+  --sidebar: oklch(0.2 0.035 264);
+  --sidebar-foreground: oklch(0.95 0.01 250);
+  --sidebar-primary: oklch(0.78 0.13 230);
+  --sidebar-primary-foreground: oklch(0.16 0.03 264);
+  --sidebar-accent: oklch(0.7 0.15 285);
+  --sidebar-accent-foreground: oklch(0.98 0.01 250);
+  --sidebar-border: oklch(0.32 0.03 262 / 0.6);
+  --sidebar-ring: oklch(0.78 0.13 230 / 0.55);
 }
 
+/* .dark kept identical so any data-[state] dark variants stay consistent */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.646 0.222 285.12);
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.646 0.222 285.12);
-  --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.646 0.222 285.12 / 0.5);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --background: oklch(0.16 0.03 264);
+  --foreground: oklch(0.95 0.01 250);
+  --card: oklch(0.205 0.035 264);
+  --card-foreground: oklch(0.95 0.01 250);
+  --popover: oklch(0.2 0.035 264);
+  --popover-foreground: oklch(0.95 0.01 250);
+  --primary: oklch(0.78 0.13 230);
+  --primary-foreground: oklch(0.16 0.03 264);
+  --secondary: oklch(0.26 0.04 264);
+  --secondary-foreground: oklch(0.9 0.02 250);
+  --muted: oklch(0.26 0.03 264);
+  --muted-foreground: oklch(0.72 0.03 252);
+  --accent: oklch(0.7 0.15 285);
+  --accent-foreground: oklch(0.98 0.01 250);
+  --destructive: oklch(0.62 0.21 18);
+  --destructive-foreground: oklch(0.98 0.01 250);
+  --border: oklch(0.32 0.03 262 / 0.6);
+  --input: oklch(0.24 0.035 264);
+  --ring: oklch(0.78 0.13 230 / 0.55);
+  --chart-1: oklch(0.78 0.13 230);
+  --chart-2: oklch(0.7 0.15 285);
+  --chart-3: oklch(0.8 0.12 200);
+  --chart-4: oklch(0.72 0.14 160);
+  --chart-5: oklch(0.7 0.16 50);
+  --sidebar: oklch(0.2 0.035 264);
+  --sidebar-foreground: oklch(0.95 0.01 250);
+  --sidebar-primary: oklch(0.78 0.13 230);
+  --sidebar-primary-foreground: oklch(0.16 0.03 264);
+  --sidebar-accent: oklch(0.7 0.15 285);
+  --sidebar-accent-foreground: oklch(0.98 0.01 250);
+  --sidebar-border: oklch(0.32 0.03 262 / 0.6);
+  --sidebar-ring: oklch(0.78 0.13 230 / 0.55);
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -97,6 +118,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-spectra-cyan: var(--spectra-cyan);
+  --color-spectra-blue: var(--spectra-blue);
+  --color-spectra-violet: var(--spectra-violet);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -122,111 +146,95 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-}
-
-/* Adding custom wiggle animation for badges */
-@keyframes wiggle {
-  0%,
-  7% {
-    transform: rotateZ(0);
-  }
-  15% {
-    transform: rotateZ(-15deg);
-  }
-  20% {
-    transform: rotateZ(10deg);
-  }
-  25% {
-    transform: rotateZ(-10deg);
-  }
-  30% {
-    transform: rotateZ(6deg);
-  }
-  35% {
-    transform: rotateZ(-4deg);
-  }
-  40%,
-  100% {
-    transform: rotateZ(0);
-  }
-}
-
-/* Adding gentle wave animation for Graph Search text */
-@keyframes wave {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
-}
-
-/* Adding color wave animation that moves blue tone across text */
-@keyframes colorWave {
-  0% {
-    background-position: -200% center;
-    filter: hue-rotate(0deg);
-  }
-  50% {
-    background-position: 0% center;
-    filter: hue-rotate(30deg);
-  }
-  100% {
-    background-position: 200% center;
-    filter: hue-rotate(0deg);
-  }
-}
-
-/* Adding ripple animation for Graph Search text */
-@keyframes ripple {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes textShimmer {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 }
 
 @layer utilities {
-  .animate-wiggle {
-    animation: wiggle 2s ease-in-out infinite;
+  /* The one signature accent: a spectral gradient for emphasis words/marks. */
+  .spectra-text {
+    background-image: linear-gradient(
+      100deg,
+      var(--spectra-cyan),
+      var(--spectra-blue) 50%,
+      var(--spectra-violet)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
-  /* Adding wave animation utility class with slower timing */
-  .animate-wave {
-    animation: wave 4s ease-in-out infinite;
+  .spectra-bg {
+    background-image: linear-gradient(
+      100deg,
+      var(--spectra-cyan),
+      var(--spectra-blue) 50%,
+      var(--spectra-violet)
+    );
   }
 
-  /* Adding color wave animation utility class */
-  .animate-color-wave {
-    background-size: 300% auto;
-    animation: colorWave 8s ease-in-out infinite;
-    animation-delay: var(--wave-delay, 0s);
+  .spectra-border {
+    border-image: linear-gradient(
+        100deg,
+        var(--spectra-cyan),
+        var(--spectra-blue) 50%,
+        var(--spectra-violet)
+      )
+      1;
   }
 
-  .animate-ripple {
-    animation: ripple 2s ease-in-out infinite;
+  /* Two restrained, purposeful motions only. */
+  @keyframes spectra-rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-rise {
+    animation: spectra-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .animate-text-shimmer {
-    background-size: 200% auto;
-    animation: textShimmer 3s linear infinite;
+  @keyframes spectra-drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -10px, 0);
+    }
+  }
+  .animate-drift {
+    animation: spectra-drift 14s ease-in-out infinite;
+  }
+
+  /* Re-narration crossfade — re-triggered via React key on role switch. */
+  @keyframes spectra-renarrate {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-renarrate {
+    animation: spectra-renarrate 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

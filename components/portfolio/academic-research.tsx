@@ -32,7 +32,7 @@ export function Academia({
     return parts.map((part, index) => {
       if (regex.test(part)) {
         return (
-          <span key={index} className="bg-purple-200 text-purple-900 px-1 rounded">
+          <span key={index} className="bg-spectra-cyan/20 text-spectra-cyan px-1 rounded">
             {part}
           </span>
         )
@@ -67,19 +67,18 @@ export function Academia({
 
   return (
     <div className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-2 text-white">Research and Conferences</h2>
-        <p className="text-card">Academic publications and professional conference presentations</p>
+      <div className="mb-6">
+        <p className="text-muted-foreground">Academic publications and professional conference presentations.</p>
       </div>
 
       {showNoResultsMessage && (
         <Card className="p-8 text-center border-2 border-dashed border-muted">
           {otherTabsWithMatches.length > 0 ? (
-            <p className="text-slate-700 text-lg">
+            <p className="text-card-foreground/85 text-lg">
               There are results for '{searchQuery}' on the following tabs: {otherTabsWithMatches.join(", ")}
             </p>
           ) : (
-            <p className="text-slate-700 text-lg">
+            <p className="text-card-foreground/85 text-lg">
               0 results, this does not mean I haven't done it. Feel free to reach out and check!
             </p>
           )}
@@ -88,7 +87,7 @@ export function Academia({
 
       <div className="grid lg:grid-cols-2 gap-8">
         <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-slate-800 mb-4">Scholarly Research</h3>
+          <h3 className="text-2xl font-semibold text-card-foreground mb-4">Scholarly Research</h3>
           {portfolioData.academicResearch.map((paper) => {
             const isHighlighted =
               hoveredPaperId === paper.id || (paper.conferenceId && hoveredConferenceId === paper.conferenceId)
@@ -99,9 +98,9 @@ export function Academia({
                 onMouseLeave={() => setHoveredPaperId(null)}
                 className={`p-6 ${
                   matchesSearch(paper) && searchQuery !== ""
-                    ? "border-4 border-purple-500 shadow-lg shadow-purple-200 ring-2 ring-purple-300"
+                    ? "border border-spectra-cyan/70 shadow-lg shadow-spectra-blue/20 ring-1 ring-spectra-cyan/40"
                     : isHighlighted
-                      ? "border-4 border-blue-500 shadow-lg shadow-blue-200 ring-2 ring-blue-300"
+                      ? "border border-spectra-blue/70 shadow-lg shadow-spectra-blue/20 ring-1 ring-spectra-blue/40"
                       : ""
                 } hover:shadow-md transition-all duration-300 cursor-pointer`}
               >
@@ -109,8 +108,8 @@ export function Academia({
                   <div className="flex items-start justify-between gap-6">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
-                        <BookOpen className="w-5 h-5 text-slate-600" />
-                        <h3 className="text-xl font-bold text-slate-800">{highlightText(paper.title, searchQuery)}</h3>
+                        <BookOpen className="w-5 h-5 text-muted-foreground" />
+                        <h3 className="text-xl font-bold text-card-foreground">{highlightText(paper.title, searchQuery)}</h3>
                         <Badge variant={paper.status === "Published" ? "default" : "outline"} className="ml-auto">
                           {paper.status}
                         </Badge>
@@ -118,8 +117,8 @@ export function Academia({
 
                       {paper.authors && paper.authors.length > 0 && (
                         <div className="flex items-center gap-2 mb-2">
-                          <Users className="w-4 h-4 text-slate-500" />
-                          <span className="text-sm text-slate-600">
+                          <Users className="w-4 h-4 text-muted-foreground" />
+                          <span className="text-sm text-muted-foreground">
                             <strong>Authors:</strong> {paper.authors.join(", ")}
                           </span>
                         </div>
@@ -127,20 +126,20 @@ export function Academia({
 
                       <div className="grid md:grid-cols-2 gap-4 mb-4">
                         <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-slate-500" />
-                          <span className="text-sm text-slate-600">
+                          <Calendar className="w-4 h-4 text-muted-foreground" />
+                          <span className="text-sm text-muted-foreground">
                             <strong>Conference:</strong> {highlightText(paper.conference, searchQuery)}
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Users className="w-4 h-4 text-slate-500" />
-                          <span className="text-sm text-slate-600">
+                          <Users className="w-4 h-4 text-muted-foreground" />
+                          <span className="text-sm text-muted-foreground">
                             <strong>Research Group:</strong> {highlightText(paper.researchGroup, searchQuery)}
                           </span>
                         </div>
                       </div>
 
-                      <p className="text-slate-700 mb-4 leading-relaxed">
+                      <p className="text-card-foreground/85 mb-4 leading-relaxed">
                         {highlightText(paper.description, searchQuery)}
                       </p>
 
@@ -150,12 +149,12 @@ export function Academia({
                             href={paper.paperLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                            className="flex items-center gap-1 text-sm text-spectra-cyan hover:text-spectra-blue hover:underline"
                           >
                             <FileText className="w-3 h-3" />
                             View Paper
                           </a>
-                          {paper.citation && <p className="text-xs text-slate-500 italic">{paper.citation}</p>}
+                          {paper.citation && <p className="text-xs text-muted-foreground italic">{paper.citation}</p>}
                         </div>
                       )}
 
@@ -170,9 +169,9 @@ export function Academia({
                                 variant="outline"
                                 className={`text-xs ${
                                   isSponsor
-                                    ? "bg-yellow-500 text-white border-yellow-500"
-                                    : "bg-blue-600 text-white border-blue-600"
-                                } ${isMatching ? "ring-2 ring-purple-400 shadow-lg shadow-purple-200" : ""}`}
+                                    ? "bg-amber-400/20 text-amber-300 border-amber-400/40"
+                                    : "bg-spectra-blue/15 text-spectra-blue border-spectra-blue/30"
+                                } ${isMatching ? "ring-2 ring-spectra-cyan/60" : ""}`}
                               >
                                 {tag}
                               </Badge>
@@ -184,8 +183,8 @@ export function Academia({
 
                     <div className="flex flex-col items-center gap-3">
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-slate-800">{paper.year}</div>
-                        <div className="text-xs text-slate-500">Year</div>
+                        <div className="text-2xl font-bold text-card-foreground">{paper.year}</div>
+                        <div className="text-xs text-muted-foreground">Year</div>
                       </div>
                     </div>
                   </div>
@@ -196,7 +195,7 @@ export function Academia({
         </div>
 
         <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-slate-800 mb-4">Conferences</h3>
+          <h3 className="text-2xl font-semibold text-card-foreground mb-4">Conferences</h3>
           {portfolioData.conferences?.map((conference: any) => {
             const relatedPaper = portfolioData.academicResearch.find((paper) => paper.conferenceId === conference.id)
             const isHighlighted =
@@ -208,32 +207,32 @@ export function Academia({
                 onMouseLeave={() => setHoveredConferenceId(null)}
                 className={`p-6 ${
                   matchesSearch(conference) && searchQuery !== ""
-                    ? "border-4 border-purple-500 shadow-lg shadow-purple-200 ring-2 ring-purple-300"
+                    ? "border border-spectra-cyan/70 shadow-lg shadow-spectra-blue/20 ring-1 ring-spectra-cyan/40"
                     : isHighlighted
-                      ? "border-4 border-blue-500 shadow-lg shadow-blue-200 ring-2 ring-blue-300"
+                      ? "border border-spectra-blue/70 shadow-lg shadow-spectra-blue/20 ring-1 ring-spectra-blue/40"
                       : ""
                 } hover:shadow-md transition-all duration-300 cursor-pointer`}
               >
                 <CardContent className="p-0 space-y-4">
                   <div>
-                    <h4 className="text-xl font-bold text-slate-800 mb-1">
+                    <h4 className="text-xl font-bold text-card-foreground mb-1">
                       {highlightText(conference.name, searchQuery)}
                     </h4>
                     {conference.location && (
-                      <div className="flex items-center gap-2 text-sm text-slate-600 mb-1">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                         <MapPin className="w-4 h-4" />
                         {highlightText(conference.location, searchQuery)}
                       </div>
                     )}
-                    <div className="flex items-center gap-2 text-sm text-slate-600">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Calendar className="w-4 h-4" />
                       {conference.date}
                     </div>
                   </div>
 
                   {conference.companyName && (
-                    <div className="flex items-center gap-2 text-sm text-slate-700">
-                      <Building2 className="w-4 h-4 text-slate-500" />
+                    <div className="flex items-center gap-2 text-sm text-card-foreground/85">
+                      <Building2 className="w-4 h-4 text-muted-foreground" />
                       <span className="font-medium">{highlightText(conference.companyName, searchQuery)}</span>
                     </div>
                   )}
@@ -246,9 +245,11 @@ export function Academia({
                         <Badge
                           key={tag}
                           variant="default"
-                          className={`${isSponsor ? "bg-yellow-500 hover:bg-yellow-600" : "bg-blue-600"} ${
-                            isMatching ? "ring-2 ring-purple-400 shadow-lg shadow-purple-200" : ""
-                          }`}
+                          className={`${
+                            isSponsor
+                              ? "bg-amber-400/20 text-amber-300 border-amber-400/40"
+                              : "bg-spectra-blue/15 text-spectra-blue border-spectra-blue/30"
+                          } ${isMatching ? "ring-2 ring-spectra-cyan/60" : ""}`}
                         >
                           {tag}
                         </Badge>
@@ -257,23 +258,23 @@ export function Academia({
                   </div>
 
                   <div className="text-sm">
-                    <span className="font-semibold text-slate-700">Track:</span>{" "}
-                    <span className="text-slate-600">{conference.track}</span>
+                    <span className="font-semibold text-card-foreground/85">Track:</span>{" "}
+                    <span className="text-muted-foreground">{conference.track}</span>
                   </div>
 
                   {conference.speakers && conference.speakers.length > 0 && (
                     <div className="text-sm">
-                      <span className="font-semibold text-slate-700">Speakers:</span>{" "}
-                      <span className="text-slate-600">{conference.speakers.join(", ")}</span>
+                      <span className="font-semibold text-card-foreground/85">Speakers:</span>{" "}
+                      <span className="text-muted-foreground">{conference.speakers.join(", ")}</span>
                     </div>
                   )}
 
                   {conference.sessions && conference.sessions.length > 0 && (
                     <div className="space-y-3">
                       {conference.sessions.map((session: any, index: number) => (
-                        <div key={index} className="pl-4 border-l-2 border-purple-400">
-                          <p className="text-sm font-semibold text-purple-700 mb-1">Session Type: {session.type}</p>
-                          <p className="text-sm text-slate-700">{highlightText(session.title, searchQuery)}</p>
+                        <div key={index} className="pl-4 border-l-2 border-spectra-violet/60">
+                          <p className="text-sm font-semibold text-spectra-violet mb-1">Session Type: {session.type}</p>
+                          <p className="text-sm text-card-foreground/85">{highlightText(session.title, searchQuery)}</p>
                         </div>
                       ))}
                     </div>
@@ -285,7 +286,7 @@ export function Academia({
                         href={conference.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                        className="flex items-center gap-1 text-sm text-spectra-cyan hover:text-spectra-blue hover:underline"
                       >
                         <ExternalLink className="w-3 h-3" />
                         {conference.linkLabel || "Conference Link"}
@@ -296,7 +297,7 @@ export function Academia({
                         href={conference.links.speaker}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                        className="flex items-center gap-1 text-sm text-spectra-cyan hover:text-spectra-blue hover:underline"
                       >
                         <ExternalLink className="w-3 h-3" />
                         Speaker Page
@@ -307,7 +308,7 @@ export function Academia({
                         href={conference.links.company}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                        className="flex items-center gap-1 text-sm text-spectra-cyan hover:text-spectra-blue hover:underline"
                       >
                         <ExternalLink className="w-3 h-3" />
                         Company Page
@@ -318,7 +319,7 @@ export function Academia({
                         href={conference.links.presentation}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                        className="flex items-center gap-1 text-sm text-spectra-cyan hover:text-spectra-blue hover:underline"
                       >
                         <ExternalLink className="w-3 h-3" />
                         Presentation
@@ -329,7 +330,7 @@ export function Academia({
                         href={conference.links.paper}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                        className="flex items-center gap-1 text-sm text-spectra-cyan hover:text-spectra-blue hover:underline"
                       >
                         <ExternalLink className="w-3 h-3" />
                         Paper

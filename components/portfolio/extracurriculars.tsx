@@ -53,7 +53,7 @@ export function Extracurriculars({
     return parts.map((part, index) => {
       if (regex.test(part)) {
         return (
-          <span key={index} className="bg-purple-200 text-purple-900 px-1 rounded">
+          <span key={index} className="bg-spectra-cyan/20 text-spectra-cyan px-1 rounded">
             {part}
           </span>
         )
@@ -69,25 +69,25 @@ export function Extracurriculars({
         key={activity.id}
         className={`hover:shadow-lg transition-all duration-300 ${
           activity.isHighlighted && (searchQuery !== "" || selectedSkill !== null)
-            ? "border-4 border-purple-500 shadow-2xl shadow-purple-200 ring-2 ring-purple-300 ring-opacity-50"
+            ? "border border-spectra-cyan/70 shadow-2xl shadow-spectra-blue/20 ring-1 ring-spectra-cyan/40"
             : ""
         }`}
       >
         <CardHeader>
           <div className="flex flex-col gap-4">
             <div className="flex items-start gap-3">
-              <div className="p-2 bg-accent/10 rounded-lg">
-                <IconComponent className="w-5 h-5 text-slate-600" />
+              <div className="p-2 bg-secondary/50 rounded-lg">
+                <IconComponent className="w-5 h-5 text-muted-foreground" />
               </div>
               <div className="flex-1">
-                <CardTitle className="text-lg text-balance text-slate-800">
+                <CardTitle className="text-lg text-balance text-card-foreground">
                   {highlightText(activity.title, searchQuery)}
                 </CardTitle>
                 <div className="flex items-center gap-4 text-muted-foreground mt-2">
-                  <span className="text-slate-700">{highlightText(activity.organization, searchQuery)}</span>
+                  <span className="text-card-foreground/85">{highlightText(activity.organization, searchQuery)}</span>
                   <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4 text-slate-600" />
-                    <span className="text-slate-700">{activity.period}</span>
+                    <Calendar className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-card-foreground/85">{activity.period}</span>
                   </div>
                 </div>
               </div>
@@ -95,13 +95,13 @@ export function Extracurriculars({
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-pretty text-slate-800">{highlightText(activity.description, searchQuery)}</p>
+          <p className="text-pretty text-card-foreground">{highlightText(activity.description, searchQuery)}</p>
 
           <div>
-            <h4 className="font-semibold mb-2 text-slate-800">Key Responsibilities:</h4>
+            <h4 className="font-semibold mb-2 text-card-foreground">Key Responsibilities:</h4>
             <ul className="list-disc list-inside space-y-1 text-sm">
               {activity.responsibilities.map((responsibility, index) => (
-                <li key={index} className="text-pretty text-slate-700">
+                <li key={index} className="text-pretty text-card-foreground/85">
                   {highlightText(responsibility, searchQuery)}
                 </li>
               ))}
@@ -125,11 +125,11 @@ export function Extracurriculars({
       {showNoResultsMessage && (
         <Card className="p-8 text-center border-2 border-dashed border-muted">
           {otherTabsWithMatches.length > 0 ? (
-            <p className="text-slate-700 text-lg">
+            <p className="text-card-foreground/85 text-lg">
               There are results for '{searchQuery}' on the following tabs: {otherTabsWithMatches.join(", ")}
             </p>
           ) : (
-            <p className="text-slate-700 text-lg">
+            <p className="text-card-foreground/85 text-lg">
               0 results, this does not mean I haven't done it. Feel free to reach out and check!
             </p>
           )}
@@ -139,8 +139,8 @@ export function Extracurriculars({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Column - Creative Initiatives */}
         <div className="space-y-6">
-          <div className="border-l-4 border-slate-400 pl-4">
-            <h3 className="text-xl font-bold mb-4 text-white">Creative Initiatives</h3>
+          <div className="border-l-4 border-border pl-4">
+            <h3 className="text-xl font-bold mb-4 text-foreground">Creative Initiatives</h3>
           </div>
           <div className="space-y-4">
             {creativeInitiatives
@@ -152,8 +152,8 @@ export function Extracurriculars({
 
         {/* Right Column - Tutoring & Mentoring */}
         <div className="space-y-6">
-          <div className="border-l-4 border-slate-400 pl-4">
-            <h3 className="text-xl font-bold mb-4 text-white">Tutoring & Mentoring</h3>
+          <div className="border-l-4 border-border pl-4">
+            <h3 className="text-xl font-bold mb-4 text-foreground">Tutoring & Mentoring</h3>
           </div>
           <div className="space-y-4">
             {tutoringMentoring

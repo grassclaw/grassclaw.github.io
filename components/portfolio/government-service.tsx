@@ -59,7 +59,7 @@ export function GovernmentService({ searchQuery, selectedSkill }: GovernmentServ
     return parts.map((part, index) => {
       if (regex.test(part)) {
         return (
-          <span key={index} className="bg-purple-200 text-purple-900 px-1 rounded">
+          <span key={index} className="bg-spectra-cyan/20 text-spectra-cyan px-1 rounded">
             {part}
           </span>
         )
@@ -72,8 +72,8 @@ export function GovernmentService({ searchQuery, selectedSkill }: GovernmentServ
     <div className="space-y-6">
       {showNoResultsMessage && (
         <Card className="p-8 text-center border-2 border-dashed border-muted">
-          <p className="text-slate-700 text-lg mb-2">Sorry, nothing was found for "{searchQuery}"</p>
-          <p className="text-sm text-slate-600">However, it doesn't mean I haven't done it! Feel free to reach out.</p>
+          <p className="text-card-foreground/85 text-lg mb-2">Sorry, nothing was found for "{searchQuery}"</p>
+          <p className="text-sm text-muted-foreground">However, it doesn't mean I haven't done it! Feel free to reach out.</p>
         </Card>
       )}
 
@@ -84,7 +84,7 @@ export function GovernmentService({ searchQuery, selectedSkill }: GovernmentServ
             key={activity.id}
             className={`hover:shadow-lg transition-all duration-300 ${
               activity.isHighlighted && (searchQuery !== "" || selectedSkill !== null)
-                ? "border-4 border-purple-500 shadow-2xl shadow-purple-200 ring-2 ring-purple-300 ring-opacity-50"
+                ? "border border-spectra-cyan/70 shadow-2xl shadow-spectra-blue/20 ring-1 ring-spectra-cyan/40"
                 : ""
             }`}
           >
@@ -92,17 +92,17 @@ export function GovernmentService({ searchQuery, selectedSkill }: GovernmentServ
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div className="flex items-start gap-3">
                   <div className="p-2 bg-accent/10 rounded-lg">
-                    <IconComponent className="w-5 h-5 text-slate-600" />
+                    <IconComponent className="w-5 h-5 text-muted-foreground" />
                   </div>
                   <div>
-                    <CardTitle className="text-xl text-balance text-slate-800">
+                    <CardTitle className="text-xl text-balance text-card-foreground">
                       {highlightText(activity.title, searchQuery)}
                     </CardTitle>
                     <div className="flex items-center gap-4 text-muted-foreground mt-2">
-                      <span className="text-slate-700">{highlightText(activity.organization, searchQuery)}</span>
+                      <span className="text-card-foreground/85">{highlightText(activity.organization, searchQuery)}</span>
                       <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4 text-slate-600" />
-                        <span className="text-slate-700">{activity.period}</span>
+                        <Calendar className="w-4 h-4 text-muted-foreground" />
+                        <span className="text-card-foreground/85">{activity.period}</span>
                       </div>
                     </div>
                   </div>
@@ -111,13 +111,13 @@ export function GovernmentService({ searchQuery, selectedSkill }: GovernmentServ
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-pretty text-slate-800">{highlightText(activity.description, searchQuery)}</p>
+              <p className="text-pretty text-card-foreground">{highlightText(activity.description, searchQuery)}</p>
 
               <div>
-                <h4 className="font-semibold mb-2 text-slate-800">Key Responsibilities:</h4>
+                <h4 className="font-semibold mb-2 text-card-foreground">Key Responsibilities:</h4>
                 <ul className="list-disc list-inside space-y-1 text-sm">
                   {activity.responsibilities.map((responsibility, index) => (
-                    <li key={index} className="text-pretty text-slate-700">
+                    <li key={index} className="text-pretty text-card-foreground/85">
                       {highlightText(responsibility, searchQuery)}
                     </li>
                   ))}

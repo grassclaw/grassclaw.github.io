@@ -22,7 +22,7 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches, otherTabs
     return parts.map((part, index) => {
       if (regex.test(part)) {
         return (
-          <span key={index} className="bg-purple-200 text-purple-900 px-1 rounded">
+          <span key={index} className="bg-spectra-cyan/20 text-spectra-cyan px-1 rounded">
             {part}
           </span>
         )
@@ -60,11 +60,11 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches, otherTabs
       {showNoResultsMessage && (
         <Card className="p-8 text-center border-2 border-dashed border-muted">
           {otherTabsWithMatches.length > 0 ? (
-            <p className="text-slate-700 text-lg">
+            <p className="text-card-foreground/85 text-lg">
               There are results for '{searchQuery}' on the following tabs: {otherTabsWithMatches.join(", ")}
             </p>
           ) : (
-            <p className="text-slate-700 text-lg">
+            <p className="text-card-foreground/85 text-lg">
               0 results, this does not mean I haven't done it. Feel free to reach out and check!
             </p>
           )}
@@ -76,14 +76,14 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches, otherTabs
         <Card className="p-6">
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2 text-xl">
-              <GraduationCap className="w-5 h-5 text-slate-600" />
+              <GraduationCap className="w-5 h-5 text-muted-foreground" />
               Education
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-slate-300"></div>
+              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-border"></div>
 
               <div className="space-y-6">
                 {portfolioData.education.map((edu, index) => (
@@ -91,7 +91,7 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches, otherTabs
                     key={edu.id}
                     className={`relative flex items-start gap-4 ${
                       matchesSearch(edu) && searchQuery !== ""
-                        ? "bg-purple-50 p-3 rounded-lg border border-purple-200"
+                        ? "bg-spectra-cyan/10 p-3 rounded-lg border border-spectra-cyan/40"
                         : ""
                     }`}
                   >
@@ -99,22 +99,22 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches, otherTabs
                     <div
                       className={`relative z-10 w-3 h-3 rounded-full border-2 ${
                         edu.status === "completed"
-                          ? "bg-slate-600 border-slate-600"
-                          : "bg-blue-500 border-blue-500 animate-pulse"
+                          ? "bg-spectra-blue border-spectra-blue"
+                          : "bg-spectra-cyan border-spectra-cyan"
                       }`}
                     ></div>
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-semibold text-slate-800">{highlightText(edu.degree, searchQuery)}</h4>
+                        <h4 className="font-semibold text-card-foreground">{highlightText(edu.degree, searchQuery)}</h4>
                         {edu.status === "in-progress" && (
                           <Badge variant="outline" className="text-xs">
                             In Progress
                           </Badge>
                         )}
                       </div>
-                      <p className="text-sm text-slate-600 mb-1">{highlightText(edu.institution, searchQuery)}</p>
-                      <p className="text-xs text-slate-500">{edu.year}</p>
+                      <p className="text-sm text-muted-foreground mb-1">{highlightText(edu.institution, searchQuery)}</p>
+                      <p className="text-xs text-muted-foreground">{edu.year}</p>
                     </div>
                   </div>
                 ))}
@@ -127,7 +127,7 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches, otherTabs
         <Card className="p-6">
           <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2 text-xl">
-              <Award className="w-5 h-5 text-slate-600" />
+              <Award className="w-5 h-5 text-muted-foreground" />
               Certificates
             </CardTitle>
           </CardHeader>
@@ -137,17 +137,17 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches, otherTabs
                 <div
                   key={cert.id}
                   className={`p-4 rounded-lg border ${
-                    matchesSearch(cert) && searchQuery !== "" ? "border-purple-500 bg-purple-50" : "border-slate-200"
+                    matchesSearch(cert) && searchQuery !== "" ? "border-spectra-cyan/60 bg-spectra-cyan/10" : "border-border/70"
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-semibold text-slate-800">{highlightText(cert.name, searchQuery)}</h4>
+                    <h4 className="font-semibold text-card-foreground">{highlightText(cert.name, searchQuery)}</h4>
                     <Badge variant={cert.status === "completed" ? "default" : "outline"} className="text-xs">
                       {cert.status === "expected" ? "Expected" : "Completed"}
                     </Badge>
                   </div>
-                  <p className="text-sm text-slate-600 mb-1">{highlightText(cert.issuer, searchQuery)}</p>
-                  <p className="text-xs text-slate-500">{cert.year}</p>
+                  <p className="text-sm text-muted-foreground mb-1">{highlightText(cert.issuer, searchQuery)}</p>
+                  <p className="text-xs text-muted-foreground">{cert.year}</p>
                 </div>
               ))}
             </div>
@@ -159,7 +159,7 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches, otherTabs
       <Card className="p-6">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-2 text-xl">
-            <Users className="w-5 h-5 text-slate-600" />
+            <Users className="w-5 h-5 text-muted-foreground" />
             Campus Involvement
           </CardTitle>
         </CardHeader>
@@ -170,17 +170,17 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches, otherTabs
                 key={involvement.id}
                 className={`p-4 rounded-lg border ${
                   matchesSearch(involvement) && searchQuery !== ""
-                    ? "border-purple-500 bg-purple-50"
-                    : "border-slate-200"
+                    ? "border-spectra-cyan/60 bg-spectra-cyan/10"
+                    : "border-border/70"
                 } hover:shadow-md transition-shadow`}
               >
-                <h4 className="font-semibold text-slate-800 mb-1">
+                <h4 className="font-semibold text-card-foreground mb-1">
                   {involvement.url ? (
                     <a
                       href={involvement.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-1"
+                      className="text-spectra-cyan hover:text-spectra-blue hover:underline flex items-center gap-1"
                     >
                       {highlightText(involvement.title, searchQuery)}
                       <ExternalLink className="w-3 h-3" />
@@ -189,9 +189,9 @@ export function Education({ searchQuery, selectedSkill, hasAnyMatches, otherTabs
                     highlightText(involvement.title, searchQuery)
                   )}
                 </h4>
-                <p className="text-sm text-slate-600 mb-2">{highlightText(involvement.organization, searchQuery)}</p>
-                <p className="text-xs text-slate-500 mb-2">{involvement.year}</p>
-                <p className="text-sm text-slate-700">{highlightText(involvement.description, searchQuery)}</p>
+                <p className="text-sm text-muted-foreground mb-2">{highlightText(involvement.organization, searchQuery)}</p>
+                <p className="text-xs text-muted-foreground mb-2">{involvement.year}</p>
+                <p className="text-sm text-card-foreground/85">{highlightText(involvement.description, searchQuery)}</p>
               </div>
             ))}
           </div>

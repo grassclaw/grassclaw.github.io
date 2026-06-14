@@ -98,11 +98,11 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
   ]
 
   const categories = {
-    AI: "#8b5cf6",
-    Infrastructure: "#3b82f6",
-    Security: "#ef4444",
-    Programming: "#10b981",
-    Data: "#f97316",
+    AI: "#a285f2", // spectral violet
+    Infrastructure: "#6f8eff", // spectral blue
+    Security: "#5bc8ff", // spectral cyan
+    Programming: "#7ee0c0", // teal
+    Data: "#f0a868", // warm amber
   }
 
   // Resize observer
@@ -136,7 +136,7 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
     ctx.translate(panX, panY)
     ctx.scale(zoom, zoom)
 
-    ctx.strokeStyle = "#000000"
+    ctx.strokeStyle = "rgba(148, 163, 220, 0.35)"
     ctx.lineWidth = 1 / zoom
 
     // edges
@@ -162,12 +162,12 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
       ctx.fill()
 
       if (isSel) {
-        ctx.strokeStyle = "#1f2937"
+        ctx.strokeStyle = "#ffffff"
         ctx.lineWidth = 3 / zoom
         ctx.stroke()
       }
 
-      ctx.fillStyle = "#ffffff"
+      ctx.fillStyle = "#e8ecf8"
       ctx.font = `${14 / zoom}px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`
       ctx.textAlign = "center"
       ctx.textBaseline = "top"
@@ -244,7 +244,7 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
           {Object.entries(categories).map(([category, color]) => (
             <div key={category} className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
-              <span className="text-sm text-black">{category}</span>
+              <span className="text-sm text-card-foreground/80">{category}</span>
             </div>
           ))}
         </div>
@@ -252,15 +252,15 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
 
       <div ref={containerRef} className="flex-1 transition-all duration-300 h-[400px] overflow-hidden relative">
         {/* Zoom bar */}
-        <div className="absolute right-4 top-4 z-10 flex flex-col items-center backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 p-3 gap-3 bg-transparent border-dashed">
+        <div className="absolute right-4 top-4 z-10 flex flex-col items-center backdrop-blur-md rounded-lg shadow-lg border border-border/60 p-3 gap-3 bg-card/70">
           <Button
             size="sm"
             variant="ghost"
             onClick={handleZoomIn}
-            className="w-10 h-5 p-0 hover:bg-slate-50 bg-transparent border-0"
+            className="w-10 h-5 p-0 hover:bg-secondary/60 bg-transparent border-0"
             aria-label="Zoom in"
           >
-            <ZoomIn className="h-5 w-5 text-white" />
+            <ZoomIn className="h-5 w-5 text-card-foreground" />
           </Button>
 
           {/* Track strictly between buttons */}
@@ -277,35 +277,35 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
             />
           </div>
 
-          <div className="text-xs font-semibold text-slate-700 select-none mt-2">{Math.round(zoom * 100)}%</div>
+          <div className="text-xs font-semibold text-card-foreground select-none mt-2">{Math.round(zoom * 100)}%</div>
 
           <Button
             size="sm"
             variant="ghost"
             onClick={handleZoomOut}
-            className="w-10 h-10 p-0 hover:bg-slate-50 bg-transparent border-0"
+            className="w-10 h-10 p-0 hover:bg-secondary/60 bg-transparent border-0"
             aria-label="Zoom out"
           >
-            <ZoomOut className="h-5 w-5 text-white" />
+            <ZoomOut className="h-5 w-5 text-card-foreground" />
           </Button>
 
-          <div className="w-full h-px bg-gray-200" />
+          <div className="w-full h-px bg-border" />
 
           <Button
             size="sm"
             variant="ghost"
             onClick={handleReset}
-            className="w-10 h-10 p-0 hover:bg-gray-50 bg-transparent border-0"
+            className="w-10 h-10 p-0 hover:bg-secondary/60 bg-transparent border-0"
             aria-label="Reset zoom"
           >
-            <RotateCcw className="h-4 w-4 text-white" />
+            <RotateCcw className="h-4 w-4 text-card-foreground" />
           </Button>
         </div>
 
         <canvas
           ref={canvasRef}
           style={{ width: "100%", height: "100%", maxWidth: "100%", maxHeight: "100%", display: "block" }}
-          className={`rounded-lg border border-gray-200 bg-slate-600 border-none ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+          className={`rounded-lg bg-[#0a1020] ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
           onClick={handleCanvasClick}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
@@ -314,7 +314,7 @@ export function SkillsGraph({ onSkillSelect, selectedSkill }: SkillsGraphProps) 
           onWheel={handleWheel}
         />
         {/* Instructions moved back to bottom and fixed container height */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 bg-black/50 text-white px-3 py-1 rounded-md text-sm backdrop-blur-sm">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 bg-background/70 border border-border/60 text-muted-foreground px-3 py-1 rounded-md text-sm backdrop-blur-sm">
           Click and drag to pan • Scroll to zoom • Click nodes to highlight connections
         </div>
       </div>

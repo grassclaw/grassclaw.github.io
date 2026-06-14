@@ -56,7 +56,7 @@ function JobTimeline({
   return (
     <div className="relative pl-8 pt-1">
       {/* vertical connector line */}
-      <div className="absolute left-3 top-3 bottom-3 w-0.5 bg-gradient-to-b from-purple-400 via-slate-300 to-slate-300" />
+      <div className="absolute left-3 top-3 bottom-3 w-0.5 spectra-bg opacity-50" />
       {phases.map((phase, i) => {
         const expanded = isExpanded(i)
         const isCurrent = i === 0
@@ -66,11 +66,11 @@ function JobTimeline({
             <div
               className={`absolute -left-8 top-1 w-6 h-6 rounded-full border-2 flex items-center justify-center z-10 ${
                 isCurrent
-                  ? "bg-purple-500 border-purple-600 shadow-md shadow-purple-300"
-                  : "bg-white border-slate-400"
+                  ? "spectra-bg border-transparent shadow-md shadow-spectra-blue/30"
+                  : "bg-card border-border"
               }`}
             >
-              {isCurrent && <div className="w-2 h-2 rounded-full bg-white" />}
+              {isCurrent && <div className="w-2 h-2 rounded-full bg-[#070d1d]" />}
             </div>
             <button
               type="button"
@@ -81,32 +81,32 @@ function JobTimeline({
               <div className="flex items-baseline flex-wrap gap-x-2 gap-y-1">
                 <h4
                   className={`${
-                    isCurrent ? "text-base font-semibold text-slate-900" : "text-sm font-semibold text-slate-700"
-                  } group-hover:text-purple-700 transition-colors`}
+                    isCurrent ? "text-base font-semibold text-card-foreground" : "text-sm font-semibold text-card-foreground/85"
+                  } group-hover:text-spectra-cyan transition-colors`}
                 >
                   {highlightText(phase.title, searchQuery)}
                 </h4>
-                <span className="text-xs text-slate-500">{phase.period}</span>
+                <span className="text-xs text-muted-foreground">{phase.period}</span>
                 {isCurrent && (
                   <Badge
                     variant="outline"
-                    className="text-[10px] uppercase tracking-wide border-purple-400 text-purple-700"
+                    className="text-[10px] uppercase tracking-wide border-spectra-cyan/50 text-spectra-cyan"
                   >
                     Current
                   </Badge>
                 )}
                 <ChevronDown
-                  className={`w-4 h-4 text-slate-500 transition-transform ml-auto ${expanded ? "rotate-180" : ""}`}
+                  className={`w-4 h-4 text-muted-foreground transition-transform ml-auto ${expanded ? "rotate-180" : ""}`}
                 />
               </div>
             </button>
             {expanded && (
               <div className="mt-2 space-y-2 pl-0">
                 {phase.description && (
-                  <p className="text-sm text-slate-700 text-pretty">{highlightText(phase.description, searchQuery)}</p>
+                  <p className="text-sm text-card-foreground/80 text-pretty">{highlightText(phase.description, searchQuery)}</p>
                 )}
                 {phase.bullets && phase.bullets.length > 0 && (
-                  <ul className="list-disc list-inside space-y-1 text-sm text-slate-700">
+                  <ul className="list-disc list-inside space-y-1 text-sm text-card-foreground/80">
                     {phase.bullets.map((bullet, j) => (
                       <li key={j} className="text-pretty">
                         {highlightText(bullet.text, searchQuery)}
@@ -131,7 +131,7 @@ const highlightText = (text: string, searchQuery: string) => {
 
   return parts.map((part, index) =>
     regex.test(part) ? (
-      <span key={index} className="bg-purple-200 text-purple-900 px-1 rounded font-medium">
+      <span key={index} className="bg-spectra-cyan/20 text-spectra-cyan px-1 rounded font-medium">
         {part}
       </span>
     ) : (
@@ -180,8 +180,8 @@ export function WorkExperience({
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2 text-lg">
-              <Code className="w-5 h-5" />
-              Technical Skills & Proficiencies
+              <Code className="w-5 h-5 text-spectra-cyan" />
+              Technical Skills &amp; Proficiencies
             </CardTitle>
             <Button
               variant="ghost"
@@ -208,8 +208,8 @@ export function WorkExperience({
             {Object.entries(portfolioData.technicalSkills).map(([category, skills]) => (
               <div key={category}>
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="text-sm font-semibold whitespace-nowrap bg-slate-800 text-white px-1.5 rounded-xl opacity-90">
-                    {category}:
+                  <h3 className="text-xs font-semibold uppercase tracking-wide whitespace-nowrap text-spectra-cyan px-1.5">
+                    {category}
                   </h3>
                   {skills.map((skill) => (
                     <Badge
@@ -217,8 +217,8 @@ export function WorkExperience({
                       variant="outline"
                       className={`font-medium text-xs transition-all duration-300 ${
                         isSkillHighlighted(skill.name)
-                          ? "bg-purple-600 text-white border-purple-600 ring-2 ring-purple-300 shadow-lg"
-                          : "border-black"
+                          ? "spectra-bg text-[#070d1d] border-transparent shadow-lg"
+                          : "border-border/70 bg-secondary/40 text-secondary-foreground"
                       }`}
                     >
                       {skill.name}
@@ -234,11 +234,11 @@ export function WorkExperience({
       {showNoResultsMessage && (
         <Card className="p-8 text-center border-2 border-dashed border-muted">
           {otherTabsWithMatches.length > 0 ? (
-            <p className="text-slate-700 text-lg">
+            <p className="text-card-foreground/85 text-lg">
               There are results for '{searchQuery}' on the following tabs: {otherTabsWithMatches.join(", ")}
             </p>
           ) : (
-            <p className="text-slate-700 text-lg">
+            <p className="text-card-foreground/85 text-lg">
               0 results, this does not mean I haven't done it. Feel free to reach out and check!
             </p>
           )}
@@ -250,7 +250,7 @@ export function WorkExperience({
           key={exp.id}
           className={`hover:shadow-lg transition-all duration-300 ${
             exp.isHighlighted && (searchQuery !== "" || selectedSkill !== null)
-              ? "border-4 border-purple-500 shadow-2xl shadow-purple-200 ring-2 ring-purple-300 ring-opacity-50"
+              ? "border border-spectra-cyan/70 shadow-2xl shadow-spectra-blue/20 ring-1 ring-spectra-cyan/40"
               : ""
           }`}
         >
@@ -263,12 +263,12 @@ export function WorkExperience({
                     : highlightText(exp.title, searchQuery)}
                 </CardTitle>
                 {(exp as any).titleHistory && (exp as any).titleHistory.length > 1 && (
-                  <p className="text-sm text-slate-600 mt-1">
+                  <p className="text-sm text-muted-foreground mt-1">
                     {(exp as any).titleHistory.length} roles across this tenure — most recent:{" "}
-                    <span className="font-medium text-slate-800">{exp.title}</span>
+                    <span className="font-medium text-card-foreground">{exp.title}</span>
                   </p>
                 )}
-                <div className="flex items-center gap-4 mt-2 text-slate-800">
+                <div className="flex items-center gap-4 mt-2 text-card-foreground">
                   <div className="flex items-center gap-1">
                     <Building className="w-4 h-4" />
                     <span className="text-sm">{highlightText(exp.company, searchQuery)}</span>
