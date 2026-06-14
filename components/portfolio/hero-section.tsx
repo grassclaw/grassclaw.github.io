@@ -1,10 +1,32 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { MapPin, Linkedin, Github, Sparkles } from "lucide-react"
+import { MapPin, Linkedin, Github, Sparkles, X } from "lucide-react"
 import { usePortfolio } from "@/contexts/portfolio-context"
-import { SpectraSphere } from "@/components/portfolio/spectra-sphere"
+import { SpectraSphere, type Beacon } from "@/components/portfolio/spectra-sphere"
+
+// Scattered "live" nodes on the sphere. These — and only these — glow and are
+// clickable. Edit freely: `i` is a lattice index 0..759 (pick spread values),
+// `href` opens a new tab, `modal` opens the in-page panel keyed in MODALS.
+const SPHERE_BEACONS: Beacon[] = [
+  { i: 58, label: "LinkedIn", href: "https://www.linkedin.com/in/cyberaaron/" },
+  { i: 232, label: "GitHub", href: "https://github.com/grassclaw" },
+  { i: 421, label: "The resume engine", modal: "engine" },
+  { i: 655, label: "What I build", modal: "build" },
+]
+
+const MODALS: Record<string, { title: string; body: string }> = {
+  engine: {
+    title: "The résumé engine",
+    body: "This page is the front end of a résumé engine. Every framing you see is generated from a single source of truth — the same engine that, given a pasted job description, re-emphasizes the record to match the role you're hiring for. Live tailoring is coming soon.",
+  },
+  build: {
+    title: "What I build",
+    body: "Principal-level architecture across NetSTAR's full security-solutions portfolio — platform patterns, integration contracts, and evaluation frameworks — and I prove the design by building it: LLM categorization at scale, MCP servers, and durable Temporal workflows.",
+  },
+}
 
 const roles = [
   {
@@ -54,37 +76,67 @@ export function HeroSection() {
     if (role) setCurrentVariation(role.variation)
   }
 
+  // Beacon activation: external links open a tab, modal beacons open the panel.
+  const [activeModal, setActiveModal] = useState<string | null>(null)
+  const handleBeacon = (b: Beacon) => {
+    if (b.href) window.open(b.href, "_blank", "noopener")
+    else if (b.modal) setActiveModal(b.modal)
+  }
+
+  useEffect(() => {
+    if (!activeModal) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveModal(null)
+    }
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [activeModal])
+
+  const modal = activeModal ? MODALS[activeModal] : null
+
   return (
     <header className="relative overflow-hidden">
       {/* Atmospheric dot-sphere — sits off the right edge, behind everything.
           On mobile it drifts to center-top, very faint. A left-fading veil
           keeps the copy legible so the message always leads. */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <SpectraSphere className="absolute right-[-22%] top-1/2 h-[150%] w-[80%] -translate-y-1/2 opacity-50 sm:right-[-12%] sm:w-[62%] sm:opacity-60 lg:right-[-6%] lg:w-[52%] lg:opacity-70" />
+        <SpectraSphere
+          beacons={SPHERE_BEACONS}
+          onActivate={handleBeacon}
+          className="absolute right-[-22%] top-1/2 h-[150%] w-[80%] -translate-y-1/2 opacity-50 sm:right-[-12%] sm:w-[62%] sm:opacity-60 lg:right-[-6%] lg:w-[52%] lg:opacity-70"
+        />
         {/* Veil: darken/fade the left two-thirds so words dominate */}
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent" />
         {/* Soft top/bottom feather into the page */}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </div>
 
-      <div className="container relative mx-auto max-w-6xl px-4 pt-14 pb-10 sm:pt-20">
+      {/* Container is click-through so the live sphere behind it stays grabbable;
+          the text column re-enables pointer events for its controls + text. */}
+      <div className="container pointer-events-none relative mx-auto max-w-6xl px-4 pt-14 pb-10 sm:pt-20">
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
           {/* Editorial text column — leads, anchored left */}
-          <div className="order-1 text-center lg:text-left">
+          <div className="order-1 text-center pointer-events-auto lg:text-left">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-spectra-cyan animate-rise">
               Principal Architect · AI/ML · Threat Intelligence
             </p>
 
             <div className="flex items-center justify-center gap-3 lg:justify-start">
-              <h1 className="font-display text-5xl font-semibold leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl animate-rise">
+              <h1 className="font-display text-4xl font-semibold leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl animate-rise">
                 Aaron <span className="spectra-text">E</span>
               </h1>
-              {/* Mobile-only: super-small avatar right beside the name */}
-              <img
-                src="/images/design-mode/aaron-headshot.png"
-                alt="Aaron E"
-                className="h-10 w-10 shrink-0 rounded-full border border-border/50 object-cover opacity-80 shadow-md shadow-black/30 lg:hidden"
-              />
+              {/* Portrait sits right beside the name across all breakpoints */}
+              <div className="relative shrink-0">
+                <div
+                  className="absolute -inset-2 rounded-full opacity-25 blur-xl spectra-bg"
+                  aria-hidden="true"
+                />
+                <img
+                  src="/images/design-mode/aaron-headshot.png"
+                  alt="Aaron E"
+                  className="relative h-16 w-16 rounded-full border border-border/50 object-cover shadow-lg shadow-black/30 sm:h-20 sm:w-20 lg:h-24 lg:w-24"
+                />
+              </div>
             </div>
 
             {/* Reframe control — the human half of the resume engine */}
@@ -99,7 +151,7 @@ export function HeroSection() {
               <div
                 role="tablist"
                 aria-label="Reframe profile for a role"
-                className="mx-auto mt-2 inline-flex max-w-full flex-wrap justify-center gap-1 rounded-xl border border-border/60 bg-secondary/40 p-1 lg:mx-0 lg:justify-start"
+                className="mt-2 flex w-full max-w-2xl gap-1 rounded-xl border border-border/60 bg-secondary/40 p-1"
               >
                 {roles.map((role) => {
                   const active = role.id === selectedRole
@@ -109,7 +161,7 @@ export function HeroSection() {
                       role="tab"
                       aria-selected={active}
                       onClick={() => handleRoleChange(role.id)}
-                      className={`relative rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                      className={`relative flex-1 whitespace-nowrap rounded-lg px-4 py-2 text-center text-sm font-medium transition-all duration-300 ${
                         active
                           ? "spectra-bg text-[#070d1d] shadow-sm"
                           : "text-muted-foreground hover:text-foreground"
@@ -191,30 +243,45 @@ export function HeroSection() {
             </p>
           </div>
 
-          {/* Atmosphere column — the photo lives inside the spectral field on
-              the right. Small + recessive: it belongs to the globe, not in
-              front of the message. The sphere itself is rendered behind the
-              whole hero (above); here the portrait sits offset within it. */}
-          <div className="order-2 hidden lg:flex lg:min-h-[360px] lg:items-center lg:justify-end lg:self-stretch">
-            <div className="group relative mr-2">
-              {/* faint spectral bloom behind the portrait, echoing the sphere glow */}
-              <div
-                className="absolute -inset-6 rounded-full opacity-25 blur-2xl spectra-bg"
-                aria-hidden="true"
-              />
-              <img
-                src="/images/design-mode/aaron-headshot.png"
-                alt="Aaron E"
-                className="relative h-28 w-28 rounded-full border border-border/40 object-cover opacity-55 shadow-2xl shadow-black/40 transition-opacity duration-500 hover:opacity-90 lg:h-32 lg:w-32"
-              />
-            </div>
-          </div>
+          {/* Right column intentionally empty — the spectral sphere renders
+              behind the whole hero; the portrait now sits beside the name. */}
         </div>
       </div>
 
       <div className="container mx-auto max-w-6xl px-4">
         <div className="h-px w-full spectra-bg opacity-30" />
       </div>
+
+      {/* Beacon modal — opened by clicking a `modal` node on the sphere. */}
+      {modal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label={modal.title}
+          onClick={() => setActiveModal(null)}
+        >
+          <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" />
+          <div
+            className="relative w-full max-w-md rounded-2xl border border-border/60 bg-card p-6 shadow-2xl shadow-black/50 animate-rise"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveModal(null)}
+              aria-label="Close"
+              className="absolute right-4 top-4 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <div className="mb-3 flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-spectra-violet" aria-hidden="true" />
+              <h3 className="font-display text-lg text-foreground">{modal.title}</h3>
+            </div>
+            <p className="text-pretty text-sm leading-relaxed text-muted-foreground">{modal.body}</p>
+          </div>
+        </div>
+      )}
     </header>
   )
 }
