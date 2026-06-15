@@ -4,13 +4,13 @@
       "id": "netstar-2024",
       "company": "NetSTAR Global Inc.",
       "location": "Remote (USA)",
-      "period": "2024 — Present",
+      "period": "April 2024 — Present",
       "employmentType": "Full-time",
       "angles": ["architecture", "ml-ai", "cybersecurity", "research", "leadership"],
       "tags": ["current", "threat-intel", "llm", "gnn", "ml-ops", "platform", "standards", "federal"],
       "titleHistory": [
         {
-          "title": "Principal Engineer & Architect — AI & Threat Intelligence",
+          "title": "Lead / Principal Engineer of Intelligent Systems & Threat Intelligence",
           "period": "November 2025 — Present",
           "phase": "principal",
           "description": "Promoted to own architectural design across NetSTAR's full security-solutions portfolio — setting the platform patterns, integration contracts, and evaluation frameworks that downstream engineering teams build against.",
@@ -21,6 +21,12 @@
               "weight": 1,
               "angles": ["architecture", "ml-ai", "cybersecurity"],
               "tags": ["mcp", "platform", "threat-intel", "llm"]
+            },
+            {
+              "text": "Productionized the categorizer on AWS ECS/Fargate with Terraform-managed infrastructure-as-code, Kubernetes deployments, GitHub Actions CI/CD, and Prometheus observability",
+              "weight": 1,
+              "angles": ["architecture", "ml-ai"],
+              "tags": ["ml-ops", "platform", "cloud", "infra"]
             },
             {
               "text": "Initiated and led the NetSTAR Shield project (listed on netstar.ai) — end-user browser-side threat scoring and protection built on the categorizer's intelligence graph",
@@ -49,8 +55,8 @@
           ]
         },
         {
-          "title": "Senior Machine Learning Engineer — Threat Intelligence",
-          "period": "2024 — November 2025",
+          "title": "Cyber AI/ML Engineer II → Senior Machine Learning Engineer — Threat Intelligence",
+          "period": "April 2024 — November 2025",
           "phase": "senior",
           "description": "Owned full lifecycle of a modular micro-LLM system classifying 40M+ domains quarterly. Research-to-production: evaluated new architectures, prototyped against real adversarial web data, shipped containerized services on AWS.",
           "angles": ["ml-ai", "cybersecurity", "research"],
@@ -91,29 +97,29 @@
           "title": "Senior AI Security Engineer",
           "period": "January 2026 — Present",
           "phase": "current",
-          "description": "Embedded security engineer across Marriott's a AI Security Program Portfolio (seven programs, 2026–2028). Designated spearhead for the integration hub Feature Development — the agentic-ecosystem integration hub connecting the other six programs through a unified compliance, governance, and evidence platform. EU AI Act (August 2026) is the forcing function.",
+          "description": "Embedded AI-security engineer on a multi-program enterprise AI Security portfolio at Marriott. Lead the integration hub unifying governance, compliance, and evidence workflows into a single agentic platform — with the EU AI Act (2026) as the forcing function.",
           "angles": ["architecture", "ml-ai", "cybersecurity"],
           "bullets": [
             {
-              "text": "Designed and prototyped a tiered AI model-security scanner (T0 / T1 / T2) as a Temporal durable workflow — T0 baseline validated against Phi-3-mini at 1.39s; T1 Bloom-style adversarial evaluation operational at ~7 min; T2 deterministic attack suite under development for migration onto the enterprise AI orchestration platform",
+              "text": "Designed and prototyped a tiered AI model-security scanner (T0 / T1 / T2) as a Temporal durable workflow — T0 baseline validated against Phi-3-mini at 1.39s; T1 Bloom-style adversarial evaluation operational at ~7 min; T2 deterministic attack suite under development",
               "weight": 1,
               "angles": ["architecture", "ml-ai", "cybersecurity"],
               "tags": ["llm", "platform", "governance"]
             },
             {
-              "text": "Building the the integration hub ↔ the compliance system integration — OSCAL-native evidence APIs over thousands of security controls, ServiceNow bidirectional sync, and continuous compliance feeds from governance agents",
+              "text": "Built OSCAL-native compliance-evidence APIs spanning thousands of security controls, with bidirectional GRC/ITSM sync and continuous compliance feeds from governance agents",
               "weight": 1,
               "angles": ["architecture", "cybersecurity"],
               "tags": ["standards", "governance", "platform"]
             },
             {
-              "text": "Extending the security-agent platform, a composable Temporal + FastAPI security-agent platform (control-analysis control analysis agent live against the compliance system; five additional agent types in development) as shared innersource infrastructure for GIS security teams",
+              "text": "Extended a composable Temporal + FastAPI security-agent platform (control-analysis agent live in production; additional agent types in development) as shared innersource infrastructure for enterprise security teams",
               "weight": 1,
               "angles": ["architecture", "ml-ai"],
               "tags": ["platform", "governance", "llm"]
             },
             {
-              "text": "Authored architecture diagrams across executive, architectural, and implementation layers; drove stakeholder alignment with VP AI Cybersecurity and EVP on the security-agent platform strategy",
+              "text": "Drove cross-team architecture alignment with senior security leadership across executive, architectural, and implementation layers on the security-agent platform strategy",
               "weight": 2,
               "angles": ["architecture", "leadership"],
               "tags": ["platform"]
@@ -324,6 +330,7 @@
       { "name": "sentence-transformers", "id": "sentence-transformers", "jobs": ["netstar-2024"], "angles": ["ml-ai"], "tags": ["embeddings"] },
       { "name": "RAG pipelines", "id": "rag", "jobs": ["nagra-2025", "netstar-2024"], "angles": ["ml-ai", "architecture"], "tags": ["llm"] },
       { "name": "Model Context Protocol (MCP) servers", "id": "mcp", "jobs": ["netstar-2024", "nagra-2025"], "angles": ["architecture", "ml-ai"], "tags": ["platform", "integration"] },
+      { "name": "Claude Code", "id": "claude-code", "jobs": ["netstar-2024", "marriott-2026"], "angles": ["ml-ai", "architecture"], "tags": ["llm", "agentic", "framework"] },
       { "name": "OpenAI API", "id": "openai", "jobs": ["netstar-2024", "nagra-2025"], "angles": ["ml-ai"], "tags": ["llm"] },
       { "name": "AWS Bedrock", "id": "bedrock", "jobs": ["netstar-2024", "nagra-2025", "marriott-2026"], "angles": ["ml-ai", "architecture"], "tags": ["llm", "cloud"] },
       { "name": "Ollama", "id": "ollama", "jobs": ["netstar-2024"], "angles": ["ml-ai"], "tags": ["llm"] },

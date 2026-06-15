@@ -24,6 +24,7 @@ export function TechnicalProficiencies({ searchQuery, onSkillClick, selectedSkil
         { name: "sentence-transformers", id: "sentence-transformers", jobs: ["netstar-2024"] },
         { name: "RAG pipelines", id: "rag", jobs: ["nagra-2025", "netstar-2024"] },
         { name: "MCP servers", id: "mcp", jobs: ["nagra-2025", "netstar-2024"] },
+        { name: "Claude Code", id: "claude-code", jobs: ["netstar-2024", "marriott-2026"] },
       ],
     },
     {
