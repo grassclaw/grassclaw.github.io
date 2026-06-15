@@ -1,17 +1,62 @@
 {
   "workExperience": [
     {
+      "id": "marriott-2026",
+      "company": "Marriott International — GIS AppSec & AI Assurance",
+      "location": "Remote (USA)",
+      "period": "January 2026 — Present",
+      "employmentType": "Concurrent contract",
+      "angles": ["architecture", "ml-ai", "cybersecurity", "research"],
+      "tags": ["current", "standards", "governance", "platform", "llm"],
+      "titleHistory": [
+        {
+          "title": "Senior AI Security Engineer",
+          "period": "January 2026 — Present",
+          "phase": "current",
+          "description": "Embedded AI-security engineer on a multi-program enterprise AI Security portfolio at Marriott. Lead the integration hub unifying governance, compliance, and evidence workflows into a single agentic platform — with the EU AI Act (2026) as the forcing function.",
+          "angles": ["architecture", "ml-ai", "cybersecurity"],
+          "bullets": [
+            {
+              "text": "Designed and prototyped a tiered AI model-security scanner (T0 / T1 / T2) as a Temporal durable workflow — T0 baseline validated against Phi-3-mini at 1.39s; T1 Bloom-style adversarial evaluation operational at ~7 min; T2 deterministic attack suite under development",
+              "weight": 1,
+              "angles": ["architecture", "ml-ai", "cybersecurity"],
+              "tags": ["llm", "platform", "governance"]
+            },
+            {
+              "text": "Built OSCAL-native compliance-evidence APIs spanning thousands of security controls, with bidirectional GRC/ITSM sync and continuous compliance feeds from governance agents",
+              "weight": 1,
+              "angles": ["architecture", "cybersecurity"],
+              "tags": ["standards", "governance", "platform"]
+            },
+            {
+              "text": "Extended a composable Temporal + FastAPI security-agent platform (control-analysis agent live in production; additional agent types in development) as shared innersource infrastructure for enterprise security teams",
+              "weight": 1,
+              "angles": ["architecture", "ml-ai"],
+              "tags": ["platform", "governance", "llm"]
+            },
+            {
+              "text": "Drove cross-team architecture alignment with senior security leadership across executive, architectural, and implementation layers on the security-agent platform strategy",
+              "weight": 2,
+              "angles": ["architecture", "leadership"],
+              "tags": ["platform"]
+            }
+          ]
+        }
+      ],
+      "stack": ["Python", "Temporal", "FastAPI", "AWS Bedrock", "LiteLLM", "OSCAL", "PostgreSQL", "Redis", "Prometheus", "ServiceNow", "Dynatrace"]
+    },
+    {
       "id": "netstar-2024",
       "company": "NetSTAR Global Inc.",
       "location": "Remote (USA)",
-      "period": "April 2024 — Present",
+      "period": "April 2024 — January 2026",
       "employmentType": "Full-time",
       "angles": ["architecture", "ml-ai", "cybersecurity", "research", "leadership"],
-      "tags": ["current", "threat-intel", "llm", "gnn", "ml-ops", "platform", "standards", "federal"],
+      "tags": ["threat-intel", "llm", "gnn", "ml-ops", "platform", "standards", "federal"],
       "titleHistory": [
         {
           "title": "Lead / Principal Engineer of Intelligent Systems & Threat Intelligence",
-          "period": "November 2025 — Present",
+          "period": "November 2025 — January 2026",
           "phase": "principal",
           "description": "Promoted to own architectural design across NetSTAR's full security-solutions portfolio — setting the platform patterns, integration contracts, and evaluation frameworks that downstream engineering teams build against.",
           "angles": ["architecture", "leadership", "cybersecurity", "ml-ai"],
@@ -85,62 +130,17 @@
       "stack": ["Python", "Go", "AWS (Bedrock, Lambda, ECS, S3, DynamoDB)", "LangChain", "LangGraph", "HuggingFace", "Docker", "Kubernetes", "PostgreSQL / TimescaleDB", "Neo4j", "Cloudflare Workers"]
     },
     {
-      "id": "marriott-2026",
-      "company": "Marriott International — GIS AppSec & AI Assurance",
-      "location": "Remote (USA)",
-      "period": "January 2026 — Present",
-      "employmentType": "Concurrent contract",
-      "angles": ["architecture", "ml-ai", "cybersecurity", "research"],
-      "tags": ["current", "standards", "governance", "platform", "llm"],
-      "titleHistory": [
-        {
-          "title": "Senior AI Security Engineer",
-          "period": "January 2026 — Present",
-          "phase": "current",
-          "description": "Embedded AI-security engineer on a multi-program enterprise AI Security portfolio at Marriott. Lead the integration hub unifying governance, compliance, and evidence workflows into a single agentic platform — with the EU AI Act (2026) as the forcing function.",
-          "angles": ["architecture", "ml-ai", "cybersecurity"],
-          "bullets": [
-            {
-              "text": "Designed and prototyped a tiered AI model-security scanner (T0 / T1 / T2) as a Temporal durable workflow — T0 baseline validated against Phi-3-mini at 1.39s; T1 Bloom-style adversarial evaluation operational at ~7 min; T2 deterministic attack suite under development",
-              "weight": 1,
-              "angles": ["architecture", "ml-ai", "cybersecurity"],
-              "tags": ["llm", "platform", "governance"]
-            },
-            {
-              "text": "Built OSCAL-native compliance-evidence APIs spanning thousands of security controls, with bidirectional GRC/ITSM sync and continuous compliance feeds from governance agents",
-              "weight": 1,
-              "angles": ["architecture", "cybersecurity"],
-              "tags": ["standards", "governance", "platform"]
-            },
-            {
-              "text": "Extended a composable Temporal + FastAPI security-agent platform (control-analysis agent live in production; additional agent types in development) as shared innersource infrastructure for enterprise security teams",
-              "weight": 1,
-              "angles": ["architecture", "ml-ai"],
-              "tags": ["platform", "governance", "llm"]
-            },
-            {
-              "text": "Drove cross-team architecture alignment with senior security leadership across executive, architectural, and implementation layers on the security-agent platform strategy",
-              "weight": 2,
-              "angles": ["architecture", "leadership"],
-              "tags": ["platform"]
-            }
-          ]
-        }
-      ],
-      "stack": ["Python", "Temporal", "FastAPI", "AWS Bedrock", "LiteLLM", "OSCAL", "PostgreSQL", "Redis", "Prometheus", "ServiceNow", "Dynatrace"]
-    },
-    {
       "id": "nagra-2025",
       "company": "Nagra Kudelski Group",
       "location": "Remote (USA)",
-      "period": "2025 — Present",
+      "period": "2025 — September 2025",
       "employmentType": "Concurrent contract",
       "angles": ["architecture", "ml-ai", "cybersecurity", "research"],
-      "tags": ["current", "threat-intel", "llm", "standards"],
+      "tags": ["threat-intel", "llm", "standards"],
       "titleHistory": [
         {
           "title": "Consulting Senior Cyber ML Architect",
-          "period": "2025 — Present",
+          "period": "2025 — September 2025",
           "phase": "current",
           "description": "Research partner redesigning the NL2KQL (natural-language-to-Kusto Query Language) investigative pipeline for security operations. Added schema validation, prompt normalization, and modular evaluation layers.",
           "angles": ["architecture", "ml-ai", "cybersecurity", "research"],
