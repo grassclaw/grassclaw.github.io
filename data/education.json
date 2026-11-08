@@ -1,0 +1,100 @@
+{
+  "education": [
+    {
+      "id": "ms-cyber-ops",
+      "degree": "M.S., Cyber & Information Operations",
+      "institution": "University of Arizona",
+      "year": "2026",
+      "status": "in-progress",
+      "angles": ["research", "cybersecurity", "architecture", "ml-ai", "leadership"],
+      "tags": ["graduate", "current", "academic"]
+    },
+    {
+      "id": "fullstack-cert",
+      "degree": "Full Stack Web Development Certificate",
+      "institution": "University of Arizona",
+      "year": "2019",
+      "status": "completed",
+      "angles": ["ml-ai"],
+      "tags": ["certificate", "webdev"]
+    },
+    {
+      "id": "bs-asu",
+      "degree": "Bachelor of Science",
+      "institution": "Arizona State University",
+      "year": "2017",
+      "status": "completed",
+      "angles": ["research", "cybersecurity", "architecture", "ml-ai", "leadership"],
+      "tags": ["undergraduate"]
+    },
+    {
+      "id": "associates",
+      "degree": "Associate Degree",
+      "institution": "Bellevue College",
+      "year": "2015",
+      "status": "completed",
+      "angles": [],
+      "tags": ["associate"]
+    }
+  ],
+  "certificates": [
+    {
+      "id": "security-plus",
+      "name": "CompTIA Security+",
+      "issuer": "CompTIA",
+      "year": "2025",
+      "status": "expected",
+      "angles": ["cybersecurity"],
+      "tags": ["certification", "current"]
+    },
+    {
+      "id": "eagle-scout",
+      "name": "Eagle Scout",
+      "issuer": "Boy Scouts of America",
+      "year": "Achievement",
+      "status": "completed",
+      "angles": ["leadership"],
+      "tags": ["achievement", "character"]
+    }
+  ],
+  "campusInvolvement": [
+    {
+      "id": "perplexity-partner",
+      "title": "Sponsored Perplexity AI Campus Partner",
+      "organization": "Perplexity AI",
+      "year": "2025 — Present",
+      "description": "Advocate for AI-driven research and learning. Host AI-related events; partnership liaison with clubs and professors.",
+      "url": "https://www.perplexity.ai/hub/legal/campus-partners-program-terms",
+      "angles": ["ml-ai", "leadership"],
+      "tags": ["ai", "advocacy", "current"]
+    },
+    {
+      "id": "creative-lab",
+      "title": "AI and Coding Workshop Instructor",
+      "organization": "University of Arizona Creative Lab",
+      "year": "2025",
+      "description": "Teach AI applications and coding fundamentals to students.",
+      "angles": ["ml-ai", "leadership"],
+      "tags": ["education", "current"]
+    },
+    {
+      "id": "social-media-coordinator",
+      "title": "Social Media Coordinator",
+      "organization": "Cyber Saguaro Club",
+      "year": "2024 — 2025",
+      "description": "Manage social media presence and digital outreach for the cybersecurity club.",
+      "url": "https://cybersaguaros.com/",
+      "angles": ["cybersecurity"],
+      "tags": ["community", "outreach"]
+    },
+    {
+      "id": "research-assistant",
+      "title": "Student Research Assistant",
+      "organization": "University of Arizona",
+      "year": "2024 — Present",
+      "description": "Contributing to cybersecurity and AI research initiatives at the UA cyber research lab.",
+      "angles": ["research", "cybersecurity", "ml-ai"],
+      "tags": ["academic", "current"]
+    }
+  ]
+}

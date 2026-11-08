@@ -1,0 +1,71 @@
+{
+  "publicService": [
+    {
+      "id": "commissioner-2025",
+      "title": "Commissioner, Planning & Zoning Committee",
+      "organization": "Town of Sahuarita",
+      "location": "Sahuarita, AZ",
+      "period": "2025 — Present",
+      "type": "Government Service",
+      "url": "https://sahuaritaaz.gov/262/Planning-Zoning-Commission",
+      "description": "Appointed to the Planning & Zoning Committee — review development proposals, zoning changes, and land-use decisions affecting community growth.",
+      "responsibilities": [
+        "Review and evaluate development proposals and zoning applications",
+        "Participate in public hearings and community engagement sessions",
+        "Collaborate with city planners and community stakeholders"
+      ],
+      "skills": ["leadership", "public-speaking", "policy-analysis", "community-engagement"],
+      "angles": ["leadership"],
+      "tags": ["government", "civic", "current"]
+    },
+    {
+      "id": "youth-group-leader",
+      "title": "Community Youth Group Leader",
+      "organization": "EastMark, Mesa, AZ",
+      "location": "Mesa, AZ",
+      "period": "2021 — 2023",
+      "type": "Public Service",
+      "description": "Guided youth in organizing skills training, community service projects, and outdoor recreation. Focus on character development and leadership.",
+      "responsibilities": [
+        "Guide youth in organizing workshops and activities",
+        "Coordinate community service projects",
+        "Mentor in leadership and character development"
+      ],
+      "skills": ["leadership", "youth-development", "mentoring"],
+      "angles": ["leadership"],
+      "tags": ["community", "mentoring"]
+    },
+    {
+      "id": "census-enumerator-2020",
+      "title": "Census Enumerator",
+      "organization": "U.S. Bureau of the Census",
+      "location": "Arizona",
+      "period": "2020",
+      "type": "Government Service",
+      "description": "Conducted door-to-door interviews and demographic data collection for the 2020 U.S. Census.",
+      "responsibilities": [
+        "Conducted household interviews and collected demographic data",
+        "Maintained confidentiality and data security protocols"
+      ],
+      "skills": ["data-collection", "communication", "community-outreach"],
+      "angles": [],
+      "tags": ["government", "federal"]
+    },
+    {
+      "id": "cub-scout-leader",
+      "title": "Cub Scout Leader",
+      "organization": "Boy Scouts of America",
+      "location": "Arizona",
+      "period": "2016 — 2017",
+      "type": "Public Service",
+      "description": "Led and mentored young scouts in character development, outdoor skills, and leadership training.",
+      "responsibilities": [
+        "Plan and execute weekly den meetings and activities",
+        "Mentor youth in leadership and character development"
+      ],
+      "skills": ["youth-development", "leadership", "mentoring"],
+      "angles": ["leadership"],
+      "tags": ["community", "mentoring"]
+    }
+  ]
+}

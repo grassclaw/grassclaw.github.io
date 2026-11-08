@@ -1,0 +1,189 @@
+{
+  "lede": "Security as a systems problem. Give me a messy substrate, certificates, malware, domains, threat feeds, models, and the job is the same: decompose it, build the system that makes sense of it, and reason about how it behaves under an adversary.",
+  "groups": [
+    {
+      "name": "Employers",
+      "rows": [
+        {
+          "who": "NetSTAR Global",
+          "when": "2024 to now",
+          "line": "Built the crawl, enrichment and categorization pipeline behind a URL-intelligence platform designed for billions of URLs, then set the platform patterns for a four-person R&D lab and a 30-engineer contract team as Director of Engineering. Initiated NetSTAR Shield and NetSTAR Scout. Now advisor and contract principal engineer."
+        },
+        {
+          "who": "NetSTAR, DTA Global",
+          "when": "2020 to 2021",
+          "line": "Threat-intelligence research engineer. Shipped the enterprise threat feeds that became up to $1.3M a year in revenue."
+        },
+        {
+          "who": "2U Education",
+          "when": "2021 to 2022",
+          "line": "Staffing operations technical lead for bootcamp staff across three systems of record; remote upskilling that cut new-hire cost by $85K a year."
+        },
+        {
+          "who": "Barrick Gold, Nevada Gold Mines",
+          "when": "2018 to 2020",
+          "line": "Environmental engineer. ISO 14001 audits, and anomaly detection that took reportable air incidents from 25 a year to 3."
+        }
+      ]
+    },
+    {
+      "name": "Through my own practice",
+      "rows": [
+        {
+          "who": "Marriott International",
+          "when": "2026, concurrent",
+          "line": "Senior engineering manager for AI security: compliance evidence kept in sync with the system of record, OSCAL-native evidence APIs, and a tiered AI model-security scanner as a durable workflow."
+        },
+        {
+          "who": "Nagra Kudelski Group",
+          "when": "2025",
+          "line": "Consulting senior cyber ML architect. Redesigned the analyst workflow and cut triage time 80%; a KQL emulator so queries fail offline before they reach Sentinel."
+        },
+        {
+          "who": "Small and mid-market clients",
+          "when": "2022 to 2024",
+          "line": "Web security audits and applied AI: OCR pipelines that automated accounts payable, scoped and delivered end to end."
+        }
+      ]
+    },
+    {
+      "name": "Communities",
+      "rows": [
+        {
+          "who": "OpenSSL Inaugural Conference, Prague",
+          "when": "2025",
+          "line": "Speaker: Making OpenSSL Approachable, interactive labs, automation and AI insights. The talk became an open-source program.",
+          "href": "https://2025.openssl-conference.org/speaker/detail-132"
+        },
+        {
+          "who": "APWG eCrime, San Diego",
+          "when": "2025",
+          "line": "Workshop: Can LLMs Outsmart Phishers? A reality check on AI defenses.",
+          "href": "https://apwg.org/events/ecrime2025"
+        },
+        {
+          "who": "ISCAP, Louisville",
+          "when": "2025",
+          "line": "Co-presenter and co-author: semantic technologies for cybersecurity education competencies.",
+          "href": "https://iscap.us/proceedings/2025/pdf/6443.pdf"
+        },
+        {
+          "who": "University of Arizona",
+          "when": "M.S.",
+          "line": "Thesis published in the university repository.",
+          "href": "https://repository.arizona.edu/handle/10150/680932"
+        },
+        {
+          "who": "Town of Sahuarita",
+          "when": "2025 to now",
+          "line": "Commissioner, Planning and Zoning. Development proposals, zoning changes, public hearings.",
+          "href": "https://sahuaritaaz.gov/262/Planning-Zoning-Commission"
+        }
+      ]
+    }
+  ],
+  "areas": [
+    {
+      "name": "Architecture at scale",
+      "receipt": "A crawl and classification pipeline sized for 100M+ URLs: single jobs to 18.7M, about 1M a day. A three-layer dedup and recrawl gate with conditional-write claims as the correctness boundary before any model call. A Go enrichment worker per URL: DNS, RDAP, x509, CRLite revocation."
+    },
+    {
+      "name": "Cost and judgment",
+      "receipt": "Quarterly compute from $50K to $4K while throughput rose. Measured crawl failures before spending on them: a 500-sample of a 2.1M-URL job was 74% dead DNS and 22% connection errors, so the fix was triage before fetch, not a bigger fleet."
+    },
+    {
+      "name": "AI assurance and governance",
+      "receipt": "Compliance evidence in bidirectional sync with the GRC system; OSCAL-native APIs; a tiered model-security scanner. The published paper: AI Minimalism, necessity-first security design for intelligent systems."
+    },
+    {
+      "name": "Research that ships",
+      "receipt": "Graph neural networks for threat categorization and an NL2KQL pipeline, both in preparation; the ISCAP paper on semantic education competencies, published; the thesis."
+    },
+    {
+      "name": "People and partners",
+      "receipt": "A four-person R&D lab and a 30-engineer contract team on shared platform patterns and evaluation frameworks. A 35-feed aggregator where partners onboard by writing a spec, not code. A seat on a municipal commission."
+    },
+    {
+      "name": "Speaking and writing",
+      "receipt": "Three conference stages in one year, the Spectral Analysis newsletter, and a public readings list on code as law, security principles, and humans and automation."
+    }
+  ],
+  "emphasis": [
+    {
+      "name": "Agentic AI architecture",
+      "line": "Small models as bounded reasoners: the harness owns what they see and the rules that shape answers."
+    },
+    {
+      "name": "Threat intelligence systems",
+      "line": "Evidence graphs over pipelines; compound evidence over static rules; unknown is benign until shown otherwise."
+    },
+    {
+      "name": "Enterprise AI governance",
+      "line": "Controls as evidence APIs, not spreadsheets; necessity-first design; the model explains, the rulebase decides."
+    }
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/grassclaw"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://linkedin.com/in/cyberaaron"
+    },
+    {
+      "label": "Readings",
+      "href": "https://github.com/grassclaw/readings"
+    }
+  ],
+  "lensOrder": {
+    "architecture": {
+      "label": "Architect",
+      "areas": [
+        "Architecture at scale",
+        "Cost and judgment",
+        "People and partners",
+        "AI assurance and governance",
+        "Research that ships",
+        "Speaking and writing"
+      ],
+      "emphasis": [
+        "Agentic AI architecture",
+        "Enterprise AI governance",
+        "Threat intelligence systems"
+      ]
+    },
+    "ml-ai": {
+      "label": "AI / ML",
+      "areas": [
+        "Research that ships",
+        "Architecture at scale",
+        "AI assurance and governance",
+        "Cost and judgment",
+        "Speaking and writing",
+        "People and partners"
+      ],
+      "emphasis": [
+        "Agentic AI architecture",
+        "Threat intelligence systems",
+        "Enterprise AI governance"
+      ]
+    },
+    "cybersecurity": {
+      "label": "Threat Intel",
+      "areas": [
+        "Research that ships",
+        "Architecture at scale",
+        "AI assurance and governance",
+        "Speaking and writing",
+        "Cost and judgment",
+        "People and partners"
+      ],
+      "emphasis": [
+        "Threat intelligence systems",
+        "Agentic AI architecture",
+        "Enterprise AI governance"
+      ]
+    }
+  }
+}

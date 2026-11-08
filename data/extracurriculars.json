@@ -1,0 +1,68 @@
+{
+  "extracurriculars": [
+    {
+      "id": "webaphors-initiative",
+      "title": "Webaphors Channel Initiative",
+      "organization": "Creative Content Platform",
+      "location": "Online",
+      "period": "2023 — Present",
+      "description": "Founded and developed the Webaphors channel initiative — educational content that bridges complex technical concepts with accessible metaphors and visual storytelling.",
+      "responsibilities": [
+        "Develop creative content strategy for technical education",
+        "Create visual metaphors for complex programming concepts",
+        "Build audience engagement through innovative storytelling"
+      ],
+      "skills": ["content-creation", "creative-writing", "technical-communication", "visual-design"],
+      "angles": ["leadership"],
+      "tags": ["education", "community", "creative", "current"]
+    },
+    {
+      "id": "youtube-discord-community",
+      "title": "YouTube Shorts & Discord Learning Community",
+      "organization": "Newine",
+      "location": "Online",
+      "period": "2022 — Present",
+      "description": "Produce educational YouTube Shorts and moderate a Discord learning community focused on AI, cybersecurity, and emerging technology.",
+      "responsibilities": [
+        "Research and script content on emerging technologies",
+        "Produce and edit short-form video",
+        "Moderate Discord learning community"
+      ],
+      "skills": ["content-creation", "video-editing", "community-management"],
+      "angles": ["leadership"],
+      "tags": ["education", "community", "creative", "current"]
+    },
+    {
+      "id": "math-tutor-byu",
+      "title": "Math Tutor (Calculus / Statistics)",
+      "organization": "Brigham Young University",
+      "location": "Provo, UT",
+      "period": "2020 — 2022",
+      "description": "One-on-one and group tutoring for undergraduate calculus and statistics students.",
+      "responsibilities": [
+        "Tutor in calculus, statistics, and related mathematics",
+        "Develop personalized learning strategies",
+        "Create practice problems and study materials"
+      ],
+      "skills": ["education", "mathematics", "mentoring"],
+      "angles": ["leadership"],
+      "tags": ["education", "mentoring", "tutoring"]
+    },
+    {
+      "id": "cybersecurity-bootcamp-mentor",
+      "title": "Cybersecurity Bootcamp Mentor",
+      "organization": "Various Bootcamp Programs",
+      "location": "Remote",
+      "period": "2023 — Present",
+      "description": "Mentor students and assist faculty in cybersecurity bootcamps — knowledge assessments, career guidance, and practical skill development.",
+      "responsibilities": [
+        "Mentor students in cybersecurity fundamentals and advanced topics",
+        "Assist faculty in assessment and curriculum development",
+        "Provide career guidance and industry insights"
+      ],
+      "skills": ["mentoring", "cybersecurity", "curriculum-development"],
+      "angles": ["cybersecurity", "leadership"],
+      "tags": ["education", "mentoring", "current"]
+    }
+  ]
+}
